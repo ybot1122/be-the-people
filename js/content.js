@@ -28,7 +28,7 @@ function updateContent(pagename) {
 
 function loadContent(pagename, callback) {
 	var request = $.ajax({
-		url: 'http://localhost:8082/?page=' + pagename,
+		url: 'http://localhost:8081/?page=' + pagename,
 		type: 'GET',
 		datatype: 'JSON'
 	});

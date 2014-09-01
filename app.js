@@ -9,9 +9,10 @@ var port = process.env.PORT || 8081;
 
 // Serve up public/ftp folder
 var serve = serveStatic('.', {});
+var mongoServer = 'bep:temp@54.68.27.92:27017/be-the-people';
 
 function getContent(page, callback) {
-	var database = mongo('be-the-people', ['content']);
+	var database = mongo(mongoServer, ['content']);
 	database.content.findOne({pid: page}, function(err, data) {
 		if (err != null || data == null) {
 			callback({error: "Invalid page request!"});
@@ -23,7 +24,7 @@ function getContent(page, callback) {
 }
 
 function getFilenames(callback) {
-	var database = mongo('be-the-people', ['bg']);
+	var database = mongo(mongoServer, ['bg']);
 	database.bg.find(function(err, data) {
 		if (err != null || data == null) {
 			callback([]);
@@ -34,7 +35,7 @@ function getFilenames(callback) {
 }
 
 function authenticate(cred, callback) {
-	var database = mongo('be-the-people', ['cred']);
+	var database = mongo(mongoServer, ['cred']);
 	database.cred.findOne(function(err, data) {
 		if (data == null || err != null) {
 			// first-time password setup
