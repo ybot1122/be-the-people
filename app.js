@@ -5,6 +5,8 @@ var url = require('url');
 var queryString = require('querystring');
 var mongo = require('mongojs');
 
+var port = process.env.PORT || 8081;
+
 // Serve up public/ftp folder
 var serve = serveStatic('.', {});
 
@@ -77,7 +79,7 @@ var server = http.createServer(function(req, res) {
 });
 
 // Listen
-server.listen(80);
+server.listen(port);
 
 // Put a friendly message on the terminal
-console.log('Server running at http://127.0.0.1:8082/');
+console.log('Server running at http://127.0.0.1:' + port);
