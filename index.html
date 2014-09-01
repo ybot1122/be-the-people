@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>Be The People</title>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script src="lib/mustache.js"></script>
+		<script src="js/content.js"></script>
+		<script src="js/background.js"></script>
+		<script>loadBgs();</script>
+		<link href="style.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="live" class="bg"></div>
+		<div id="next" class="bg"></div>
+
+		<div id="container">
+			<div id="menu">
+				<span id="home">home</span><span id="about">about</span>
+				<span id="chapters">chapters</span><span id="contact">contact</span>
+				<img src="logo.jpg" alt="Be The People Logo" />
+			</div>
+			<div id="loading">
+				<img src="ajax-loader.gif" alt="loading..." />
+			</div>
+			<div id="content">
+				<h3></h3>
+				<div></div>
+			</div>
+		</div>
+
+		<script>
+			$(document).ready(function() {
+				$('#home').click(function(e) {
+					$('#content').slideUp('1500');
+				});
+				$('#about').click(function(e) {
+					updateContent('about');
+				});
+				$('#chapters').click(function(e) {
+					updateContent('chapters');
+				});
+				$('#contact').click(function(e) {
+					updateContent('contact');
+				});
+			});
+		</script>
+	</body>
+</html>
