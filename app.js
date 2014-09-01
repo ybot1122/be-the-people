@@ -77,7 +77,7 @@ var server = http.createServer(function(req, res) {
 });
 
 // Listen
-server.listen(8082);
+server.listen(80);
 
 // Put a friendly message on the terminal
 console.log('Server running at http://127.0.0.1:8082/');
