@@ -5,7 +5,7 @@
 // wrapper for an ajax request to the database for a list of background images
 function loadBgs(callback) {
 	var request = $.ajax({
-		url: 'http://localhost:8081/?bgs=true',
+		url: '/?bgs=true',
 		type: 'GET',
 		datatype: 'JSON'
 	});
