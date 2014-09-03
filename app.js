@@ -4,6 +4,12 @@ var serveStatic = require('serve-static');
 var url = require('url');
 var queryString = require('querystring');
 var mongo = require('mongojs');
+var facebook = require('facebook-sdk');
+var FB = new facebook.Facebook({
+	appId		: 	'1524386131129811',
+	xfbml		: 	true,
+	version		: 	'v2.0'
+});
 
 var port = process.env.PORT || 8081;
 
@@ -34,16 +40,19 @@ function getFilenames(callback) {
 	});
 }
 
-function authenticate(cred, callback) {
-	var database = mongo(mongoServer, ['cred']);
-	database.cred.findOne(function(err, data) {
-		if (data == null || err != null) {
-			// first-time password setup
+function authFb(id, accessToken, callback) {
+	FB.api('/' + id + '/accounts/', 'GET', {access_token: accessToken}, function(response) {
+		if (!response || response.error || !response.data || response.data.length < 1) {
+			callback([]);
 		} else {
-			var result = (cred === data.pass) ? {state: true} : {state: false};
-			callback(result);
+			for (var i = 0; i < response.data.length; i++) {
+				if (response.data[i].id === '151789761537076') {
+					callback([true]);
+				}
+			}
+			callback([]);
 		}
-	});
+	})
 }
 
 // Create server
@@ -51,10 +60,10 @@ var server = http.createServer(function(req, res) {
 	// check if there is a request for page content
 	var queryObj = queryString.parse(url.parse(req.url).query);
 
-	if (queryObj.hasOwnProperty('admin')) {
-		authenticate(queryObj.admin, function(status) {
+	if (queryObj.hasOwnProperty('admin') && queryObj.hasOwnProperty('id')) {
+		authFb(queryObj.id, queryObj.admin, function(data) {
 			res.writeHead(200, {'Content-Type': 'application/json'});
-			res.end(JSON.stringify(status));
+			res.end(JSON.stringify(data));
 		});
 	} else if (queryObj.hasOwnProperty('page')) {
 		// handle get request for page content

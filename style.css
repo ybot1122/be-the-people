@@ -38,6 +38,20 @@ body, div {
 		width: 100%;
 	}
 
+	#auth {
+		margin: 5px;
+		padding: 2px;
+		display: inline-block;
+		font-size: 18px;
+		vertical-align: middle;
+		opacity: .3;
+	}
+
+	#auth:hover {
+		opacity: 1.0;
+		cursor: pointer;
+	}
+
 #content, #loading {
 	position: absolute;
 	top: 10%;

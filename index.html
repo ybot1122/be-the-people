@@ -9,6 +9,7 @@
 		<link href="style.css" rel="stylesheet" />
 	</head>
 	<body>
+		<script src="js/fb.js"></script>
 		<div id="live" class="bg"></div>
 		<div id="next" class="bg"></div>
 
@@ -17,6 +18,7 @@
 				<span id="home">home</span><span id="about">about</span>
 				<span id="chapters">chapters</span><span id="contact">contact</span>
 				<img src="logo.jpg" alt="Be The People Logo" />
+				<div id="auth">login to facebook for admin access</div>
 			</div>
 			<div id="loading">
 				<img src="ajax-loader.gif" alt="loading..." />
@@ -40,6 +42,15 @@
 				});
 				$('#contact').click(function(e) {
 					updateContent('contact');
+				});
+				$('#auth').click(function(e) {
+					authenticateFb(function(data) {
+						if (data.error) {
+							alert(data.error);
+						} else {
+							alert(data);
+						}
+					});
 				});
 			});
 		</script>
