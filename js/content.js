@@ -8,22 +8,27 @@
 	transition animation also.
 		pagename 	=> 	string identifying the page to load content for
 */
-
 function updateContent(pagename) {
-	$('#content').slideUp('1500', function() {
-		$('#loading').show();
-		loadContent(pagename, function(data) {
-			$('#content h3').html(pagename);
-			if (data.hasOwnProperty('error')) {
-				$('#content div').html(Mustache.render(
-						'<p class=\"error\">{{error}}</p>', data));
-			} else {
-				$('#content div').html(Mustache.render('<p>{{body}}</p>', data));
-			}
-			$('#loading').hide();
-			$('#content').slideDown('1500');
+	var $button = $('#' + pagename);
+	// check if client just wants to toggle display
+	if ($button.is('span[data-active=\"true\"]')) {
+		$('#content').slideUp('1500');
+		$button.removeAttr('data-active');
+	} else {
+		// switch active button and then render the html
+		$('span[data-active=\"true\"]').removeAttr('data-active');
+		$button.attr('data-active', 'true');
+		$('#content').slideUp('1500', function() {
+			$('#loading').show();
+			loadContent(pagename, function(data) {
+				loadTemplate($('#content div'), '#template-' + pagename, 'general.html', data,
+				function() {
+					$('#loading').hide();
+					$('#content').slideDown('1500');
+				});
+			});
 		});
-	});
+	}
 }
 
 function loadContent(pagename, callback) {
@@ -34,10 +39,22 @@ function loadContent(pagename, callback) {
 	});
 
 	request.done(function(data, msg) {
-		callback(data);
+		if (!data || data === null || data.error) {
+			callback({error: 'bad request'});
+		} else {
+			callback({data: data});
+		}
 	});
 
 	request.fail(function(data, msg) {
 		callback({error: 'database currently down'});
+	});
+}
+
+function loadTemplate($destination, selector, filename, data, callback) {
+	$destination.load('templates/' + filename + ' ' + selector, 
+	function(response, status, xhr) {
+		$destination.html(Mustache.render($destination.text(), data));
+		callback();
 	});
 }

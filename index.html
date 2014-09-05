@@ -5,6 +5,7 @@
 		<script src="lib/mustache.js"></script>
 		<script src="js/content.js"></script>
 		<script src="js/background.js"></script>
+		<script src="js/admin.js"></script>
 		<script>loadBgs();</script>
 		<link href="style.css" rel="stylesheet" />
 	</head>
@@ -24,7 +25,6 @@
 				<img src="ajax-loader.gif" alt="loading..." />
 			</div>
 			<div id="content">
-				<h3></h3>
 				<div></div>
 			</div>
 		</div>
@@ -32,6 +32,7 @@
 		<script>
 			$(document).ready(function() {
 				$('#home').click(function(e) {
+					$('span[data-active=\"true\"]').removeAttr('data-active');
 					$('#content').slideUp('1500');
 				});
 				$('#about').click(function(e) {
@@ -42,15 +43,6 @@
 				});
 				$('#contact').click(function(e) {
 					updateContent('contact');
-				});
-				$('#auth').click(function(e) {
-					authenticateFb(function(data) {
-						if (data.error) {
-							alert(data.error);
-						} else {
-							alert(data);
-						}
-					});
 				});
 			});
 		</script>

@@ -15,9 +15,7 @@ function loadBgs(callback) {
 			noBackground();
 		} else {
 			$('#live').css('background-image', 'url(\"' + data[0] + '\")');
-			if (data.length > 1) {
-				rotateGraphic(0, data, 0);
-			}
+			rotateGraphic(0, data, 0);
 		}
 	});
 
@@ -35,15 +33,25 @@ function noBackground() {
 
 // invoked when a list of background images is provided and there is more
 // than one image available to rotate
-function rotateGraphic(counter, data, fadeTime = 500) {
+function rotateGraphic(counter, data, fadeTime = 1000) {
 	var graphics = data;
 	var next = (counter + 1) % graphics.length;
-
-	$('.bg').fadeToggle(fadeTime, function() {
-		var $hidden = ($('#live').is(':visible')) ? $('#next') : $('#live');
-		$hidden.css('background-image', 'url(\"' + graphics[next] + '\")');
+	var $currVis;
+	var $currHide;
+	if ($('#live').is(':visible')) {
+		$currVis = $('#live');
+		$currHide = $('#next');
+	} else {
+		$currVis = $('#next');
+		$currHide = $('#live');
+	}
+	$currVis.fadeOut(fadeTime, function() {
+		$currVis.css('background-image', 'url(\"' + graphics[next] + '\")');
 	});
-	setTimeout(function() { 
-		rotateGraphic(next, data);
-	}, 7000);
+	$currHide.show();
+	if (graphics.length > 1) {
+		setTimeout(function() { 
+			rotateGraphic(next, data);
+		}, 2000);
+	}
 }

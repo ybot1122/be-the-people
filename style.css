@@ -41,10 +41,10 @@ body, div {
 	#auth {
 		margin: 5px;
 		padding: 2px;
-		display: inline-block;
 		font-size: 18px;
 		vertical-align: middle;
 		opacity: .3;
+		display: none;
 	}
 
 	#auth:hover {
@@ -80,9 +80,6 @@ body, div {
 	background-size: 100% 100%;
 	background-color: black;
 	z-index: 0;
-}
-
-#live {
 	display: none;
 }
 
@@ -91,3 +88,62 @@ body, div {
 	text-align: center;
 	background: url('ajax-loader.gif') no-repeat top;
 }
+
+#admin {
+	position: absolute;
+	width: 80%;
+	height: 80%;
+	padding: 10px;
+	left: 10%;
+	top: 10%;
+	z-index: 2;
+	background: white;
+	display: none;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+	#admin img {
+		height: 150px;
+	}
+
+	.del {
+		text-align: center;
+		border: 1px red dashed;
+		margin: 5px;
+		padding: 5px;
+		font-size: 8px;
+		display: block;
+	}
+
+	#admin-load {
+		display: none;
+	}
+
+	#admin-load img {
+		height: 10px;
+	}
+
+	#admin-message {
+		font-size: 10px;
+	}
+
+	#admin table {
+		width: 100%;
+	}
+
+	#admin td {
+		text-align: center;
+		margin-top: 25px;
+		margin-bottom: 5px;
+		border-right: 1px black solid;
+	}
+
+	#admin table input, #admin table textarea {
+		width: 100%;
+		max-width: 300px;
+	}
+
+	#admin table textarea {
+		height: 75px;
+	}
