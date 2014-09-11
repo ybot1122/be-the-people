@@ -48,7 +48,7 @@ function rotateGraphic(counter, data, fadeTime = 1000) {
 	$currVis.fadeOut(fadeTime, function() {
 		$currVis.css('background-image', 'url(\"' + graphics[next] + '\")');
 	});
-	$currHide.show();
+	$currHide.fadeIn(fadeTime);
 	if (graphics.length > 1) {
 		setTimeout(function() { 
 			rotateGraphic(next, data);

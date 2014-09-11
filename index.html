@@ -6,11 +6,11 @@
 		<script src="js/content.js"></script>
 		<script src="js/background.js"></script>
 		<script src="js/admin.js"></script>
-		<script>loadBgs();</script>
 		<link href="style.css" rel="stylesheet" />
 	</head>
 	<body>
 		<script src="js/fb.js"></script>
+
 		<div id="live" class="bg"></div>
 		<div id="next" class="bg"></div>
 
@@ -31,6 +31,7 @@
 
 		<script>
 			$(document).ready(function() {
+				loadBgs();
 				$('#home').click(function(e) {
 					$('span[data-active=\"true\"]').removeAttr('data-active');
 					$('#content').slideUp('1500');
