@@ -33,7 +33,7 @@ function noBackground() {
 
 // invoked when a list of background images is provided and there is more
 // than one image available to rotate
-function rotateGraphic(counter, data, fadeTime = 1000) {
+function rotateGraphic(counter, data, fadeTime) {
 	var graphics = data;
 	var next = (counter + 1) % graphics.length;
 	var $currVis;
@@ -51,7 +51,7 @@ function rotateGraphic(counter, data, fadeTime = 1000) {
 	$currHide.fadeIn(fadeTime);
 	if (graphics.length > 1) {
 		setTimeout(function() { 
-			rotateGraphic(next, data);
+			rotateGraphic(next, data, 1000);
 		}, 7000);
 	}
 }
