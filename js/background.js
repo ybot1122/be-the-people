@@ -3,7 +3,7 @@
 */
 
 // wrapper for an ajax request to the database for a list of background images
-function loadBgs(callback) {
+function loadBgs() {
 	var request = $.ajax({
 		url: '/?bgs=true',
 		type: 'GET',
@@ -52,6 +52,6 @@ function rotateGraphic(counter, data, fadeTime = 1000) {
 	if (graphics.length > 1) {
 		setTimeout(function() { 
 			rotateGraphic(next, data);
-		}, 2000);
+		}, 7000);
 	}
 }

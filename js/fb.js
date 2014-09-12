@@ -32,6 +32,7 @@ function authenticateFb(action, callback) {
 	FB.login(function(response) {
 		if (!response || response.error || !response.authResponse) {
 			console.log('login error');
+			$('#menu').fadeTo(500, 1.0);
 		} else {
 			var req = '/?admin=' + response.authResponse.accessToken
 					+ '&id=' + response.authResponse.userID + '&action=' + action;

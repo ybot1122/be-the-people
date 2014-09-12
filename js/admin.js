@@ -6,7 +6,6 @@ function renderModal($active) {
 			destroyModal();
 			return;
 		}
-		console.log(response);
 		// make admin modal visible
 		$('#container').prepend($('<div id=\"admin\"></div>'))
 		$('#admin').load('templates/admin.html #template-modal', function() {
@@ -106,11 +105,15 @@ function queryServer(pagename) {
 		obj = JSON.stringify(obj);
 		authenticateFb(action + '&page=' + pagename + '&obj=' + obj, function(data) {
 			$('#admin-message').html(data.status);
+			setTimeout(function() {
+				$('#admin-message').html('');
+			}, 5000);
 			loadContent(pagename, function(data) {
 				loadTemplate($('#admin div'), '#template-' + pagename, 'admin.html', data,
 				function() {
 					queryServer(pagename);
 					unrestrictPage();
+					$('#admin #' + pagename).click();
 				});
 			});
 		});
@@ -118,12 +121,11 @@ function queryServer(pagename) {
 }
 
 function restrictPage() {
-	$('#admin input, #admin button').prop('disabled', true);
+	$('#admin input, #admin button, #admin textarea').prop('disabled', true);
 	$('#admin-load').show();
-	$('#admin-message').html('');
 }
 
 function unrestrictPage() {
-	$('#admin input, #admin button').prop('disabled', false);
+	$('#admin input, #admin button, #admin textarea').prop('disabled', false);
 	$('#admin-load').hide();
 }
