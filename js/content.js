@@ -1,5 +1,6 @@
 /*
 	content.js - functions to invoke when retrieving content from the database
+	the functions will 
 */
 
 /*
@@ -38,11 +39,11 @@ function loadContent(pagename, callback) {
 		datatype: 'JSON'
 	});
 
-	request.done(function(data, msg) {
-		if (!data || data === null || data.error) {
+	request.done(function(res, msg) {
+		if (!res || res === null || res.status === 'failure') {
 			callback({error: 'bad request'});
 		} else {
-			callback({data: data});
+			callback({data: res.data});
 		}
 	});
 
@@ -51,6 +52,10 @@ function loadContent(pagename, callback) {
 	});
 }
 
+/*
+	This function is used across multiple parts of the program. It is a wrapper function
+	for rendering our mustache.js templates.
+*/
 function loadTemplate($destination, selector, filename, data, callback) {
 	$destination.load('templates/' + filename + ' ' + selector, 
 	function(response, status, xhr) {

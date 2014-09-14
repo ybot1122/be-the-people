@@ -1,3 +1,8 @@
+/*
+	app.js - this is our NodeJS server. It has two jobs: retrieve content from our MongoDB
+	server. securely authenticate users before making updates to our MongoDB server
+*/
+
 var finalhandler = require('finalhandler');
 var http = require('http');
 var serveStatic = require('serve-static');
@@ -18,25 +23,49 @@ var serve = serveStatic('.', {});
 var mongoServer = 'bep:temp@54.68.27.92:27017/be-the-people';
 
 /*
-	result object for retrieving page content from database
+	These functions are to be invoked with a callback function. Each callback function
+	is expecting to receive a JSON object of the following format:
 		status 	: 	failure or success
-		data	: 	(on success) an object
-			about 		: 	an array of objects {body: string}
-			chapters 	: 	an array of objects {school: string, year: string}
-			contact 	: 	an array of objects {field: string, value: string}
+		data	: 	(on success) an array of JSON objects of the one of the following formats:
+			-> about 		: 	{_id: ObjectID, body: string}
+			-> chapters 	: 	{_id: ObjectID, school: string, year: string}
+			-> contact 		: 	{_id: ObjectID, field: string, value: string}
+			-> backgrounds	: 	{_id: ObjectID, filename: string, type: string}
 */
 function getContent(page, callback) {
 	var database = mongo(mongoServer, [page]);
 	database.collection(page).find({}, function(err, data) {
 		if (err != null || data === null) {
-			callback({error: "Invalid page request!"});
+			callback({status: 'failure'});
 		} else {
-			callback(data);
+			callback({
+				status 	: 	'success',
+				data 	: 	data
+			});
 		}
 		database.close();
 	});
 }
 
+function getFilenames(callback) {
+	var database = mongo(mongoServer, ['bg']);
+	database.bg.find(function(err, data) {
+		if (err != null || !data || data == null) {
+			callback({status: 'failure'});
+		} else {
+			callback({
+				status 	: 	'success',
+				data 	: 	data
+			});
+		}
+	});
+}
+
+/*
+	These functions perform updates and removal procedures on our database. It is imperative
+	that these functions only be invoked if the client is authenticated. Currently these functions
+	do not check for failure, so we (for now!) assume that each database operation succeeds.
+*/
 function updateContent(queryObj) {
 	if (queryObj.hasOwnProperty('page')) {
 		var database = mongo(mongoServer, [queryObj.page]);
@@ -63,32 +92,19 @@ function addContent(queryObj) {
 		database.collection(queryObj.page).insert(obj, {});
 	}
 }
-/*
-	result object for retrieving filenames from database
-		status 	: 	failure or success
-		files 	: 	array of objects {filename: string, type: string}
-*/
-function getFilenames(callback) {
-	var database = mongo(mongoServer, ['bg']);
-	database.bg.find(function(err, data) {
-		if (err != null || !data || data == null) {
-			callback([]);
-		} else {
-			callback(data);
-		}
-	});
-}
 
 /*
+	The authFB function is how our server verfies that a user is an admin of a certain FB page.
+	Notice the page ID is hard-coded in. 
+
 	result object for auth-ing with Facebook:
 		status 	: 	failure or success
-		>> action = verify
+		>> if (action == 'verify') the object also contains data for all the content
 		pages	: 	(on success) an object
 			about 		: 	data
 			chapters 	: 	data
 			contact 	: 	data
 		bgs 	: 	(on success) an array of filenames
-		>> action = update
 */
 function authFb(queryObj, callback) {
 	var action = queryObj.action;
@@ -122,35 +138,40 @@ function authFb(queryObj, callback) {
 	})
 }
 
-// Create server
+/*
+	This is where we initialize our HTTP server. Our HTTP server must first parse any GET variable
+	that it may receive. Depending on the GET variables passed, the server will either return
+	an HTML page OR a JSON object. 
+*/
 var server = http.createServer(function(req, res) {
 	// check if there is a request for page content
 	var queryObj = queryString.parse(url.parse(req.url).query);
 
 	if (queryObj.hasOwnProperty('admin') && queryObj.hasOwnProperty('id')
 			&& queryObj.hasOwnProperty('action')) {
+		// handle request of authenticating an admin and then performing an action
 		authFb(queryObj, function(data) {
 			res.writeHead(200, {'Content-Type': 'application/json'});
 			res.end(JSON.stringify(data));
 		});
 	} else if (queryObj.hasOwnProperty('page')) {
-		// handle get request for page content
+		// handle request for page content
 		getContent(queryObj.page, function(data) {
 			res.writeHead(200, {'Content-Type': 'application/json'});
 			res.end(JSON.stringify(data));
 		});
 	} else if (queryObj.hasOwnProperty('bgs')) {
-		// handle get request for background filenames
-		getFilenames(function(data) {
+		// handle request for background filenames
+		getFilenames(function(info) {
 			var result = [];
-			data.forEach(function(val) {
+			info.data.forEach(function(val) {
 				result.push('graphics/' + val.filename + '.gif');
 			});
 			res.writeHead(200, {'Content-Type': 'application/json'});
 			res.end(JSON.stringify(result));
 		});
 	} else {
-		// serve the files
+		// no valid GET variables. just serve the HTML file to client.
 		var done = finalhandler(req, res)
 		serve(req, res, done)
 	}

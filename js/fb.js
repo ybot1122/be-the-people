@@ -1,3 +1,12 @@
+/*
+	fb.js handles the client-side Facebook authentication. From the client-side, the user needs 
+	to log in to Facebook and grant us permission to view their managed pages.
+*/
+
+/*
+	The following code is copied directly from the Facebook developers website and is required
+	to essentially initialize FB. 
+*/
 var isLoaded = false;
 
 window.fbAsyncInit = function() {
