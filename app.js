@@ -115,7 +115,7 @@ function authFb(queryObj, callback) {
 			callback({status: 'failure'});
 		} else {
 			for (var i = 0; i < response.data.length; i++) {
-				if (response.data[i].id === '151789761537076') {
+				if (response.data[i].id === '797627276956025') {
 					if (action === 'verify') {
 						callback({status: 'success'});
 					} else if (action === 'update') {
