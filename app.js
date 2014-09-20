@@ -10,6 +10,7 @@ var url = require('url');
 var queryString = require('querystring');
 var mongo = require('mongojs');
 var facebook = require('facebook-sdk');
+
 var FB = new facebook.Facebook({
 	appId		: 	'1524386131129811',
 	xfbml		: 	true,
