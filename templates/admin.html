@@ -1,5 +1,26 @@
 <script id="template-about" type="text/html">
 	<h3>Editing the About Page</h3>
+	<table>
+		<tr>
+			<th>Options</th>
+			<th>Paragraph Text</th>
+		</tr>
+	{{#data}}
+		<tr data-id="{{_id}}">
+			<td>
+				<input type="submit" value="Update" /><br />
+				<input type="submit" value="Remove" />
+			</td>
+			<td><textarea data-name="body">{{body}}</textarea></td>
+		</tr>
+	{{/data}}
+		<tr>
+			<td>
+				<input type="submit" value="Add" />
+			</td>
+			<td><textarea data-name="body">say something...</textarea></td>
+		</tr>
+	</table>
 </script>
 
 <script id="template-contact" type="text/html">
