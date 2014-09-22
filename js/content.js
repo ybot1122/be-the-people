@@ -8,7 +8,6 @@
 	and then uses Mustache templating to render the contents. manages the sliding
 	transition animation also.
 		pagename 	=> 	string identifying the page to load content for
-		yoolololololol
 */
 function updateContent(pagename) {
 	var $button = $('#' + pagename);

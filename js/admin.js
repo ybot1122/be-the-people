@@ -75,12 +75,24 @@ function attachButtonBehavior() {
 		e.preventDefault();
 		e.stopPropagation();
 		restrictPage();
-		loadContent('background', function(data) {
-			loadTemplate($('#admin div'), '#template-background', 'admin.html', data,
+
+		// make an ajax request for background filenames
+		var request = $.ajax({
+			url: '/?bgs=true',
+			type: 'GET',
+			datatype: 'JSON'
+		});
+
+		request.done(function(data, msg) {
+			loadTemplate($('#admin div'), '#template-background', 'admin.html', {'data': data},
 			function() {
 				queryServer('background');
 				unrestrictPage();
 			});
+		});
+
+		request.fail(function(data, msg) {
+			console.log('failure');
 		});
 	});
 }
