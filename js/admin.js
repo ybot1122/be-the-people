@@ -70,6 +70,19 @@ function attachButtonBehavior() {
 			});
 		});
 	});
+
+	$('#admin #background').click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		restrictPage();
+		loadContent('background', function(data) {
+			loadTemplate($('#admin div'), '#template-background', 'admin.html', data,
+			function() {
+				queryServer('background');
+				unrestrictPage();
+			});
+		});
+	});
 }
 
 function queryServer(pagename) {
