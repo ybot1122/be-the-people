@@ -130,13 +130,21 @@ body, div {
 
 	#admin table {
 		width: 100%;
+		border-collapse: collapse;
 	}
 
 	#admin td {
 		text-align: center;
 		margin-top: 25px;
 		margin-bottom: 5px;
-		border-right: 1px black solid;
+	}
+
+	#admin tr {
+		border-bottom: 1px solid black;
+	}
+
+	#admin tr:nth-child(2n){
+		background-color: #F7F7F7;
 	}
 
 	#admin table input, #admin table textarea {
@@ -146,4 +154,16 @@ body, div {
 
 	#admin table textarea {
 		height: 75px;
+	}
+
+	#admin #addrow {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 100px;
+		margin-top: 15px;
+	}
+
+	#admin h3 {
+		text-align: center;
 	}
