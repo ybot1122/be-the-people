@@ -121,6 +121,9 @@ body, div {
 	display: none;
 	overflow-x: hidden;
 	overflow-y: scroll;
+	margin: 0;
+	padding: 0;
+	background-color: #CCC;
 }
 
 	#admin img {
@@ -167,3 +170,143 @@ body, div {
 	#admin table textarea {
 		height: 75px;
 	}
+#editAbout input[type=submit] {
+	border-radius: 10px;
+	background-color: #DDD;
+	border: 4px solid #666;
+	padding: 6px;
+	font-size: 14pt;
+	width: 80%;
+	max-width: 200px;
+}
+
+#editAbout input[type=submit]:hover {
+	background-color: #BBB;
+}
+
+#editAbout #aboutRow:hover {
+	border: 2px dashed red;
+	background-color: rgb(255, 190, 190);
+}
+
+#editAbout .leftCol, #editAbout .rightCol {
+	width: 48%;
+	float: left;
+	display: block;
+	min-height: 100px;
+	height: auto !important;
+	overflow: hidden;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#editAbout .rightCol {
+	clear: right;
+}
+
+#editAbout textarea {
+	width: 80%;
+	max-width: 80%;
+	height: 80px;
+}
+
+#editAbout #options, #editAbout #text {
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+
+#editAbout #text {
+	clear: right;
+}
+
+#editAbout .paragraph {
+	overflow: auto;
+	margin: 2px;
+	margin-bottom: 12px;
+	clear: left;
+	padding-top: 10px;
+	/*border: 2px solid white;*/
+}
+
+#editAbout .paragraph:hover {
+	background-color: rgba(255, 0, 0, .2);
+	border: 2px solid rgba(255, 0, 0, .5);
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+#editAbout .data {
+	clear: left;
+}
+
+#editAbout div {
+	overflow: hidden;
+}
+
+#editAbout {
+	font-family: Helvetica, Arial, Sans-serif;
+	max-width: 1000px;
+	min-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+}
+
+.adminButton {
+	width: 18%;
+	height: 40px;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#about {
+	background-color: #768CEE;
+}
+
+#about:hover {
+	background-color: #6B7FD6;
+}
+
+#exit {
+	background-color: #FA3E3E;
+}
+
+#exit:hover {
+	background-color: #E03838;
+}
+
+#chapters {
+	background-color: #41E838;
+}
+
+#chapters:hover {
+	background-color: #3AC932;
+}
+
+#contact {
+	background-color: #D938D9;
+}
+
+#contact:hover {
+	background-color: #BF34BF;
+}
+
+#background {
+	background-color: #F29111;
+}
+
+#background:hover {
+	background-color: #DB830F;
+}
+
+#colorMe {
+	background-color: #BBB;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
