@@ -1,24 +1,28 @@
 <script id="template-about" type="text/html">
 	<h3>About Be The People</h3>
-	{{#data}}
-		<p>{{body}}</p>
-	{{/data}}
-	{{#error}}
-		<p>{{error}}</p>
-	{{/error}}
+	<div class="paragraphs">
+		{{#data}}
+			<p>{{body}}</p>
+		{{/data}}
+		{{#error}}
+			<p>{{error}}</p>
+		{{/error}}
+	</div>
 </script>
 
 <script id="template-chapters" type="text/html">
 	<h3>Be The People Chapters</h3>
-	<p>Here are the current chapters: </p>
-	<ul>
-	{{#data}}
-		<li>{{school}}: started at {{year}}</li>
-	{{/data}}
-	{{#error}}
-		<li>{{error}}</li>
-	{{/error}}
-	</ul>
+	<div class="paragraphs">
+		<div class="topic"><p>Here are the current chapters:</p></div>
+		<ol>
+		{{#data}}
+			<li>{{school}}: started at {{year}}</li>
+		{{/data}}
+		{{#error}}
+			<li>{{error}}</li>
+		{{/error}}
+		</ol>
+	</div>
 </script>
 
 <script id="template-contact" type="text/html">
