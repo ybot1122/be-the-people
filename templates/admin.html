@@ -1,26 +1,32 @@
 <script id="template-about" type="text/html">
-	<h3>Editing the About Page</h3>
-	<table>
-		<tr>
-			<th>Options</th>
-			<th>Paragraph Text</th>
-		</tr>
+<div id="editAbout">
+	<h3>Edit About Page</h3>
+
+	<h4 id="options">Options</h4>
+	<h4 id="text">Paragraph</h4><br />
+
 	{{#data}}
-		<tr data-id="{{_id}}">
-			<td>
-				<input type="submit" value="Update" /><br />
-				<input type="submit" value="Remove" />
-			</td>
-			<td><textarea data-name="body">{{body}}</textarea></td>
-		</tr>
+		<div data-id="{{_id}}" class="data">
+			<div class="paragraph">
+				<div class="leftCol">
+					<input type="submit" value="Update" /><br />
+					<input type="submit" value="Remove" />
+				</div>
+				<div class="rightCol">
+					<textarea data-name="body" class="textArea">{{body}}</textarea>
+				</div>
+			</div>
+		</div>
 	{{/data}}
-		<tr>
-			<td>
-				<input type="submit" value="Add" />
-			</td>
-			<td><textarea data-name="body">say something...</textarea></td>
-		</tr>
-	</table>
+	<div class="paragraph">
+		<div class="leftCol">
+			<input type="submit" value="Add" />
+		</div>
+		<div class="rightCol">
+			<textarea data-name="body">say something...</textarea>
+		</div>
+	</div>
+</div>
 </script>
 
 <script id="template-contact" type="text/html">
@@ -96,11 +102,7 @@
 </script>
 
 <script id="template-modal" type="text/html">
-	<button id="exit">Exit</button>
-	<button id="about">About</button>
-	<button id="chapters">Chapters</button>
-	<button id="contact">Contact</button>
-	<button id="background">Background</button>
+	<button id="exit" class="adminButton">Exit</button><button id="about" class="adminButton">About</button><button id="chapters" class="adminButton">Chapters</button><button id="contact" class="adminButton">Contact</button><button id="background" class="adminButton">Background</button>
 	<span id="admin-load"><img src="ajax-loader.gif" alt="loading..." /></span>
 	<span id="admin-message"></span>
 	<div></div>
