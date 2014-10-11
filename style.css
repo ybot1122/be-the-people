@@ -151,26 +151,27 @@ body, div {
 	#admin table textarea {
 		height: 75px;
 	}
-#editAbout input[type=submit] {
+.editAdmin input[type=submit] {
 	border-radius: 10px;
 	background-color: #DDD;
 	border: 4px solid #666;
-	padding: 6px;
-	font-size: 14pt;
+	padding: 5px;
+	font-size: 12pt;
 	width: 80%;
 	max-width: 200px;
+	margin: 5px;
 }
 
-#editAbout input[type=submit]:hover {
+.editAdmin input[type=submit]:hover {
 	background-color: #BBB;
 }
 
-#editAbout #aboutRow:hover {
+.editAdmin #aboutRow:hover {
 	border: 2px dashed red;
 	background-color: rgb(255, 190, 190);
 }
 
-#editAbout .leftCol, #editAbout .rightCol {
+.editAdmin .leftCol, .editAdmin .rightCol {
 	width: 48%;
 	float: left;
 	display: block;
@@ -181,27 +182,40 @@ body, div {
 	text-align: center;
 }
 
-#editAbout .rightCol {
+.editAdmin .farLeftCol, .editAdmin .centerCol, .editAdmin .farRightCol {
+	width: 32%;
+	float: left;
+	display: block;
+	min-height: 100px;
+	height: auto !important;
+	overflow: hidden;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+
+.editAdmin .rightCol {
 	clear: right;
 }
 
-#editAbout textarea {
+.editAdmin textarea {
 	width: 80%;
 	max-width: 80%;
+	min-width: 80%;
 	height: 80px;
 }
 
-#editAbout #options, #editAbout #text {
+.editAdmin #options, .editAdmin #text {
 	float: left;
 	width: 50%;
 	text-align: center;
 }
 
-#editAbout #text {
+.editAdmin #text {
 	clear: right;
 }
 
-#editAbout .paragraph {
+.editAdmin .paragraph {
 	overflow: auto;
 	margin: 2px;
 	margin-bottom: 12px;
@@ -210,22 +224,22 @@ body, div {
 	/*border: 2px solid white;*/
 }
 
-#editAbout .paragraph:hover {
+.editAdmin .paragraph:hover {
 	background-color: rgba(255, 0, 0, .2);
 	border: 2px solid rgba(255, 0, 0, .5);
 	margin: 0;
 	margin-bottom: 10px;
 }
 
-#editAbout .data {
+.editAdmin .data {
 	clear: left;
 }
 
-#editAbout div {
+.editAdmin div {
 	overflow: hidden;
 }
 
-#editAbout {
+.editAdmin {
 	font-family: Helvetica, Arial, Sans-serif;
 	max-width: 800px;
 	min-width: 400px;

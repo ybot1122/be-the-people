@@ -80,8 +80,9 @@ function queryServer(pagename) {
     var obj = {};
     var action;
     if ($(this).val() === 'Update') {
-      obj._id = $(this).parents('tr').first().attr('data-id');
-      $(this).parents('tr').first().find('input, textarea').each(function(ind, elm) {
+      console.log("Update");
+      obj._id = $(this).parent().parent().parent().attr('data-id');
+      $(this).parent().parent().first().find('input, textarea').each(function(ind, elm) {
         var status = $(elm).attr('data-name');
         if (typeof status !== typeof undefined && status !== false) {
           obj[$(elm).attr('data-name')] = $(elm).val();
@@ -89,7 +90,7 @@ function queryServer(pagename) {
       });
       action = 'update'
     } else if ($(this).val() === 'Add') {
-      $(this).parents('tr').first().find('input, textarea').each(function(ind, elm) {
+      $(this).parent().parent().first().find('input, textarea').each(function(ind, elm) {
         var status = $(elm).attr('data-name');
         if (typeof status !== typeof undefined && status !== false) {
           obj[$(elm).attr('data-name')] = $(elm).val();
@@ -97,7 +98,7 @@ function queryServer(pagename) {
       });
       action = 'add'
     } else if ($(this).val() === 'Remove') {
-      obj._id = $(this).parents('tr').first().attr('data-id');
+      obj._id = $(this).parent().parent().parent().attr('data-id');
       action = 'remove'
     } else {
       return;
