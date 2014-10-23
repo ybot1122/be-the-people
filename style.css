@@ -98,7 +98,7 @@ body, div {
 	left: 20%;
 	top: 10%;
 	z-index: 2;
-	background: white;
+	/*background: linear-gradient(red, blue);*/
 	display: none;
 	overflow-x: hidden;
 	overflow-y: scroll;
@@ -203,6 +203,7 @@ body, div {
 	max-width: 80%;
 	min-width: 80%;
 	height: 80px;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
 .editAdmin #options, .editAdmin #text {
@@ -246,6 +247,11 @@ body, div {
 	margin-left: auto;
 	margin-right: auto;
 	overflow: hidden;
+	background: none;
+	/*background: -webkit-linear-gradient(#768CEE, #CCC); /* For Safari 5.1 to 6.0 */
+	/*background: -o-linear-gradient(#768CEE, #CCC); /* For Opera 11.1 to 12.0 */
+	/*background: -moz-linear-gradient(#768CEE, #CCC); /* For Firefox 3.6 to 15 */
+	/*background: linear-gradient(#768CEE, #CCC); /* Standard syntax */
 }
 
 .adminButton {
@@ -254,6 +260,10 @@ body, div {
 	margin: 0;
 	padding: 0;
 	border: none;
+}
+
+.centerCol input[type=text], .farRightCol input[type=text] {
+	font-size: 13pt;
 }
 
 #about {

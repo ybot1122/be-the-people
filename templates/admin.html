@@ -52,43 +52,55 @@
 			</div>
 		</div>
 	{{/data}}
+	<div class="paragraph">
+		<div class="farLeftCol">
+			<input type="submit" value="add" />
+		</div>
+		<div class="centerCol">
+			<input type="text" placeholder="Name" data-name="field" />
+		</div>
+		<div class="farRightCol">
+			<input type="text" placeholder="Value" data-name="value" />
+		</div>
+	</div>
 </div>
 </script>
 
 <script id="template-chapters" type="text/html">
+<div class="editAdmin">
 	<h3>Editing the Chapters Page</h3>
-	<table>
-		<tr>
-			<th>Options</th>
-			<th>School Name</th>
-			<th>Founding Year</th>
-		</tr>
+
+	<h4 class="farLeftCol">Options</h4>
+	<h4 class="centerCOl">School Name</h4>
+	<h4 class="farRightCol">Founding Year</h4>
 	{{#data}}
-		<tr data-id="{{_id}}">
-			<td>
+	<div data-id="{{_id}}" class="data">
+		<div class="paragraph">
+			<div class="farLeftCol">
 				<input type="submit" value="Update" /><br />
 				<input type="submit" value="Remove" />
-			</td>
-			<td>
+			</div>
+			<div class="centerCol">
 				<input type="text" value="{{school}}" data-name="school" />
-			</td>
-			<td>
+			</div>
+			<div class="farRightCol">
 				<input type="text" value="{{year}}" data-name="year" />
-			</td>
-		</tr>
+			</div>
+		</div>
+	</div>
 	{{/data}}
-		<tr>
-			<td>
-				<input type="submit" value="Add" />
-			</td>
-			<td>
-				<input type="text" value="New School" data-name="school" />
-			</td>
-			<td>
-				<input type="text" value="Founding Year" data-name="year" />
-			</td>
-		</tr>
-	</table>
+	<div class="paragraph">
+		<div class="farLeftCol">
+			<input type="submit" value="Add" />
+		</div>
+		<div class="centerCol">
+			<input type="text" placeholder="School Name" data-name="school" />
+		</div>
+		<div class="farRightCol">
+			<input type="text" placeholder="Founding Year" data-name="year" />
+		</div>
+	</div>
+</div>
 </script>
 
 <script id="template-modal" type="text/html">

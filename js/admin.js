@@ -41,6 +41,12 @@ function attachButtonBehavior() {
       function() {
         queryServer('contact');
         unrestrictPage();
+        $('#admin').css({
+          'background': '-webkit-linear-gradient(#D938D9, #CCC)',
+          'background': '-o-linear-gradient(#D938D9, #CCC)',
+          'background': '-moz-linear-gradient(#D938D9, #CCC)',
+          'background': 'linear-gradient(#D938D9, #CCC)'
+        });
       });
     });
   });
@@ -54,6 +60,12 @@ function attachButtonBehavior() {
       function() {
         queryServer('chapters');
         unrestrictPage();
+        $('#admin').css({
+          'background': '-webkit-linear-gradient(#41E838, #CCC)',
+          'background': '-o-linear-gradient(#41E838, #CCC)',
+          'background': '-moz-linear-gradient(#41E838, #CCC)',
+          'background': 'linear-gradient(#41E838, #CCC)'
+        });
       });
     });
   });
@@ -67,6 +79,13 @@ function attachButtonBehavior() {
       function() {
         queryServer('about');
         unrestrictPage();
+        $('textarea').autosize(); 
+        $('#admin').css({
+          'background': '-webkit-linear-gradient(#768CEE, #CCC)',
+          'background': '-o-linear-gradient(#768CEE, #CCC)',
+          'background': '-moz-linear-gradient(#768CEE, #CCC)',
+          'background': 'linear-gradient(#768CEE, #CCC)'
+        });
       });
     });
   });
