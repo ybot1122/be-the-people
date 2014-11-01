@@ -1,38 +1,31 @@
 /*
 	content.js - functions to invoke when retrieving content from the database
-	the functions will 
 */
 
 /*
-	updateContent(pagename) - makes an ajax request to the server for content info
-	and then uses Mustache templating to render the contents. manages the sliding
-	transition animation also.
-		pagename 	=> 	string identifying the page to load content for
-		yoolololololol
+	detects which content panel is open and either closes it if currently active
+	or opens a different panel and loads content to it
 */
-function updateContent(pagename) {
+function changeActivePage(pagename) {
 	var $button = $('#' + pagename);
-	// check if client just wants to toggle display
 	if ($button.is('span[data-active=\"true\"]')) {
+		// content pane already open. just close it.
 		$('#content').slideUp('1500');
 		$button.removeAttr('data-active');
 	} else {
-		// switch active button and then render the html
+		// close active content pane and open new one
 		$('span[data-active=\"true\"]').removeAttr('data-active');
 		$button.attr('data-active', 'true');
 		$('#content').slideUp('1500', function() {
 			$('#loading').show();
-			loadContent(pagename, function(data) {
-				loadTemplate($('#content div'), '#template-' + pagename, 'general.html', data,
-				function() {
-					$('#loading').hide();
-					$('#content').slideDown('1500');
-				});
-			});
+			// TODO: make request to server, get the data, and render the template
 		});
 	}
 }
 
+/*
+	wrapper function for sending a GET AJAX request to 
+*/
 function loadContent(pagename, callback) {
 	var request = $.ajax({
 		url: '/?page=' + pagename,
@@ -42,12 +35,15 @@ function loadContent(pagename, callback) {
 
 	request.done(function(res, msg) {
 		if (!res || res === null || res.status === 'failure') {
+			// request went to server but didn't work
 			callback({error: 'bad request'});
 		} else {
+			// request succeeded
 			callback({data: res.data});
 		}
 	});
 
+	// request failed to even make it to server
 	request.fail(function(data, msg) {
 		callback({error: 'database currently down'});
 	});

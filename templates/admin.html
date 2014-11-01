@@ -1,100 +1,23 @@
+<!--
+	Not sure which fields and data your template will be receiving?
+	Check the GitHub wiki page!
+-->
+
 <script id="template-about" type="text/html">
 	<h3>Editing the About Page</h3>
-	<table>
-		<tr>
-			<th>Options</th>
-			<th>Paragraph Text</th>
-		</tr>
-	{{#data}}
-		<tr data-id="{{_id}}">
-			<td>
-				<input type="submit" value="Update" /><br />
-				<input type="submit" value="Remove" />
-			</td>
-			<td><textarea data-name="body">{{body}}</textarea></td>
-		</tr>
-	{{/data}}
-		<tr>
-			<td>
-				<input type="submit" value="Add" />
-			</td>
-			<td><textarea data-name="body">say something...</textarea></td>
-		</tr>
-	</table>
 </script>
 
 <script id="template-contact" type="text/html">
 	<h3>Editing the Contact Page</h3>
-	<table>
-		<tr>
-			<th>Options</th>
-			<th>Field Name</th>
-			<th>Field Value</th>
-		</tr>
-		{{#data}}
-		<tr data-id="{{_id}}">
-			<td>
-				<input type="submit" value="Update" /><br />
-				<input type="submit" value="Remove" />
-			</td>
-			<td>
-				<input type="text" value="{{field}}" data-name="field" />
-			</td>
-			<td>
-				<input type="text" value="{{value}}" data-name="value" />
-			</td>
-		</tr>
-		{{/data}}
-		<tr>
-			<td>
-				<input type="submit" value="Add" />
-			</td>
-			<td>
-				<input type="text" value="field name" data-name="field" />
-			</td>
-			<td>
-				<input type="text" value="field value" data-name="value" />
-			</td>
-		</tr>
-	</table>
 </script>
 
 <script id="template-chapters" type="text/html">
 	<h3>Editing the Chapters Page</h3>
-	<table>
-		<tr>
-			<th>Options</th>
-			<th>School Name</th>
-			<th>Founding Year</th>
-		</tr>
-	{{#data}}
-		<tr data-id="{{_id}}">
-			<td>
-				<input type="submit" value="Update" /><br />
-				<input type="submit" value="Remove" />
-			</td>
-			<td>
-				<input type="text" value="{{school}}" data-name="school" />
-			</td>
-			<td>
-				<input type="text" value="{{year}}" data-name="year" />
-			</td>
-		</tr>
-	{{/data}}
-		<tr>
-			<td>
-				<input type="submit" value="Add" />
-			</td>
-			<td>
-				<input type="text" value="New School" data-name="school" />
-			</td>
-			<td>
-				<input type="text" value="Founding Year" data-name="year" />
-			</td>
-		</tr>
-	</table>
 </script>
 
+<!--
+	HTML Template for the entire admin modal
+-->
 <script id="template-modal" type="text/html">
 	<button id="exit">Exit</button>
 	<button id="about">About</button>
