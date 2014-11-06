@@ -8,6 +8,7 @@
 */
 function changeActivePage(pagename) {
 	var $button = $('#' + pagename);
+	// active page; clicking again means you wanna close it
 	if ($button.is('span[data-active=\"true\"]')) {
 		// content pane already open. just close it.
 		$('#content').slideUp('1500');
@@ -19,12 +20,20 @@ function changeActivePage(pagename) {
 		$('#content').slideUp('1500', function() {
 			$('#loading').show();
 			// TODO: make request to server, get the data, and render the template
+			loadContent(pagename, function(data) {
+				loadTemplate($('#content div'), '#template-' + pagename, 'general.html', data, callback)
+			});
 		});
 	}
 }
 
+function callback() {
+	$('#loading').hide();
+	$('#content').slideDown('1500');
+}
+
 /*
-	wrapper function for sending a GET AJAX request to 
+	wrapper function for sending a GET AJAX request to
 */
 function loadContent(pagename, callback) {
 	var request = $.ajax({
@@ -54,7 +63,7 @@ function loadContent(pagename, callback) {
 	for rendering our mustache.js templates.
 */
 function loadTemplate($destination, selector, filename, data, callback) {
-	$destination.load('templates/' + filename + ' ' + selector, 
+	$destination.load('templates/' + filename + ' ' + selector,
 	function(response, status, xhr) {
 		$destination.html(Mustache.render($destination.text(), data));
 		callback();
