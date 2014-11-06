@@ -1,5 +1,6 @@
 /*
-	content.js - functions to invoke when retrieving content from the database
+	js/content.js
+	functions to invoke when retrieving content from the database
 */
 
 /*

@@ -1,5 +1,6 @@
 /*
-	app.js - this is our NodeJS server. It has two jobs: retrieve content from our MongoDB
+	app.js
+	this is our NodeJS server. It has two jobs: retrieve content from our MongoDB
 	server. securely authenticate users before making updates to our MongoDB server
 */
 
