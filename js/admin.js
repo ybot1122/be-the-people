@@ -99,9 +99,8 @@ function queryServer(pagename) {
     var obj = {};
     var action;
     if ($(this).val() === 'Update') {
-      console.log("Update");
       obj._id = $(this).parent().parent().parent().attr('data-id');
-      $(this).parent().parent().first().find('input, textarea').each(function(ind, elm) {
+      $(this).parent().parent().find('input, textarea').each(function(ind, elm) {
         var status = $(elm).attr('data-name');
         if (typeof status !== typeof undefined && status !== false) {
           obj[$(elm).attr('data-name')] = $(elm).val();
