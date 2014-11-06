@@ -116,10 +116,10 @@ body, div {
 	height: 10%;
 	padding-top: .5%;
 	padding-bottom: .5%;
-	padding-left: 1%;
-	padding-right: 1%;
+	padding-left: 2%;
+	padding-right: 2%;
 	overflow: hidden;
-	width: 98%;
+	width: 96%;
 }
 
 #header img {
@@ -133,8 +133,8 @@ body, div {
 
 .infocolumn {
 	float: left;
-	height: 86%;
-	margin-top: .5%;
+	height: 84%;
+	margin-top: 1%;
 	margin-left: 2%;
 	width: 30.66%;
 	background-color: red;
