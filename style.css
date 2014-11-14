@@ -9,25 +9,6 @@ body, div {
 	height: 100%;
 }
 
-#content, #loading {
-	position: absolute;
-	top: 10%;
-	left: 45%;
-	width: 45%;
-	height: 85%;
-	background: rgba(255, 255, 255, .5);
-	display: none;
-	z-index: 1;
-}
-
-	#content h3 {
-		text-align: center;
-	}
-
-	#content div {
-		margin: 10px;
-	}
-
 .bg {
 	position: absolute;
 	width: 100%;
@@ -39,12 +20,6 @@ body, div {
 	background-color: black;
 	z-index: 0;
 	display: none;
-}
-
-#loading {
-	margin-top: 30px;
-	text-align: center;
-	background: url('ajax-loader.gif') no-repeat top;
 }
 
 #header {
