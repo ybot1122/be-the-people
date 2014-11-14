@@ -6,7 +6,7 @@
 	top: 150px;
 	left: 10%;
 	background-color: rgba(79,79,79,0.93);
-	box-shadow: 0 0 10px 2px #555;
+	box-shadow: 0 0 5px 2px #DDD;
 	font-family: Helvetica, Arial, sans-serif;
 	border-radius: 20px;
 }
@@ -49,6 +49,12 @@
 		text-align: center;
 		border-top-right-radius: 20px;
 		border-top-left-radius: 20px;
+	}
+	
+	#adminContent h1 {
+		text-align: center;
+		color: #EDEDED;
+		margin-top: 10%;
 	}
 	
 	/*
