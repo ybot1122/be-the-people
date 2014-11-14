@@ -1,0 +1,96 @@
+#admin {
+	width: 80%;
+	height: 80%;
+	margin: auto;
+	position: absolute;
+	top: 150px;
+	left: 10%;
+	background-color: rgba(255,255,255,0.9);
+	box-shadow: 0 0 10px 2px #555;
+	font-family: Helvetica, Arial, sans-serif;
+	border-radius: 20px;
+}
+
+	#admin button {
+		width: 20%;
+		height: 50px;
+		float: left;
+		border: none;
+		margin-top: 5px;
+		background-color: #3E3E3E;
+		color: white;
+		border-left: 2px solid #D5D5D5;
+	}
+	
+	#admin #exit {
+		border-left: none;
+	}
+	
+	#admin button:hover {
+		background-color: #212121;
+		text-shadow: 2px 0px 20px #EBEBEB;
+	}
+	
+	#admin #buttons {
+		width: 100%;
+		height: 60px;
+		background-color: #3E3E3E;
+		vertical-align: middle;
+		line-height: 60px;
+	}
+	
+	#admin #adminIntro {
+		width: 100%;
+		height: 50px;
+		background-color: #CCC;
+		line-height: 50px;
+		margin: 0;
+		vertical-align: middle;
+		text-align: center;
+		border-top-right-radius: 20px;
+		border-top-left-radius: 20px;
+	}
+	
+	/*
+	
+	#admin #exit {
+		background-color: #F05154;
+	}
+	
+	#admin #exit:hover {
+		background-color: #F03033;
+	}
+	
+	#admin #about {
+		background-color: #9F77F4;
+	}
+	
+	#admin #about:hover {
+		background-color: #8755F3;
+	}
+	
+	#admin #chapters {
+		background-color: #2EED79;
+	}
+	
+	#admin #chapters:hover {
+		background-color: #19E068;	
+	}
+	
+	#admin #contact {
+		background-color: #EDF55D;
+	}
+	
+	#admin #contact:hover {
+		background-color: #E1EC31;
+	}
+	
+	#admin #background {
+		background-color: #F5B278
+	}
+	
+	#admin #background:hover {
+		background-color: #F59E52;
+	}
+	
+	*/

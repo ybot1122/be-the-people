@@ -13,13 +13,19 @@ function renderModal($active) {
 			destroyModal();
 			return;
 		}
-		// TODO: make admin modal visible and functional
+		$('#container').prepend($('<div id=\"admin\"></div>'));
+		$('#admin').hide();
+		$('#admin').load('templates/admin.html #template-modal', function() {
+			$('#admin').html(Mustache.render($('#admin').text(), {}));
+			attachButtonBehavior();
+			$('#admin').slideDown(1500);
+		});
 	});
 }
 
 // destroys the admin modal and restores the main website
 function destroyModal() {
-	$('#admin').fadeTo(500, 0.0, function() {
+	$('#admin').slideUp(1000, 0.0, function() {
 		$('#admin').remove();
 	});
 	$('#menu').fadeTo(500, 1.0);
@@ -28,19 +34,62 @@ function destroyModal() {
 // TODO: tell the admin-modal buttons what to do
 function attachButtonBehavior() {
 	$('#exit').click(function(e) {
-		// exiting the modal
+		destroyModal();
 	});	
+	
+	$('#admin #background').click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		restrictPage();
+		loadContent('background', function(data) {
+	  		loadTemplate($('#adminContent div'), '#template-background', 'admin.html', data,
+	  			function() {
+				// queryServer('about');
+				unrestrictPage();
+	 		 });
+		});
+	});
 
 	$('#admin #contact').click(function(e) {
 		// loading admin controls for the contact page
+		e.preventDefault();
+		e.stopPropagation();
+		restrictPage();
+		loadContent('contact', function(data) {
+	  		loadTemplate($('#adminContent div'), '#template-contact', 'admin.html', data,
+	  			function() {
+				// queryServer('about');
+				unrestrictPage();
+	 		 });
+		});
 	});
 
 	$('#admin #chapters').click(function(e) {
 		// loading admin controls for the chapters page
+		e.preventDefault();
+		e.stopPropagation();
+		restrictPage();
+		loadContent('chapters', function(data) {
+	  		loadTemplate($('#adminContent div'), '#template-chapters', 'admin.html', data,
+	  			function() {
+				// queryServer('about');
+				unrestrictPage();
+	 		 });
+		});
 	});
 
 	$('#admin #about').click(function(e) {
 		// loading admin controls for the about page
+		e.preventDefault();
+		e.stopPropagation();
+		restrictPage();
+		loadContent('about', function(data) {
+	  		loadTemplate($('#adminContent div'), '#template-about', 'admin.html', data,
+	  			function() {
+				// queryServer('about');
+				unrestrictPage();
+	 		 });
+		});
 	});
 }
 

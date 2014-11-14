@@ -15,16 +15,25 @@
 	<h3>Editing the Chapters Page</h3>
 </script>
 
+<script id="template-background" type="text/html">
+	<h3>Editing the Background Page</h3>
+</script>
+
 <!--
 	HTML Template for the entire admin modal
 -->
 <script id="template-modal" type="text/html">
-	<button id="exit">Exit</button>
-	<button id="about">About</button>
-	<button id="chapters">Chapters</button>
-	<button id="contact">Contact</button>
-	<button id="background">Background</button>
-	<span id="admin-load"><img src="ajax-loader.gif" alt="loading..." /></span>
-	<span id="admin-message"></span>
-	<div></div>
+	<p id="adminIntro">
+		Admin Panel
+	</p>
+	<div id="buttons">
+		<button id="exit">Exit</button>
+		<button id="about">About</button>
+		<button id="chapters">Chapters</button>
+		<button id="contact">Contact</button>
+		<button id="background">Background</button>
+	</div>
+	<div id="adminContent">
+		<div></div>
+	</div>
 </script>
