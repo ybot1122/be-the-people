@@ -12,11 +12,12 @@ function changeActivePage(pagename) {
 
 	//If the home button is clicked, animate all the columns back to the original width and margin
 	if($button.is('#home')){
+		
+		$button.hide();
 		$('.infocolumn').animate({
 			width: '30%',
 			marginLeft:'30'
 		}, 600)
-		$button.hide();
 	} else { 
 		//make the active column 95%, while making the others 0% width and remove their margin for sizing issues
 		$button.animate({width:'95%'}, 600);
