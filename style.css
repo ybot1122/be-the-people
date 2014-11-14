@@ -49,3 +49,13 @@ body, div {
 	width: 30%;
 	background-color: red;
 }
+
+#home {
+	position: absolute;
+	display: none;
+	height: 30px;
+	width: 30px;
+	top: 120px;
+	right: 50px;
+	background-color: blue;
+}
