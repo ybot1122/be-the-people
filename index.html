@@ -17,7 +17,7 @@
 
 		<div id="container">
 			<div id="header">
-				<img src="logo.jpg" alt="Be The People Logo" />
+				<img id ="home" src="logo.jpg" alt="Be The People Logo" />
 				<div id="auth">login to facebook for admin access</div>
 			</div>
 
@@ -31,35 +31,14 @@
 
 			<div class="infocolumn" id="contact">
 
-			</div>
-
-			<div id="content">
-				<div></div>
-			</div>
-			
+			</div>			
 		</div>
-
-		<!--
-		<div id="container">
-			<div id="menu">
-				<span id="home">home</span><span id="about">about</span>
-				<span id="chapters">chapters</span><span id="contact">contact</span>
-			</div>
-			<div id="loading">
-				<img src="ajax-loader.gif" alt="loading..." />
-			</div>
-			<div id="content">
-				<div></div>
-			</div>
-		</div>
-		-->
 
 		<script>
 			$(document).ready(function() {
 				loadBgs();
 				$('#home').click(function(e) {
-					$('span[data-active=\"true\"]').removeAttr('data-active');
-					$('#content').slideUp('1500');
+					changeActivePage('home');
 				});
 				$('#about').click(function(e) {
 					changeActivePage('about');
