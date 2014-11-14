@@ -16,13 +16,14 @@ function changeActivePage(pagename) {
 			width: '30%',
 			marginLeft:'30'
 		}, 600)
+		$button.hide();
 	} else { 
 		//make the active column 95%, while making the others 0% width and remove their margin for sizing issues
 		$button.animate({width:'95%'}, 600);
 		$('.infocolumn').not($button).animate({
 			width:'0%', 
 			marginLeft:'0'
-		}, 600);
+		}, 600, callback);
 	}
 
 	// TODO: make request to server, get the data, and render the template
@@ -48,6 +49,10 @@ function changeActivePage(pagename) {
 		});
 	}
 	*/
+}
+
+function callback(){
+	$('#home').show();
 }
 
 /*
