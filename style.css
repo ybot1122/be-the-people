@@ -49,12 +49,12 @@ body, div {
 
 #header {
 	height: 10%;
-	padding-top: .5%;
-	padding-bottom: .5%;
-	padding-left: 2%;
-	padding-right: 2%;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 30px;
+	padding-right: 30px;
 	overflow: hidden;
-	width: 96%;
+	width: 95%;
 }
 
 #header img {
@@ -68,9 +68,9 @@ body, div {
 
 .infocolumn {
 	float: left;
-	height: 84%;
-	margin-top: 1%;
-	margin-left: 2%;
-	width: 30.66%;
+	height: 80%;
+	margin-top: 30px;
+	margin-left: 35px;
+	width: 30%;
 	background-color: red;
 }
