@@ -19,6 +19,7 @@ function renderModal($active) {
 			$('#admin').html(Mustache.render($('#admin').text(), {}));
 			attachButtonBehavior();
 			$('#admin').slideDown(1500);
+			$('.infocolumn').slideUp(1000).fadeOut(1000);
 		});
 	});
 }
@@ -26,6 +27,7 @@ function renderModal($active) {
 // destroys the admin modal and restores the main website
 function destroyModal() {
 	$('#admin').slideUp(1000, 0.0, function() {
+		$('.infocolumn').slideDown(1000).fadeIn(1000);
 		$('#admin').remove();
 	});
 	$('#menu').fadeTo(500, 1.0);
