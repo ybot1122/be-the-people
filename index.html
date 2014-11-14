@@ -16,7 +16,7 @@
 
 		<div id="container">
 			<div id="header">
-				<img src="logo.jpg" alt="Be The People Logo" />
+				<img id ="home" src="logo.jpg" alt="Be The People Logo" />
 				<div id="auth">login to facebook for admin access</div>
 			</div>
 
@@ -52,8 +52,7 @@
 			$(document).ready(function() {
 				loadBgs();
 				$('#home').click(function(e) {
-					$('span[data-active=\"true\"]').removeAttr('data-active');
-					$('#content').slideUp('1500');
+					changeActivePage('home');
 				});
 				$('#about').click(function(e) {
 					changeActivePage('about');
