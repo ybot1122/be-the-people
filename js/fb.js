@@ -17,12 +17,15 @@ window.fbAsyncInit = function() {
 	});
 	$('#auth').show();
 	$('#auth').click(function(e) {
-		$active = $('span[data-active=\"true\"]');
-		$active.click();
-		$('#menu').fadeTo(500, 0.0, function() {
-			$('#menu').hide();
-		});
-		renderModal($active);
+		// Only activate if the admin panel is not already present
+		if ($('#admin').length == 0) {
+			$active = $('span[data-active=\"true\"]');
+			$active.click();
+			$('#menu').fadeTo(500, 0.0, function() {
+				$('#menu').hide();
+			});
+			renderModal($active);
+		}
 	});
 };
 

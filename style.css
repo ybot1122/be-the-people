@@ -12,8 +12,8 @@ body, div {
 .bg {
 	position: absolute;
 	width: 100%;
-	top: 12%;
-	height: 88%;
+	top: 10%;
+	height: 90%;
 	background-repeat: none;
 	background-position: center;
 	background-size: 100% 100%;
@@ -23,18 +23,33 @@ body, div {
 }
 
 #header {
-	height: 10%;
+	/* changed height from 10% to fixed value */
+	height: 100px;
+	/*
 	padding-top: 7px;
 	padding-bottom: 7px;
 	padding-left: 30px;
 	padding-right: 30px;
+	*/
 	overflow: hidden;
-	width: 95%;
+	width: 100%;
+	background-image: url('headerBG.png');
+	background-repeat: no-repeat;
+	background-clip: content-box;
+	border-bottom: 3px solid #444;
 }
 
-#header img {
-	height: 100%;
-	width: 15%;
+#logo {
+	height: 70px;
+	margin-left: 30px;
+	padding-top: 15px;
+}
+
+#adminImage {
+	width: 20px;
+	height: 20px;
+	opacity: 0.8;
+	transform: translate(0, 20%);
 }
 
 #auth {
@@ -59,3 +74,18 @@ body, div {
 	right: 50px;
 	background-color: blue;
 }
+
+#auth {
+	font-family: Arial, sans-serif;
+	color: #B5B5B5;
+	padding: 10px;
+	background-color: rgba(0, 0, 0, .5);
+	border: 2px solid black;
+	border-bottom-left-radius: 10px;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+	#auth:hover {
+		background-color: rgba(0, 0, 0, .7);
+	}

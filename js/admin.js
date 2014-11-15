@@ -39,10 +39,20 @@ function attachButtonBehavior() {
 		destroyModal();
 	});	
 	
+	$('#admin #exit').mouseenter(function(e) {
+		$('#whiteBars #exitBar').stop(true).animate({backgroundColor : '#F9F9F9'}, 300);
+	});
+	
+	$('#admin #exit').mouseleave(function(e){
+		$('#whiteBars #exitBar').stop(true).animate({'background-color' : "#3E3E3E"}, 300);
+	});
+	
 	$('#admin #background').click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
 		restrictPage();
+		$('#admin #background').css('background-color', '#212121');
+		$('#admin #chapters, #admin #contact, #admin #about').css('background-color', '#3E3E3E');
 		loadContent('background', function(data) {
 	  		loadTemplate($('#adminContent div'), '#template-background', 'admin.html', data,
 	  			function() {
@@ -51,12 +61,22 @@ function attachButtonBehavior() {
 	 		 });
 		});
 	});
+	
+	$('#admin #background').mouseenter(function(e) {
+		$('#whiteBars #backgroundBar').stop(true).animate({backgroundColor: "#F9F9F9"}, 300);
+	});
+	
+	$('#admin #background').mouseleave(function(e){
+		$('#whiteBars #backgroundBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
+	});
 
 	$('#admin #contact').click(function(e) {
 		// loading admin controls for the contact page
 		e.preventDefault();
 		e.stopPropagation();
 		restrictPage();
+		$('#admin #contact').css('background-color', '#212121');
+		$('#admin #chapters, #admin #about, #admin #background').css('background-color', '#3E3E3E');
 		loadContent('contact', function(data) {
 	  		loadTemplate($('#adminContent div'), '#template-contact', 'admin.html', data,
 	  			function() {
@@ -65,12 +85,22 @@ function attachButtonBehavior() {
 	 		 });
 		});
 	});
+	
+	$('#admin #contact').mouseenter(function(e) {
+		$('#whiteBars #contactBar').stop(true).animate({backgroundColor: "#F9F9F9"}, 300);
+	});
+	
+	$('#admin #contact').mouseleave(function(e){
+		$('#whiteBars #contactBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
+	});
 
 	$('#admin #chapters').click(function(e) {
 		// loading admin controls for the chapters page
 		e.preventDefault();
 		e.stopPropagation();
 		restrictPage();
+		$('#admin #chapters').css('background-color', '#212121');
+		$('#admin #about, #admin #contact, #admin #background').css('background-color', '#3E3E3E');
 		loadContent('chapters', function(data) {
 	  		loadTemplate($('#adminContent div'), '#template-chapters', 'admin.html', data,
 	  			function() {
@@ -79,12 +109,22 @@ function attachButtonBehavior() {
 	 		 });
 		});
 	});
+	
+	$('#admin #chapters').mouseenter(function(e) {
+		$('#whiteBars #chaptersBar').stop(true).animate({backgroundColor: "#F9F9F9"}, 300);
+	});
+	
+	$('#admin #chapters').mouseleave(function(e){
+		$('#whiteBars #chaptersBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
+	});
 
 	$('#admin #about').click(function(e) {
 		// loading admin controls for the about page
 		e.preventDefault();
 		e.stopPropagation();
 		restrictPage();
+		$('#admin #about').css('background-color', '#212121');
+		$('#admin #chapters, #admin #contact, #admin #background').css('background-color', '#3E3E3E');
 		loadContent('about', function(data) {
 	  		loadTemplate($('#adminContent div'), '#template-about', 'admin.html', data,
 	  			function() {
@@ -92,6 +132,14 @@ function attachButtonBehavior() {
 				unrestrictPage();
 	 		 });
 		});
+	});
+	
+	$('#admin #about').mouseenter(function(e) {
+		$('#whiteBars #aboutBar').stop(true).animate({backgroundColor: "#F9F9F9"}, 300);
+	});
+	
+	$('#admin #about').mouseleave(function(e){
+		$('#whiteBars #aboutBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
 	});
 }
 
