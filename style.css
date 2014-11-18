@@ -66,12 +66,9 @@ body, div {
 }
 
 #home {
-	position: absolute;
-	display: none;
+	float: right;
 	height: 30px;
 	width: 30px;
-	top: 140px;
-	right: 45px;
 	background-color: blue;
 }
 
