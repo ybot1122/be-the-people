@@ -9,28 +9,23 @@
 */
 function changeActivePage(pagename) {
 	var $button = $('#' + pagename);
-
 	//If the home button is clicked, animate all the columns back to the original width and margin
 	if($button.is('#home')){
-		
 		$button.hide();
-		$('.infocolumn').animate({
-			width: '30%',
-			marginLeft:'30'
-		}, 600)
+		$('#content').animate({
+			height: '0%'
+		}, 1000, shrinkColumns);
 	} else { 
 		//make the active column 95%, while making the others 0% width and remove their margin for sizing issues
 		$button.animate({width:'95%'}, 600);
 		$('.infocolumn').not($button).animate({
 			width:'0%', 
 			marginLeft:'0'
-		}, 600, callback);
+		}, 600, expandColumns);
 	}
 
 	// TODO: make request to server, get the data, and render the template
-	loadContent(pagename, function(data) {
-		loadTemplate($('#content div'), '#template-' + pagename, 'general.html', data, function(){})
-	});
+
 	/*
 	// active page; clicking again means you wanna close it
 	if ($button.is('span[data-active=\"true\"]')) {
@@ -52,8 +47,20 @@ function changeActivePage(pagename) {
 	*/
 }
 
-function callback(){
+function expandColumns(){
 	$('#home').show();
+	$('#content').show()
+	$('#content').animate({
+		height: '75%'
+	}, 1000);
+}
+
+function shrinkColumns(){
+	$('#content').hide();
+	$('.infocolumn').animate({
+		width: '30%',
+		marginLeft:'30'
+	}, 600);
 }
 
 /*
