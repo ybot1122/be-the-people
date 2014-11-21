@@ -23,14 +23,7 @@ body, div {
 }
 
 #header {
-	/* changed height from 10% to fixed value */
-	height: 100px;
-	/*
-	padding-top: 7px;
-	padding-bottom: 7px;
-	padding-left: 30px;
-	padding-right: 30px;
-	*/
+	height: 10%;
 	overflow: hidden;
 	width: 100%;
 	background-image: url('headerBG.png');
@@ -58,9 +51,9 @@ body, div {
 
 .infocolumn {
 	float: left;
-	height: 75%;
-	margin-top: 30px;
-	margin-left: 35px;
+	height: 80%;
+	margin-top: 2.5%;
+	margin-left: 2.5%;
 	width: 30%;
 	background-color: red;
 }

@@ -17,7 +17,7 @@ function changeActivePage(pagename) {
 		}, 1000, shrinkColumns);
 	} else { 
 		//make the active column 95%, while making the others 0% width and remove their margin for sizing issues
-		$button.animate({width:'95%'}, 600);
+		$button.animate({width:'95%', marginLeft: '2.5%'}, 600);
 		$('.infocolumn').not($button).animate({
 			width:'0%', 
 			marginLeft:'0'
@@ -51,7 +51,7 @@ function expandColumns(){
 	$('#home').show();
 	$('#content').show()
 	$('#content').animate({
-		height: '75%'
+		height: '80%'
 	}, 1000);
 }
 
@@ -59,7 +59,7 @@ function shrinkColumns(){
 	$('#content').hide();
 	$('.infocolumn').animate({
 		width: '30%',
-		marginLeft:'30'
+		marginLeft:'2.5%'
 	}, 600);
 }
 
