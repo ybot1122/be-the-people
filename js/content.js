@@ -20,7 +20,8 @@ function changeActivePage(pagename) {
 		//Calls expandColumn callback function to show the content div once they are expanded.
 		$button.animate({
 			width:'95%',
-			opacity: '.8'
+			opacity: '.8',
+			marginLeft: '2.5%'
 		}, 600);
 		$('.infocolumn').not($button).animate({
 			width:'0%', 
@@ -66,7 +67,8 @@ function shrinkColumns(){
 	$('.infocolumn').animate({
 		width: '30%',
 		marginLeft:'2.5%',
-		opacity: '.6'
+		opacity: '.6',
+		marginLeft:'2.5%'
 	}, 600);
 }
 
