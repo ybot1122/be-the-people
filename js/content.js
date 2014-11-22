@@ -26,7 +26,7 @@ function changeActivePage(pagename) {
 		$('.infocolumn').not($button).animate({
 			width:'0%', 
 			marginLeft:'0'
-		}, 600, expandColumns);
+		}, 600, expandColumns(pagename));
 	}
 
 	// TODO: make request to server, get the data, and render the template
@@ -53,12 +53,16 @@ function changeActivePage(pagename) {
 }
 
 //Shows the home button, content div, and slides the content up
-function expandColumns(){
+function expandColumns(pagename){
 	$('#home').show();
 	$('#content').show()
 	$('#content').animate({
 		height: '75%'
-	}, 1000);
+	}, 1000, function() {
+		loadContent(pagename, function(data) {
+			loadTemplate($('#content'), "#template-" + pagename, "general.html", data);
+		})
+	});
 }
 
 //hides the content div and shrinks the columns to the original size
