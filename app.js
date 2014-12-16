@@ -4,102 +4,47 @@
 	server. securely authenticate users before making updates to our MongoDB server
 */
 
+/*
+	Modules and Dependencies
+*/
 var finalhandler = require('finalhandler');
 var http = require('http');
 var serveStatic = require('serve-static');
 var url = require('url');
 var queryString = require('querystring');
-var mongo = require('mongojs');
 var facebook = require('facebook-sdk');
 var AWS = require('aws-sdk');
-var uuid = require('node-uuid');
-
+var ddb = new AWS.DynamoDB({region: 'us-west-2'});
 var FB = new facebook.Facebook({
-	appId		: 	'1524386131129811',
-	xfbml		: 	true,
+	appId			: 	'1524386131129811',
+	xfbml			: 	true,
 	version		: 	'v2.0'
 });
 
+/*
+	Server Variables
+*/
 var port = process.env.PORT || 8081;
-
-// Serve up public/ftp folder
 var serve = serveStatic('.', {});
-var mongoServer = 'bep:temp@54.68.27.92:27017/be-the-people';
+var fbPageId = '797627276956025';
 
 /*
-	These functions are to be invoked with a callback function. Each callback function
-	is expecting to receive a JSON object of the following format:
-		status 	: 	failure or success
-		data	: 	(on success) an array of JSON objects of the one of the following formats:
-			-> about 		: 	{_id: ObjectID, body: string}
-			-> chapters 	: 	{_id: ObjectID, school: string, year: string}
-			-> contact 		: 	{_id: ObjectID, field: string, value: string}
-			-> backgrounds	: 	{_id: ObjectID, filename: string, type: string}
+	Sends request to DynamoDB for all the content of a certain page
 */
-function getContent(page, callback) {
-	var database = mongo(mongoServer, [page]);
-	database.collection(page).find({}, function(err, data) {
-		if (err != null || data === null) {
-			callback({status: 'failure'});
-		} else {
-			callback({
-				status 	: 	'success',
-				data 	: 	data
-			});
-		}
-		database.close();
-	});
-}
+function retrievePageContent(pagename) {
 
-function getFilenames(callback) {
-	var database = mongo(mongoServer, ['bg']);
-	database.bg.find(function(err, data) {
-		if (err != null || !data || data == null) {
-			callback({status: 'failure'});
-		} else {
-			callback({
-				status 	: 	'success',
-				data 	: 	data
-			});
-		}
-	});
 }
 
 /*
-	These functions perform updates and removal procedures on our database. It is imperative
-	that these functions only be invoked if the client is authenticated. Currently these functions
-	do not check for failure, so we (for now!) assume that each database operation succeeds.
+	Sends update request to DynamoDB to update attributes for a certain page
 */
-function updateContent(queryObj) {
-	if (queryObj.hasOwnProperty('page')) {
-		var database = mongo(mongoServer, [queryObj.page]);
-		var obj = JSON.parse(queryObj.obj);
-		obj._id = mongo.ObjectId(obj._id);
-		database.collection(queryObj.page).update({_id: obj._id}, obj, 
-			{upsert: false, multi: false});
-	}
-}
+function performPageUpdate(pagename, input) {
 
-function removeContent(queryObj) {
-	if (queryObj.hasOwnProperty('page')) {
-		var database = mongo(mongoServer, [queryObj.page]);
-		var obj = JSON.parse(queryObj.obj);
-		obj._id = mongo.ObjectId(obj._id);
-		database.collection(queryObj.page).remove({_id: obj._id}, {justOne: true});
-	}
-}
-
-function addContent(queryObj) {
-	if (queryObj.hasOwnProperty('page')) {
-		var database = mongo(mongoServer, [queryObj.page]);
-		var obj = JSON.parse(queryObj.obj);
-		database.collection(queryObj.page).insert(obj, {});
-	}
 }
 
 /*
-	The authFB function is how our server verfies that a user is an admin of a certain FB page.
-	Notice the page ID is hard-coded in. 
+	Verfies that a user is an admin of a certain FB page
+	Page ID is hard coded
 
 	result object for auth-ing with Facebook:
 		status 	: 	failure or success
@@ -119,7 +64,7 @@ function authFb(queryObj, callback) {
 			callback({status: 'failure'});
 		} else {
 			for (var i = 0; i < response.data.length; i++) {
-				if (response.data[i].id === '797627276956025') {
+				if (response.data[i].id === fbPageId) {
 					if (action === 'verify') {
 						callback({status: 'success'});
 					} else if (action === 'update') {
@@ -143,9 +88,9 @@ function authFb(queryObj, callback) {
 }
 
 /*
-	This is where we initialize our HTTP server. Our HTTP server must first parse any GET variable
-	that it may receive. Depending on the GET variables passed, the server will either return
-	an HTML page OR a JSON object. 
+	Initialize HTTP server
+	HTTP server must first parse any GET variable that it may receive
+	Returns either HTML information or JSON object
 */
 var server = http.createServer(function(req, res) {
 	// check if there is a request for page content
