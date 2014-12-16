@@ -11,6 +11,8 @@ var url = require('url');
 var queryString = require('querystring');
 var mongo = require('mongojs');
 var facebook = require('facebook-sdk');
+var AWS = require('aws-sdk');
+var uuid = require('node-uuid');
 
 var FB = new facebook.Facebook({
 	appId		: 	'1524386131129811',
@@ -183,4 +185,4 @@ var server = http.createServer(function(req, res) {
 server.listen(port);
 
 // Put a friendly message on the terminal
-console.log('Server running at http://127.0.0.1:' + port);
+console.log('Server running at http://localhost:' + port);
