@@ -67,15 +67,13 @@ function authFb(queryObj, callback) {
 				if (response.data[i].id === fbPageId) {
 					if (action === 'verify') {
 						callback({status: 'success'});
+					// ~~ IT IS POSSIBLE THAT WE COMBINE ALL OF THESE FLOWS INTO ONE ~~
 					} else if (action === 'update') {
-						updateContent(queryObj);
-						callback({status: 'success'});
+						// invoke update flow
 					} else if (action === 'add') {
-						addContent(queryObj);
-						callback({status: 'success'});
+						// invoke add content flow
 					} else if (action === 'remove') {
-						removeContent(queryObj);
-						callback({status: 'success'});
+						// invoke remove content flow
 					} else {
 						callback({status: 'failure'});
 					}
