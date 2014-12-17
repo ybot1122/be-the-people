@@ -32,15 +32,15 @@ function changeActivePage(pagename) {
 }
 
 //Shows the home button, content div, and slides the content up
-function expandColumns(pagename){
-	$('#home').show();
-	$('#main-frame').show()
-	$('#main-frame').animate({
-		height: '75%'
-	}, 1000, function() {
-		loadContent(pagename, function(data) {
-			loadTemplate($('#content'), "#template-" + pagename, "general.html", data);
-		})
+function expandColumns(pagename) {
+	loadContent(pagename, function(data) {
+		loadTemplate($('#content'), "#template-" + pagename, "general.html", data, function() {
+			$('#home').show();
+			$('#main-frame').show()
+			$('#main-frame').animate({
+				height: '75%'
+			}, 1000);
+		});
 	});
 }
 
