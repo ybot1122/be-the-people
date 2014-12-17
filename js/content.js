@@ -12,7 +12,7 @@ function changeActivePage(pagename) {
 	//If the home button is clicked, slide the content div down then calls a shrinkcolumns function
 	if($button.is('#home')){
 		$button.hide();
-		$('#content').animate({
+		$('#main-frame').animate({
 			height: '0%'
 		}, 1000, shrinkColumns);
 	} else { 
@@ -28,35 +28,14 @@ function changeActivePage(pagename) {
 			marginLeft:'0'
 		}, 600, expandColumns(pagename));
 	}
-
 	// TODO: make request to server, get the data, and render the template
-
-	/*
-	// active page; clicking again means you wanna close it
-	if ($button.is('span[data-active=\"true\"]')) {
-		// content pane already open. just close it.
-		$('#content').slideUp('1500');
-		$button.removeAttr('data-active');
-	} else {
-		// close active content pane and open new one
-		$('span[data-active=\"true\"]').removeAttr('data-active');
-		$button.attr('data-active', 'true');
-		$('#content').slideUp('1500', function() {
-			$('#loading').show();
-			// TODO: make request to server, get the data, and render the template
-			loadContent(pagename, function(data) {
-				loadTemplate($('#content div'), '#template-' + pagename, 'general.html', data, function(){})
-			});
-		});
-	}
-	*/
 }
 
 //Shows the home button, content div, and slides the content up
 function expandColumns(pagename){
 	$('#home').show();
-	$('#content').show()
-	$('#content').animate({
+	$('#main-frame').show()
+	$('#main-frame').animate({
 		height: '75%'
 	}, 1000, function() {
 		loadContent(pagename, function(data) {
@@ -67,7 +46,7 @@ function expandColumns(pagename){
 
 //hides the content div and shrinks the columns to the original size
 function shrinkColumns(){
-	$('#content').hide();
+	$('#main-frame').hide();
 	$('.infocolumn').animate({
 		width: '30%',
 		marginLeft:'2.5%',

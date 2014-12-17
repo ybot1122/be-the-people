@@ -103,20 +103,12 @@ var server = http.createServer(function(req, res) {
 		});
 	} else if (queryObj.hasOwnProperty('page')) {
 		// handle request for page content
-		getContent(queryObj.page, function(data) {
-			res.writeHead(200, {'Content-Type': 'application/json'});
-			res.end(JSON.stringify(data));
-		});
+		res.writeHead(200, {'Content-Type': 'application/json'});
+		res.end();
 	} else if (queryObj.hasOwnProperty('bgs')) {
 		// handle request for background filenames
-		getFilenames(function(info) {
-			var result = [];
-			info.data.forEach(function(val) {
-				result.push('graphics/' + val.filename + '.gif');
-			});
-			res.writeHead(200, {'Content-Type': 'application/json'});
-			res.end(JSON.stringify(result));
-		});
+		res.writeHead(200, {'Content-Type': 'application/json'});
+		res.end();
 	} else {
 		// no valid GET variables. just serve the HTML file to client.
 		var done = finalhandler(req, res)
