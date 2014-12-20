@@ -1,40 +1,6 @@
 <!--
 	Not sure which fields and data your template will be receiving?
 	Check the GitHub wiki page!
--->
-
-<script id="template-about" type="text/html">
-	<h3>Editing the About Page</h3>
-	<table>
-		<tr>
-			<th>Action</th>
-			<th>Text</th>
-		</tr>
-		<tr>
-			<td>
-				<input type="submit" value="Add" />
-				<input type="submit" value="Remove" />
-			</td>
-			<td>
-				<textarea></textarea>
-			</td>
-		</tr>
-	</table>
-</script>
-
-<script id="template-contact" type="text/html">
-	<h3>Editing the Contact Page</h3>
-</script>
-
-<script id="template-chapters" type="text/html">
-	<h3>Editing the Chapters Page</h3>
-</script>
-
-<script id="template-background" type="text/html">
-	<h3>Editing the Background Page</h3>
-</script>
-
-<!--
 	HTML Template for the entire admin modal
 -->
 <script id="template-modal" type="text/html">
@@ -58,4 +24,140 @@
 			<h1>Click on a tab to edit its content</h1>
 		</div>
 	</div>
+
+	<form>
+		<div id="about-form">
+			<h3>Editing the About Page</h3>
+			<table>
+				<tr>
+					<th>Text</th>
+					<th>Index</th>
+					<th>Mark for Deletion</th>
+				</tr>
+				<tr>
+					<td>
+						<textarea></textarea>
+					</td>
+					<td>
+						<select>
+							 <option value="1">1</option>
+							 <option value="2">2</option>
+							 <option value="3">3</option>
+						</select>
+					</td>
+					<td>
+						<input type="checkbox" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<input type="submit" value="Add Row" />
+					</td>
+				<tr>
+			</table>
+		</div>
+		<div id="chapters-form">
+			<h3>Editing the Chapters Page</h3>
+			<table>
+				<tr>
+					<th>School Name</th>
+					<th>Year</th>
+					<th>Index</th>
+					<th>Mark For Deletion</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" />
+					</td>
+					<td>
+						<input type="text" />
+					</td>
+					<td>
+						<select>
+							 <option value="1">1</option>
+							 <option value="2">2</option>
+							 <option value="3">3</option>
+						</select>
+					</td>
+					<td>
+						<input type="checkbox"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<input type="submit" value="Add Row" />
+					</td>
+				<tr>
+			</table>
+		</div>
+		<div id="contact-form">
+			<h3>Editing the Contact Page</h3>
+			<table>
+				<tr>
+					<th>Field Name</th>
+					<th>Field Value</th>
+					<th>Index</th>
+					<th>Mark For Deletion</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" />
+					</td>
+					<td>
+						<input type="text" />
+					</td>
+					<td>
+						<select>
+							 <option value="1">1</option>
+							 <option value="2">2</option>
+							 <option value="3">3</option>
+						</select>
+					</td>
+					<td>
+						<input type="checkbox"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<input type="submit" value="Add Row" />
+					</td>
+				<tr>
+			</table>
+		</div>
+		<div id="background-form">
+			<h3>Editing the Background Page</h3>
+			<table>
+				<tr>
+					<th>Preview</th>
+					<th>Extension</th>
+					<th>Index</th>
+					<th>Mark for Deletion</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="text" />
+					</td>
+					<td>
+						<select>
+							 <option value="1">1</option>
+							 <option value="2">2</option>
+							 <option value="3">3</option>
+						</select>
+					</td>
+					<td>
+						<input type="checkbox"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<input type="submit" value="Add Row" />
+					</td>
+				<tr>
+			</table>
+		</div>
+		<div id="buttonHolder">
+			<input type="submit" value="Submit" />
+		</div>
+	</form>
 </script>

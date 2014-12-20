@@ -72,6 +72,10 @@
 		font-weight: normal;
 		font-style: italic;
 	}
+
+	#admin h3 {
+		text-align: center;
+	}
 	
 	/*
 	
@@ -116,21 +120,34 @@
 	}
 	
 	*/
-#admin table {
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-}
+	#admin table {
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+	}
 
-#admin table td {
-	text-align: center;
-}
+	#admin table tr {
+		width: 30%;
+	}
 
-#admin table input {
-	width: 40%;
-}
+	#admin table td {
+		text-align: center;
+	}
 
-#admin table textarea {
-	width: 80%;
-	height: 150px;
-}
+	#admin input {
+		width: 100%;
+		max-width: 300px;
+	}
+
+	#admin #buttonHolder{
+		text-align: center;
+	}
+
+	#admin table textarea {
+		width: 80%;
+		height: 150px;
+	}
+
+	#admin form div{
+		display: none;
+	}
