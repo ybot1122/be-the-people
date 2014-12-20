@@ -50,6 +50,7 @@ body, div {
 }
 
 .infocolumn {
+	display: none;
 	float: left;
 	height: 75%;
 	margin-top: 30px;
