@@ -9,13 +9,15 @@
 */
 function changeActivePage(pagename) {
 	var $button = $('#' + pagename);
+	var selectedID = $button.id;
+	console.log(selectedID);
 	//If the home button is clicked, slide the content div down then calls a shrinkcolumns function
 	if($button.is('#home')){
 		$button.fadeOut(300);
 		$('#main-frame').animate({
 			height: '0%'
 		}, 1000, shrinkColumns);
-	} else { 
+	} else {
 		//make the active column 95%, while making the others 0% width and remove their margin for sizing issues
 		//Calls expandColumn callback function to show the content div once they are expanded.
 		$button.animate({
@@ -23,6 +25,7 @@ function changeActivePage(pagename) {
 			opacity: '.8',
 			marginLeft: '2.5%'
 		}, 600);
+		// hide all the other columns
 		$('.infocolumn').not($button).animate({
 			width:'0%',
 			marginLeft:'0',
