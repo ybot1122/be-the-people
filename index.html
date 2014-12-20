@@ -25,12 +25,9 @@
 			</div>
 
 			<div id="main">
-				<div class="infocolumn" id="about">
-				</div>
-				<div class="infocolumn" id="chapters">
-				</div>
-				<div class="infocolumn" id="contact">
-				</div>
+				<div class="infocolumn" id="about">About Be The People</div>
+				<div class="infocolumn" id="chapters">Chapters of Be The People</div>
+				<div class="infocolumn" id="contact">Contact Be The People</div>
 
 				<div id ="main-frame">
 					<div id="home">
@@ -44,18 +41,7 @@
 		<script>
 			$(document).ready(function() {
 				loadBgs();
-				$('#home').click(function(e) {
-					changeActivePage('home');
-				});
-				$('#about').click(function(e) {
-					changeActivePage('about');
-				});
-				$('#chapters').click(function(e) {
-					changeActivePage('chapters');
-				});
-				$('#contact').click(function(e) {
-					changeActivePage('contact');
-				});
+				var content = loadContent(initializeCols);
 			});
 		</script>
 	</body>

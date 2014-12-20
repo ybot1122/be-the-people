@@ -18,8 +18,9 @@ function renderModal($active) {
 		$('#admin').load('templates/admin.html #template-modal', function() {
 			$('#admin').html(Mustache.render($('#admin').text(), {}));
 			attachButtonBehavior();
-			$('#admin').slideDown(1500);
-			$('#main').slideUp(1000);
+			$('#main').slideUp(1000, function() {
+				$('#admin').slideDown(1000);
+			});
 		});
 	});
 }

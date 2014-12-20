@@ -11,7 +11,7 @@ function changeActivePage(pagename) {
 	var $button = $('#' + pagename);
 	//If the home button is clicked, slide the content div down then calls a shrinkcolumns function
 	if($button.is('#home')){
-		$button.hide();
+		$button.fadeOut(300);
 		$('#main-frame').animate({
 			height: '0%'
 		}, 1000, shrinkColumns);
@@ -24,23 +24,24 @@ function changeActivePage(pagename) {
 			marginLeft: '2.5%'
 		}, 600);
 		$('.infocolumn').not($button).animate({
-			width:'0%', 
-			marginLeft:'0'
-		}, 600, expandColumns(pagename));
+			width:'0%',
+			marginLeft:'0',
+			opacity: '0'
+		}, 600, expandColumns($button, pagename));
 	}
 	// TODO: make request to server, get the data, and render the template
 }
 
 //Shows the home button, content div, and slides the content up
-function expandColumns(pagename) {
-	loadContent(pagename, function(data) {
-		loadTemplate($('#content'), "#template-" + pagename, "general.html", data, function() {
-			$('#home').show();
-			$('#main-frame').show()
-			$('#main-frame').animate({
-				height: '75%'
-			}, 1000);
-		});
+function expandColumns($button, pagename) {
+	data = {};
+	loadTemplate($('#content'), "#template-" + pagename, "general.html", data, function() {
+		$('#home').show();
+		$('#main-frame').show();
+		$('.infocolumn').not($button);
+		$('#main-frame').animate({
+			height: '75%'
+		}, 1000);
 	});
 }
 
@@ -58,9 +59,9 @@ function shrinkColumns(){
 /*
 	wrapper function for sending a GET AJAX request to
 */
-function loadContent(pagename, callback) {
+function loadContent(callback) {
 	var request = $.ajax({
-		url: '/?page=' + pagename,
+		url: '/?page',
 		type: 'GET',
 		datatype: 'JSON'
 	});
@@ -79,6 +80,22 @@ function loadContent(pagename, callback) {
 	request.fail(function(data, msg) {
 		callback({error: 'database currently down'});
 	});
+}
+
+function initializeCols(response) {
+	$('#home').click(function(e) {
+		changeActivePage('home');
+	});
+	$('#about').click(function(e) {
+		changeActivePage('about');
+	});
+	$('#chapters').click(function(e) {
+		changeActivePage('chapters');
+	});
+	$('#contact').click(function(e) {
+		changeActivePage('contact');
+	});
+	$('#home, #about, #chapters, #contact').slideDown(1000);
 }
 
 /*
