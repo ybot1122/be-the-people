@@ -29,7 +29,6 @@
 		<table>
 			<tr>
 				<th>Text</th>
-				<th>Index</th>
 				<th>Mark for Deletion</th>
 			</tr>
 			{{#about}}{{#M}}{{#body}}
@@ -38,17 +37,32 @@
 					<textarea class="item" data-type="body">{{S}}</textarea>
 				</td>
 				<td>
-					<select>
-						 <option value="1">1</option>
-						 <option value="2">2</option>
-						 <option value="3">3</option>
-					</select>
+					<input class="del" type="checkbox" />
+				</td>
+			</tr>
+			{{/body}}{{/M}}{{/about}}
+			<tr>
+				<td>
+					<textarea class="item" data-type="body">{{S}}</textarea>
+				</td>
+				<td>
+					<input class="del" type="checkbox" />
+				</td>
+			</tr><tr>
+				<td>
+					<textarea class="item" data-type="body">{{S}}</textarea>
+				</td>
+				<td>
+					<input class="del" type="checkbox" />
+				</td>
+			</tr><tr>
+				<td>
+					<textarea class="item" data-type="body">{{S}}</textarea>
 				</td>
 				<td>
 					<input class="del" type="checkbox" />
 				</td>
 			</tr>
-			{{/body}}{{/M}}{{/about}}
 			<tr>
 				<td colspan="3">
 					<input type="submit" value="Add Row" />
@@ -62,7 +76,6 @@
 			<tr>
 				<th>School Name</th>
 				<th>Year</th>
-				<th>Index</th>
 				<th>Mark For Deletion</th>
 			</tr>
 			{{#chapters}}{{#M}}
@@ -76,13 +89,6 @@
 					{{#year}}
 					<input class="item" data-type="year" type="text" value="{{S}}" />
 					{{/year}}
-				</td>
-				<td>
-					<select>
-						 <option value="1">1</option>
-						 <option value="2">2</option>
-						 <option value="3">3</option>
-					</select>
 				</td>
 				<td>
 					<input class="del" type="checkbox"/>
@@ -102,7 +108,6 @@
 			<tr>
 				<th>Field Name</th>
 				<th>Field Value</th>
-				<th>Index</th>
 				<th>Mark For Deletion</th>
 			</tr>
 			{{#contact}}{{#M}}
@@ -116,13 +121,6 @@
 					{{#fieldvalue}}
 					<input class="item" data-type="fieldvalue" type="text" value="{{S}}"/>
 					{{/fieldvalue}}
-				</td>
-				<td>
-					<select>
-						 <option value="1">1</option>
-						 <option value="2">2</option>
-						 <option value="3">3</option>
-					</select>
 				</td>
 				<td>
 					<input class="del" type="checkbox"/>
@@ -142,7 +140,6 @@
 			<tr>
 				<th>Preview</th>
 				<th>Extension</th>
-				<th>Index</th>
 				<th>Mark for Deletion</th>
 			</tr>
 			<tr>
@@ -151,19 +148,14 @@
 					<input type="text" />
 				</td>
 				<td>
-					<select>
-						 <option value="1">1</option>
-						 <option value="2">2</option>
-						 <option value="3">3</option>
-					</select>
-				</td>
-				<td>
 					<input type="checkbox"/>
 				</td>
 			</tr>
 			<tr>
-				<a href="uploadFile.html" id="uploadImage">Upload Image</a>
-			</tr>
+				<td colspan="4">
+					<input type="submit" value="Add Row" />
+				</td>
+			<tr>
 		</table>
 	</div>
 	<div id="buttonHolder">
