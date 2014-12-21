@@ -29,6 +29,7 @@ function destroyModal() {
 	$('#admin').slideUp(1000, 0.0, function() {
 		$('#main').slideDown(1000);
 		$('#admin').remove();
+		loadContent(initializeCols);
 	});
 	$('#menu').fadeTo(500, 1.0);
 }
@@ -190,5 +191,6 @@ function deliverUpdateObject() {
 	var resultString = JSON.stringify(result);
 	authenticateFb('update&upData=' + resultString, function(response) {
 		console.log(response);
+		destroyModal();
 	});
 }

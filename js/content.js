@@ -115,6 +115,7 @@ function loadContent(callback) {
 }
 
 function initializeCols(response) {
+	console.log(response);
 	$('#home').click(function(e) {
 		changeActivePage('home');
 	});
