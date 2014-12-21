@@ -35,7 +35,7 @@
 			{{#about}}{{#M}}{{#body}}
 			<tr>
 				<td>
-					<textarea>{{S}}</textarea>
+					<textarea class="item" data-type="body">{{S}}</textarea>
 				</td>
 				<td>
 					<select>
@@ -45,7 +45,7 @@
 					</select>
 				</td>
 				<td>
-					<input type="checkbox" />
+					<input class="del" type="checkbox" />
 				</td>
 			</tr>
 			{{/body}}{{/M}}{{/about}}
@@ -69,12 +69,12 @@
 			<tr>
 				<td>
 					{{#school}}
-					<input type="text" value="{{S}}" />
+					<input class="item" data-type="school" type="text" value="{{S}}" />
 					{{/school}}
 				</td>
 				<td>
 					{{#year}}
-					<input type="text" value="{{N}}" />
+					<input class="item" data-type="year" type="text" value="{{S}}" />
 					{{/year}}
 				</td>
 				<td>
@@ -85,7 +85,7 @@
 					</select>
 				</td>
 				<td>
-					<input type="checkbox"/>
+					<input class="del" type="checkbox"/>
 				</td>
 			</tr>
 			{{/M}}{{/chapters}}
@@ -109,12 +109,12 @@
 			<tr>
 				<td>
 					{{#fieldname}}
-					<input type="text" value="{{S}}"/>
+					<input class="item" data-type="fieldname" type="text" value="{{S}}"/>
 					{{/fieldname}}
 				</td>
 				<td>
 					{{#fieldvalue}}
-					<input type="text" value="{{S}}"/>
+					<input class="item" data-type="fieldvalue" type="text" value="{{S}}"/>
 					{{/fieldvalue}}
 				</td>
 				<td>
@@ -125,7 +125,7 @@
 					</select>
 				</td>
 				<td>
-					<input type="checkbox"/>
+					<input class="del" type="checkbox"/>
 				</td>
 			</tr>
 			{{/M}}{{/contact}}

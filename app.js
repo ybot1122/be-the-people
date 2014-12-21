@@ -67,8 +67,40 @@ function retrievePageContent(callback) {
 /*
 	Sends update request to DynamoDB to update attributes for a certain page
 */
-function performPageUpdate(pagename, input) {
+function performPageUpdate(input, callback) {
+	var finalResult = {};
+	for(var pagename in input){
+	  finalResult[pagename] = [];
+	  for(var fields in input[pagename]){
+	    var map = {M: {}};
+	    for(fieldNames in input[pagename][fields]){
+	      map.M[fieldNames] = {S: input[pagename][fields][fieldNames]};
+	    }
+	    finalResult[pagename].push(map);
+	  }
+	}
 
+	for(var lists in finalResult){  
+	  var params = {
+	  Key: {
+	    pagename: {S: lists}
+	  },
+	  TableName: 'bethepeople',
+	  UpdateExpression: 'SET content = :val1',
+	  ExpressionAttributeValues: {
+	    ':val1': {L: finalResult[lists]}
+	  }
+	  };
+
+	  ddb.updateItem(params, function(err, data) {
+	    if (err) {
+	      console.log(err);
+	    } else {
+	      console.log(data);
+	    }
+	  });
+	}
+	callback({status: 'success'});
 }
 
 /*
@@ -100,7 +132,7 @@ function authFb(queryObj, callback) {
 					} else if (action === 'update' && queryObj.hasOwnProperty('upData')) {
 						// invoke update flow
 						var upData = JSON.parse(queryObj.upData);
-						callback({status: 'success'});
+						performPageUpdate(upData, callback);
 					} else {
 						callback({status: 'failure'});
 					}
