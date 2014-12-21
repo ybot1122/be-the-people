@@ -144,7 +144,7 @@ function attachButtonBehavior() {
 		element.append(td);
 		var td2 = document.creatElement("td");
 		var select = document.createElement("select");
-		select.append("")
+		select.append("");
 
 
 		/*
