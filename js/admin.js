@@ -29,6 +29,7 @@ function destroyModal() {
 	$('#admin').slideUp(1000, 0.0, function() {
 		$('#main').slideDown(1000);
 		$('#admin').remove();
+		loadContent(initializeCols);
 	});
 	$('#menu').fadeTo(500, 1.0);
 }
@@ -52,7 +53,7 @@ function attachButtonBehavior() {
 		e.stopPropagation();
 		$('#admin #background').css('background-color', '#212121');
 		$('#admin #chapters, #admin #contact, #admin #about').css('background-color', '#3E3E3E');
-		$('#admin form div:visible').hide();
+		$('#admin div[id*=-form]:visible').hide();
 		$('#background-form').show();
 		$('#buttonHolder').show();
 	});
@@ -71,7 +72,7 @@ function attachButtonBehavior() {
 		e.stopPropagation();
 		$('#admin #contact').css('background-color', '#212121');
 		$('#admin #chapters, #admin #about, #admin #background').css('background-color', '#3E3E3E');
-		$('#admin form div:visible').hide();
+		$('#admin div[id*=-form]:visible').hide();
 		$('#contact-form').show();
 		$('#buttonHolder').show();
 	});
@@ -90,7 +91,7 @@ function attachButtonBehavior() {
 		e.stopPropagation();
 		$('#admin #chapters').css('background-color', '#212121');
 		$('#admin #about, #admin #contact, #admin #background').css('background-color', '#3E3E3E');
-		$('#admin form div:visible').hide();
+		$('#admin div[id*=-form]:visible').hide();
 		$('#chapters-form').show();
 		$('#buttonHolder').show();
 	});
@@ -109,7 +110,7 @@ function attachButtonBehavior() {
 		e.stopPropagation();
 		$('#admin #about').css('background-color', '#212121');
 		$('#admin #chapters, #admin #contact, #admin #background').css('background-color', '#3E3E3E');
-		$('#admin form div:visible').hide();
+		$('#admin div[id*=-form]:visible').hide();
 		$('#about-form').show();
 		$('#buttonHolder').show();
 	});
@@ -213,5 +214,6 @@ function deliverUpdateObject() {
 	var resultString = JSON.stringify(result);
 	authenticateFb('update&upData=' + resultString, function(response) {
 		console.log(response);
+		destroyModal();
 	});
 }

@@ -104,6 +104,7 @@ function loadContent(callback) {
 				chapters: res.data.chapters,
 				contact: res.data.contact
 			});
+			loadBgs(res.data.bgs);
 		}
 	});
 
@@ -114,6 +115,7 @@ function loadContent(callback) {
 }
 
 function initializeCols(response) {
+	console.log(response);
 	$('#home').click(function(e) {
 		changeActivePage('home');
 	});
