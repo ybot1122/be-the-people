@@ -114,7 +114,6 @@ function loadContent(callback) {
 }
 
 function initializeCols(response) {
-	console.log(response);	
 	$('#home').click(function(e) {
 		changeActivePage('home');
 	});
@@ -126,6 +125,18 @@ function initializeCols(response) {
 	});
 	$('#contact').click(function(e) {
 		changeActivePage('contact', {data: response.contact});
+	});
+	$('#auth').click(function(e) {
+		// Only activate if the admin panel is not already present
+		if ($('#admin').length == 0) {
+			$active = $('span[data-active=\"true\"]');
+			$active.click();
+			$('#menu').fadeTo(500, 0.0, function() {
+				$('#menu').hide();
+			});
+			console.log(response);
+			renderModal($active, response);
+		}
 	});
 	$('#home, #about, #chapters, #contact').slideDown(1000);
 }

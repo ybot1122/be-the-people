@@ -5,7 +5,7 @@
 */
 
 // hides main website and launches admin modal
-function renderModal($active) {
+function renderModal($active, content) {
 	authenticateFb('verify', function(response) {
 		if (!response || response === null || response.status !== 'success') {
 			// authentication failed, exit out of admin modal
@@ -15,10 +15,9 @@ function renderModal($active) {
 		}
 		$('#container').prepend($('<div id=\"admin\"></div>'));
 		$('#admin').hide();
-		$('#admin').load('templates/admin.html #template-modal', function() {
-			$('#admin').html(Mustache.render($('#admin').text(), {}));
+		loadTemplate($('#admin'), '#template-modal', 'admin.html', content, function() {
 			attachButtonBehavior();
-			$('#main').slideUp(1000, function() {
+				$('#main').slideUp(1000, function() {
 				$('#admin').slideDown(1000);
 			});
 		});
@@ -122,11 +121,13 @@ function attachButtonBehavior() {
 	$('#admin #about').mouseleave(function(e){
 		$('#whiteBars #aboutBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
 	});
-}
 
-// TODO: implement behavior for the page-specific content update
-// buttons (i.e. the insert, update, and remove buttons)
-// CHECK THE GITHUB WIKI FOR THE ADMIN COMMAND WORKFLOW
+	$('#adminSubmit').click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		deliverUpdateObject();
+	});
+}
 
 // a function that disables all input, button, and textarea components in admin modal
 function restrictPage() {
@@ -138,4 +139,15 @@ function restrictPage() {
 function unrestrictPage() {
 	$('#admin input, #admin button, #admin textarea').prop('disabled', false);
 	$('#admin-load').hide();
+}
+
+// invoked when user submits changes from the admin panel
+function deliverUpdateObject() {
+	var result = {
+		about: [{body: 'sdfsadfdsfdsafd'}]
+	};
+	var resultString = JSON.stringify(result);
+	authenticateFb('update&upData=' + resultString, function(response) {
+		console.log(response);
+	});
 }
