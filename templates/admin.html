@@ -19,7 +19,7 @@
 				<th>Mark for Deletion</th>
 			</tr>
 			{{#about}}{{#M}}{{#body}}
-			<tr id="contentRow">
+			<tr>
 				<td>
 					<textarea class="item" data-type="body">{{S}}</textarea>
 				</td>
@@ -28,41 +28,6 @@
 				</td>
 			</tr>
 			{{/body}}{{/M}}{{/about}}
-			<tr id="contentRow">
-				<td>
-					<textarea class="item" data-type="body">{{S}}</textarea>
-				</td>
-				<td>
-					<input class="del" type="checkbox" />
-				</td>
-			</tr>
-			<tr id="contentRow">
-				<td>
-					<textarea class="item" data-type="body">{{S}}</textarea>
-				</td>
-				<td>
-					<input class="del" type="checkbox" />
-				</td>
-			</tr>
-			<tr id="contentRow">
-				<td>
-					<textarea class="item" data-type="body">{{S}}</textarea>
-				</td>
-				<td>
-					<input class="del" type="checkbox" />
-				</td>
-			</tr>
-			<tr id="contentRow">
-				<td>
-					<textarea class="item" data-type="body">{{S}}</textarea>
-				</td>
-				<td>
-					<input class="del" type="checkbox" />
-				</td>
-			</tr>
-
-
-
 			<tr id="submitInput">
 				<td colspan="3">
 					<input type="submit" value="Add Row" id="addRowAbout"/>
@@ -79,7 +44,7 @@
 				<th>Mark For Deletion</th>
 			</tr>
 			{{#chapters}}{{#M}}
-			<tr id="chapterInfo">
+			<tr>
 				<td>
 					{{#school}}
 					<input class="item" data-type="school" type="text" value="{{S}}" />
@@ -111,7 +76,7 @@
 				<th>Mark For Deletion</th>
 			</tr>
 			{{#contact}}{{#M}}
-			<tr id="contactInfo">
+			<tr>
 				<td>
 					{{#fieldname}}
 					<input class="item" data-type="fieldname" type="text" value="{{S}}"/>
