@@ -116,19 +116,19 @@ function loadContent(callback) {
 
 function initializeCols(response) {
 	console.log(response);
-	$('#home').click(function(e) {
+	$('#home').unbind('click').click(function(e) {
 		changeActivePage('home');
 	});
-	$('#about').click(function(e) {
+	$('#about').unbind('click').click(function(e) {
 		changeActivePage('about', {data: response.about});
 	});
-	$('#chapters').click(function(e) {
+	$('#chapters').unbind('click').click(function(e) {
 		changeActivePage('chapters', {data: response.chapters});
 	});
-	$('#contact').click(function(e) {
+	$('#contact').unbind('click').click(function(e) {
 		changeActivePage('contact', {data: response.contact});
 	});
-	$('#auth').click(function(e) {
+	$('#auth').unbind('click').click(function(e) {
 		// Only activate if the admin panel is not already present
 		if ($('#admin').length == 0) {
 			$active = $('span[data-active=\"true\"]');
