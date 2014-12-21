@@ -132,6 +132,30 @@ function attachButtonBehavior() {
 		event.preventDefault();
 		window.open($(this).attr("href"), "popupWindow", "width=600, height=600, scrollbar=yes");
 	});
+
+	$('#addRowAbout').click(function() {
+		var element = document.createElement("tr");
+		var td = document.createElement("td");
+		var text = document.createElement("textarea");
+		text.attr('class', 'item');
+		text.attr('data-type', 'body');
+		td.append(text);
+		element.append(td);
+		var td2 = document.creatElement("td");
+		var select = document.createElement("select");
+		select.append("")
+
+
+		/*
+		var newRow = $('#contentRow');
+		var tr = document.createElement("tr");
+		tr.innerHTML = newRow[0].innerHTML;
+		console.log(tr);
+		$('#about-form table').append(tr);
+		newRow = $('#submitInput');
+		$('#about-form table').append(newRow);
+		*/
+	});
 }
 
 // a function that disables all input, button, and textarea components in admin modal
@@ -186,9 +210,7 @@ function deliverUpdateObject() {
 			}
 		}
 	});
-	console.log(result);
 	var resultString = JSON.stringify(result);
-	grabFiles();
 	authenticateFb('update&upData=' + resultString, function(response) {
 		console.log(response);
 	});

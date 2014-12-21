@@ -33,7 +33,7 @@
 				<th>Mark for Deletion</th>
 			</tr>
 			{{#about}}{{#M}}{{#body}}
-			<tr>
+			<tr id="contentRow">
 				<td>
 					<textarea class="item" data-type="body">{{S}}</textarea>
 				</td>
@@ -49,11 +49,11 @@
 				</td>
 			</tr>
 			{{/body}}{{/M}}{{/about}}
-			<tr>
+			<tr id="submitInput">
 				<td colspan="3">
-					<input type="submit" value="Add Row" />
+					<input type="submit" value="Add Row"/>
 				</td>
-			<tr>
+			</tr>
 		</table>
 	</div>
 	<div id="chapters-form">
@@ -66,7 +66,7 @@
 				<th>Mark For Deletion</th>
 			</tr>
 			{{#chapters}}{{#M}}
-			<tr>
+			<tr id="chapterInfo">
 				<td>
 					{{#school}}
 					<input class="item" data-type="school" type="text" value="{{S}}" />
@@ -89,11 +89,11 @@
 				</td>
 			</tr>
 			{{/M}}{{/chapters}}
-			<tr>
+			<tr id="chapterSubmit">
 				<td colspan="4">
-					<input type="submit" value="Add Row" />
+					<input type="submit" value="Add Row"/>
 				</td>
-			<tr>
+			</tr>
 		</table>
 	</div>
 	<div id="contact-form">
@@ -131,9 +131,9 @@
 			{{/M}}{{/contact}}
 			<tr>
 				<td colspan="4">
-					<input type="submit" value="Add Row" />
+					<input type="submit" value="Add Row" id="addRowContact"/>
 				</td>
-			<tr>
+			</tr>
 		</table>
 	</div>
 	<div id="background-form">
