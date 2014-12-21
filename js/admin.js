@@ -51,16 +51,11 @@ function attachButtonBehavior() {
 	$('#admin #background').click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		restrictPage();
 		$('#admin #background').css('background-color', '#212121');
 		$('#admin #chapters, #admin #contact, #admin #about').css('background-color', '#3E3E3E');
-		loadContent('background', function(data) {
-	  		loadTemplate($('#adminContent div'), '#template-background', 'admin.html', data,
-	  			function() {
-				// queryServer('about');
-				unrestrictPage();
-	 		 });
-		});
+		$('#admin form div:visible').hide();
+		$('#background-form').show();
+		$('#buttonHolder').show();
 	});
 	
 	$('#admin #background').mouseenter(function(e) {
@@ -75,16 +70,11 @@ function attachButtonBehavior() {
 		// loading admin controls for the contact page
 		e.preventDefault();
 		e.stopPropagation();
-		restrictPage();
 		$('#admin #contact').css('background-color', '#212121');
 		$('#admin #chapters, #admin #about, #admin #background').css('background-color', '#3E3E3E');
-		loadContent('contact', function(data) {
-	  		loadTemplate($('#adminContent div'), '#template-contact', 'admin.html', data,
-	  			function() {
-				// queryServer('about');
-				unrestrictPage();
-	 		 });
-		});
+		$('#admin form div:visible').hide();
+		$('#contact-form').show();
+		$('#buttonHolder').show();
 	});
 	
 	$('#admin #contact').mouseenter(function(e) {
@@ -99,16 +89,11 @@ function attachButtonBehavior() {
 		// loading admin controls for the chapters page
 		e.preventDefault();
 		e.stopPropagation();
-		restrictPage();
 		$('#admin #chapters').css('background-color', '#212121');
 		$('#admin #about, #admin #contact, #admin #background').css('background-color', '#3E3E3E');
-		loadContent('chapters', function(data) {
-	  		loadTemplate($('#adminContent div'), '#template-chapters', 'admin.html', data,
-	  			function() {
-				// queryServer('about');
-				unrestrictPage();
-	 		 });
-		});
+		$('#admin form div:visible').hide();
+		$('#chapters-form').show();
+		$('#buttonHolder').show();
 	});
 	
 	$('#admin #chapters').mouseenter(function(e) {
@@ -123,16 +108,11 @@ function attachButtonBehavior() {
 		// loading admin controls for the about page
 		e.preventDefault();
 		e.stopPropagation();
-		restrictPage();
 		$('#admin #about').css('background-color', '#212121');
 		$('#admin #chapters, #admin #contact, #admin #background').css('background-color', '#3E3E3E');
-		loadContent('about', function(data) {
-	  		loadTemplate($('#adminContent div'), '#template-about', 'admin.html', data,
-	  			function() {
-				// queryServer('about');
-				unrestrictPage();
-	 		 });
-		});
+		$('#admin form div:visible').hide();
+		$('#about-form').show();
+		$('#buttonHolder').show();
 	});
 	
 	$('#admin #about').mouseenter(function(e) {
