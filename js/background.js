@@ -3,25 +3,18 @@
 */
 
 // wrapper for an ajax request to the database for a list of background images
-function loadBgs() {
-	var request = $.ajax({
-		url: '/?bgs=true',
-		type: 'GET',
-		datatype: 'JSON'
-	});
-
-	request.done(function(data, msg) {
-		if (data.length < 1) {
-			noBackground();
-		} else {
-			$('#live').css('background-image', 'url(\"' + data[0] + '\")');
-			rotateGraphic(0, data, 0);
-		}
-	});
-
-	request.fail(function(data, msg) {
+function loadBgs(data) {
+	var bgs = [];
+	for (item in data) {
+		bgs.push('graphics/' + data[item].M.filename.S);
+	}
+	console.log(bgs);
+	if (bgs.length < 1) {
 		noBackground();
-	});
+	} else {
+		$('#live').css('background-image', 'url(\"' + bgs[0] + '\")');
+		rotateGraphic(0, bgs, 0);
+	}
 }
 
 // invoked when the ajax query fails or receives an empty array

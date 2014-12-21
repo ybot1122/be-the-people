@@ -104,6 +104,7 @@ function loadContent(callback) {
 				chapters: res.data.chapters,
 				contact: res.data.contact
 			});
+			loadBgs(res.data.bgs);
 		}
 	});
 
