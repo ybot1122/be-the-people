@@ -129,33 +129,95 @@ function attachButtonBehavior() {
 		deliverUpdateObject();
 	});
 
-	$('#uploadImage').click(function(event) {
-		event.preventDefault();
-		window.open($(this).attr("href"), "popupWindow", "width=600, height=600, scrollbar=yes");
-	});
-
 	$('#addRowAbout').click(function() {
-		var element = document.createElement("tr");
-		var td = document.createElement("td");
-		var text = document.createElement("textarea");
+		var element = $(document.createElement("tr"));
+		var td = $(document.createElement("td"));
+		var text = $(document.createElement("textarea"));
+
 		text.attr('class', 'item');
 		text.attr('data-type', 'body');
+
 		td.append(text);
 		element.append(td);
-		var td2 = document.creatElement("td");
-		var select = document.createElement("select");
-		select.append("");
 
+		var td2 = $(document.createElement("td"));
+		var input = $(document.createElement("input"));
 
-		/*
-		var newRow = $('#contentRow');
-		var tr = document.createElement("tr");
-		tr.innerHTML = newRow[0].innerHTML;
-		console.log(tr);
-		$('#about-form table').append(tr);
-		newRow = $('#submitInput');
-		$('#about-form table').append(newRow);
-		*/
+		input.attr('type', 'checkbox');
+		input.attr('class', 'del');
+
+		td2.append(input);
+		element.append(td2);
+
+		$('#about-form table').append(element);
+		element = $('#submitInput');
+		$('#about-form table').append(element);
+	});
+
+	$('#addRowChp').click(function() {
+		var tr = $(document.createElement("tr"));
+		var td = $(document.createElement("td"));
+		var input = $(document.createElement("input"));
+
+		input.attr('class', 'item');
+		input.attr('data-type', 'school');
+		input.attr('type', 'text');
+
+		td.append(input);
+		tr.append(td);
+
+		td = $(document.createElement("td"));
+		input = $(document.createElement("input"));
+		input.attr('data-type', 'year');
+
+		td.append(input);
+		tr.append(td);
+
+		td = $(document.createElement("td"));
+		input = $(document.createElement("input"));
+		input.attr('class', 'del');
+		input.attr('type', 'checkbox');
+
+		td.append(input);
+		tr.append(td);
+
+		$("#chapters-form table").append(tr);
+		tr = $('#chapterSubmit');
+		$('#chapters-form table').append(tr);
+	});
+
+	$('#addRowCont').click(function() {
+		var tr = $(document.createElement("tr"));
+		var td = $(document.createElement("td"));
+		var input = $(document.createElement("input"));
+
+		input.attr('class', 'item');
+		input.attr('data-type', 'fieldname');
+		input.attr('type', 'text');
+
+		td.append(input);
+		tr.append(td);
+
+		td = $(document.createElement("td"));
+		input = $(document.createElement("input"));
+		input.attr('class', 'item');
+		input.attr('data-type', 'fieldvalue');
+		input.attr('type', 'text');
+
+		td.append(input);
+		tr.append(td);
+
+		td = $(document.createElement("td"));
+		input = $(document.createElement("input"));
+		input.attr('class', 'del');
+		input.attr('type', 'checkbox');
+
+		td.append(input);
+		tr.append(td);
+
+		$('#contact-form table').append(tr);
+		tr = $('#contactSubmit');
+		$('#contact-form table').append(tr);
 	});
 }
 

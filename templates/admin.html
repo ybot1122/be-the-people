@@ -65,7 +65,7 @@
 
 			<tr id="submitInput">
 				<td colspan="3">
-					<input type="submit" value="Add Row"/>
+					<input type="submit" value="Add Row" id="addRowAbout"/>
 				</td>
 			</tr>
 		</table>
@@ -97,7 +97,7 @@
 			{{/M}}{{/chapters}}
 			<tr id="chapterSubmit">
 				<td colspan="4">
-					<input type="submit" value="Add Row"/>
+					<input type="submit" value="Add Row" id="addRowChp"/>
 				</td>
 			</tr>
 		</table>
@@ -111,7 +111,7 @@
 				<th>Mark For Deletion</th>
 			</tr>
 			{{#contact}}{{#M}}
-			<tr>
+			<tr id="contactInfo">
 				<td>
 					{{#fieldname}}
 					<input class="item" data-type="fieldname" type="text" value="{{S}}"/>
@@ -127,9 +127,9 @@
 				</td>
 			</tr>
 			{{/M}}{{/contact}}
-			<tr>
+			<tr id="contactSubmit">
 				<td colspan="4">
-					<input type="submit" value="Add Row" id="addRowContact"/>
+					<input type="submit" value="Add Row" id="addRowCont"/>
 				</td>
 			</tr>
 		</table>
