@@ -9,10 +9,10 @@
 */
 function changeActivePage(pagename) {
 	var $button = $('#' + pagename);
-	var selectedID = $button.id;
-	console.log(selectedID);
-	//If the home button is clicked, slide the content div down then calls a shrinkcolumns function
+	var selectedID = pagename;
+	//If the home (X) button is clicked, slide the content div down then calls a shrinkcolumns function
 	if($button.is('#home')){
+		makeEverythingAvailable();
 		$button.fadeOut(300);
 		$('#main-frame').animate({
 			height: '0%'
@@ -20,19 +20,44 @@ function changeActivePage(pagename) {
 	} else {
 		//make the active column 95%, while making the others 0% width and remove their margin for sizing issues
 		//Calls expandColumn callback function to show the content div once they are expanded.
-		$button.animate({
-			width:'95%',
-			opacity: '.8',
-			marginLeft: '2.5%'
-		}, 600);
-		// hide all the other columns
-		$('.infocolumn').not($button).animate({
-			width:'0%',
-			marginLeft:'0',
-			opacity: '0'
-		}, 600, expandColumns($button, pagename));
+
+		// if something is already selected, that isnt this new item
+		if (!selectedAlready(selectedID)) {
+			//console.log("did i reach here");
+			$('#' + pagename).attr('name', 'selected');
+			$button.animate({
+				width:'95%',
+				opacity: '.8',
+				marginLeft: '2.5%'
+			}, 600);
+			// hide all the other columns
+			$('.infocolumn').not($button).animate({
+				width:'0%',
+				marginLeft:'0',
+				opacity: '0'
+			}, 600, expandColumns($button, pagename));
+		}
 	}
 	// TODO: make request to server, get the data, and render the template
+}
+
+function selectedAlready(selectedID) {
+	var divs = $('#main').find('.infocolumn');
+	for (var i = 0; i < divs.length; i++) {
+		if (divs[i].attributes[3])
+			console.log(divs[i].attributes[3].value);
+		if (divs[i].attributes[3] && divs[i].id !== selectedID) {
+			//console.log(selectedID + " " + divs[i].id);
+			return true;
+		}
+	}
+	return false;
+}
+
+function makeEverythingAvailable() {
+	$('#about').removeAttr('name');
+	$('#chapters').removeAttr('name');
+	$('#contact').removeAttr('name');
 }
 
 //Shows the home button, content div, and slides the content up
