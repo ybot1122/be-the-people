@@ -134,7 +134,6 @@ function initializeCols(response) {
 			$('#menu').fadeTo(500, 0.0, function() {
 				$('#menu').hide();
 			});
-			console.log(response);
 			renderModal($active, response);
 		}
 	});

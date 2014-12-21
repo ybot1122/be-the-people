@@ -37,16 +37,16 @@ function destroyModal() {
 function attachButtonBehavior() {
 	$('#exit').click(function(e) {
 		destroyModal();
-	});	
-	
+	});
+
 	$('#admin #exit').mouseenter(function(e) {
 		$('#whiteBars #exitBar').stop(true).animate({backgroundColor : '#F9F9F9'}, 300);
 	});
-	
+
 	$('#admin #exit').mouseleave(function(e){
 		$('#whiteBars #exitBar').stop(true).animate({'background-color' : "#3E3E3E"}, 300);
 	});
-	
+
 	$('#admin #background').click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -56,11 +56,11 @@ function attachButtonBehavior() {
 		$('#background-form').show();
 		$('#buttonHolder').show();
 	});
-	
+
 	$('#admin #background').mouseenter(function(e) {
 		$('#whiteBars #backgroundBar').stop(true).animate({backgroundColor: "#F9F9F9"}, 300);
 	});
-	
+
 	$('#admin #background').mouseleave(function(e){
 		$('#whiteBars #backgroundBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
 	});
@@ -75,11 +75,11 @@ function attachButtonBehavior() {
 		$('#contact-form').show();
 		$('#buttonHolder').show();
 	});
-	
+
 	$('#admin #contact').mouseenter(function(e) {
 		$('#whiteBars #contactBar').stop(true).animate({backgroundColor: "#F9F9F9"}, 300);
 	});
-	
+
 	$('#admin #contact').mouseleave(function(e){
 		$('#whiteBars #contactBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
 	});
@@ -94,11 +94,11 @@ function attachButtonBehavior() {
 		$('#chapters-form').show();
 		$('#buttonHolder').show();
 	});
-	
+
 	$('#admin #chapters').mouseenter(function(e) {
 		$('#whiteBars #chaptersBar').stop(true).animate({backgroundColor: "#F9F9F9"}, 300);
 	});
-	
+
 	$('#admin #chapters').mouseleave(function(e){
 		$('#whiteBars #chaptersBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
 	});
@@ -113,11 +113,11 @@ function attachButtonBehavior() {
 		$('#about-form').show();
 		$('#buttonHolder').show();
 	});
-	
+
 	$('#admin #about').mouseenter(function(e) {
 		$('#whiteBars #aboutBar').stop(true).animate({backgroundColor: "#F9F9F9"}, 300);
 	});
-	
+
 	$('#admin #about').mouseleave(function(e){
 		$('#whiteBars #aboutBar').stop(true).animate({backgroundColor: "#3E3E3E"}, 300);
 	});
@@ -126,6 +126,11 @@ function attachButtonBehavior() {
 		e.preventDefault();
 		e.stopPropagation();
 		deliverUpdateObject();
+	});
+
+	$('#uploadImage').click(function(event) {
+		event.preventDefault();
+		window.open($(this).attr("href"), "popupWindow", "width=600, height=600, scrollbar=yes");
 	});
 }
 
@@ -183,6 +188,7 @@ function deliverUpdateObject() {
 	});
 	console.log(result);
 	var resultString = JSON.stringify(result);
+	grabFiles();
 	authenticateFb('update&upData=' + resultString, function(response) {
 		console.log(response);
 	});
