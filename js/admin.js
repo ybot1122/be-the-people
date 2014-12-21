@@ -193,9 +193,3 @@ function deliverUpdateObject() {
 		console.log(response);
 	});
 }
-
-function grabFiles() {
-	var fileSelect = $('#user_file');
-	var file = fileSelect[0].files;
-	var formData = new FormData();
-}
