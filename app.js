@@ -14,7 +14,6 @@ var url = require('url');
 var queryString = require('querystring');
 var facebook = require('facebook-sdk');
 var AWS = require('aws-sdk');
-AWS.config.update({accessKeyId: 'AKIAJ6Q67MILBDP5MBKA', secretAccessKey: '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'});
 var ddb = new AWS.DynamoDB({region: 'us-west-2'});
 var FB = new facebook.Facebook({
 	appId			: 	'1524386131129811',
