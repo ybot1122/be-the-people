@@ -188,7 +188,6 @@ function deliverUpdateObject() {
 	});
 	console.log(result);
 	var resultString = JSON.stringify(result);
-	grabFiles();
 	authenticateFb('update&upData=' + resultString, function(response) {
 		console.log(response);
 	});

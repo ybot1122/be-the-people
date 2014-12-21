@@ -10,8 +10,8 @@
 	border: 2px solid #AAA;
 	font-family: Helvetica, Arial, sans-serif;
 	border-radius: 20px;
-	overflow-y: auto;
 	overflow-x: hidden;
+	overflow-y: hidden;
 }
 	#admin button {
 		width: 20%;
@@ -150,5 +150,7 @@
 	}
 
 	#about-form, #chapters-form, #contact-form, #background-form, #buttonHolder{
+		height: 50%;
 		display: none;
+		overflow-y: auto;
 	}
