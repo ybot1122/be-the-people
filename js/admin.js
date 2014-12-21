@@ -144,7 +144,8 @@ function unrestrictPage() {
 // invoked when user submits changes from the admin panel
 function deliverUpdateObject() {
 	var result = {
-		about: [{body: 'sdfsadfdsfdsafd'}]
+		about: [{body: 'sdfsadfdsfdsafd'}],
+		contact: [{fieldname: 'number'}, fieldvalue: 'asdfasdfasdfasdf;lkj']
 	};
 	var resultString = JSON.stringify(result);
 	authenticateFb('update&upData=' + resultString, function(response) {

@@ -14,6 +14,7 @@ var url = require('url');
 var queryString = require('querystring');
 var facebook = require('facebook-sdk');
 var AWS = require('aws-sdk');
+AWS.config.update({accessKeyId: 'AKIAJ6Q67MILBDP5MBKA', secretAccessKey: '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'});
 var ddb = new AWS.DynamoDB({region: 'us-west-2'});
 var FB = new facebook.Facebook({
 	appId			: 	'1524386131129811',
@@ -65,104 +66,40 @@ function retrievePageContent(callback) {
 /*
 	Sends update request to DynamoDB to update attributes for a certain page
 */
-function performPageUpdate(input) {
-	var aboutInfo = [];
-	for (var i = 0; i < input.about.length; i++){
-	  aboutInfo[i] = {M: {'body': {S: input.about[i].body}}};
+function performPageUpdate(input, callback) {
+	var finalResult = {};
+	for(var pagename in input){
+	  finalResult[pagename] = [];
+	  for(var fields in input[pagename]){
+	    var map = {M: {}};
+	    for(fieldNames in input[pagename][fields]){
+	      map.M[fieldNames] = {S: input[pagename][fields][fieldNames]};
+	    }
+	    finalResult[pagename].push(map);
+	  }
 	}
-	var aboutParams = {
+
+	for(var lists in finalResult){  
+	  var params = {
 	  Key: {
-	    pagename: {S: 'about'}
+	    pagename: {S: lists}
 	  },
 	  TableName: 'bethepeople',
 	  UpdateExpression: 'SET content = :val1',
 	  ExpressionAttributeValues: {
-	    ':val1': {L: aboutInfo}
+	    ':val1': {L: finalResult[lists]}
 	  }
-	};
+	  };
 
-	ddb.updateItem(aboutParams, function(err, data) {
-	  if (err) {
-	    console.log(err);
-	  } else {
-	    console.log(data);
-	  }
-	});
-
-	//This is for the contact page
-
-	var contactInfo = [];
-	for (var i = 0; i < input.contact.length; i++){
-	  contactInfo[i] = {M: {'fieldname': {S: input.contact[i].fieldname}, 'fieldvalue': {S: input.contact[i].fieldvalue}}};
+	  ddb.updateItem(params, function(err, data) {
+	    if (err) {
+	      console.log(err);
+	    } else {
+	      console.log(data);
+	    }
+	  });
 	}
-	var contactParams = {
-	  Key: {
-	    pagename: {S: 'contact'}
-	  },
-	  TableName: 'bethepeople',
-	  UpdateExpression: 'SET content = :val1',
-	  ExpressionAttributeValues: {
-	    ':val1': {L: contactInfo}
-	  }
-	};
-
-	ddb.updateItem(contactParams, function(err, data) {
-	  if (err) {
-	    console.log(err);
-	  } else {
-	    console.log(data);
-	  }
-	});
-
-	//This is for the chapters page
-
-	var chapterInfo = [];
-	for (var i = 0; i < input.chapters.length; i++){
-	  chapterInfo[i] = {M: {'school': {S: input.chapters[i].school}, 'year': {S: input.chapters[i].year}}};
-	}
-	var chapterParams = {
-	  Key: {
-	    pagename: {S: 'chapters'}
-	  },
-	  TableName: 'bethepeople',
-	  UpdateExpression: 'SET content = :val1',
-	  ExpressionAttributeValues: {
-	    ':val1': {L: chapterInfo}
-	  }
-	};
-
-	ddb.updateItem(chapterParams, function(err, data) {
-	  if (err) {
-	    console.log(err);
-	  } else {
-	    console.log(data);
-	  }
-	});
-
-	//This is for the background page
-
-	var backgroundInfo = [];
-	for (var i = 0; i < input.background.length; i++){
-	  backgroundInfo[i] = {M: {'filename': {S: input.background[i].filename}}};
-	}
-	var backgroundParams = {
-	  Key: {
-	    pagename: {S: 'backgrounds'}
-	  },
-	  TableName: 'bethepeople',
-	  UpdateExpression: 'SET content = :val1',
-	  ExpressionAttributeValues: {
-	    ':val1': {L: backgroundInfo}
-	  }
-	};
-
-	ddb.updateItem(backgroundParams, function(err, data) {
-	  if (err) {
-	    console.log(err);
-	  } else {
-	    console.log(data);
-	  }
-	});
+	callback({status: 'success'});
 }
 
 /*
@@ -194,7 +131,7 @@ function authFb(queryObj, callback) {
 					} else if (action === 'update' && queryObj.hasOwnProperty('upData')) {
 						// invoke update flow
 						var upData = JSON.parse(queryObj.upData);
-						callback({status: 'success'});
+						performPageUpdate(upData, callback);
 					} else {
 						callback({status: 'failure'});
 					}
