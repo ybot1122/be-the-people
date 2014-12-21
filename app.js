@@ -57,7 +57,6 @@ function retrievePageContent(callback) {
 	  		chapters: res[1].content.L,
 	  		contact: res[2].content.L
 	  	}
-	    console.log(result);
 	    callback({status: 'success', data: result});
 		}
 	});
@@ -192,20 +191,18 @@ function authFb(queryObj, callback) {
 					if (action === 'verify') {
 						callback({status: 'success'});
 					// ~~ IT IS POSSIBLE THAT WE COMBINE ALL OF THESE FLOWS INTO ONE ~~
-					} else if (action === 'update') {
-						if(queryObj.hasOwnProperty('updata')){
-							var parsed = JSON.parse(queryObj.updata);
-							performPageUpdate(parsed);
-						}
+					} else if (action === 'update' && queryObj.hasOwnProperty('upData')) {
+						// invoke update flow
+						var upData = JSON.parse(queryObj.upData);
+						callback({status: 'success'});
 					} else {
 						callback({status: 'failure'});
 					}
-					return;
 				}
 			}
 			callback({status: 'failure'});
 		}
-	})
+	});
 }
 
 /*

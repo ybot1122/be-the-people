@@ -15,18 +15,6 @@ window.fbAsyncInit = function() {
 		xfbml		: 	true,
 		version		: 	'v2.0'
 	});
-	$('#auth').show();
-	$('#auth').click(function(e) {
-		// Only activate if the admin panel is not already present
-		if ($('#admin').length == 0) {
-			$active = $('span[data-active=\"true\"]');
-			$active.click();
-			$('#menu').fadeTo(500, 0.0, function() {
-				$('#menu').hide();
-			});
-			renderModal($active);
-		}
-	});
 };
 
 (function(d, s, id){

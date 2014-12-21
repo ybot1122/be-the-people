@@ -34,9 +34,10 @@
 					<th>Index</th>
 					<th>Mark for Deletion</th>
 				</tr>
+				{{#about}}{{#M}}{{#body}}
 				<tr>
 					<td>
-						<textarea></textarea>
+						<textarea>{{S}}</textarea>
 					</td>
 					<td>
 						<select>
@@ -49,6 +50,7 @@
 						<input type="checkbox" />
 					</td>
 				</tr>
+				{{/body}}{{/M}}{{/about}}
 				<tr>
 					<td colspan="3">
 						<input type="submit" value="Add Row" />
@@ -65,12 +67,17 @@
 					<th>Index</th>
 					<th>Mark For Deletion</th>
 				</tr>
+				{{#chapters}}{{#M}}
 				<tr>
 					<td>
-						<input type="text" />
+						{{#school}}
+						<input type="text" value="{{S}}" />
+						{{/school}}
 					</td>
 					<td>
-						<input type="text" />
+						{{#year}}
+						<input type="text" value="{{N}}" />
+						{{/year}}
 					</td>
 					<td>
 						<select>
@@ -83,6 +90,7 @@
 						<input type="checkbox"/>
 					</td>
 				</tr>
+				{{/M}}{{/chapters}}
 				<tr>
 					<td colspan="4">
 						<input type="submit" value="Add Row" />
@@ -99,12 +107,17 @@
 					<th>Index</th>
 					<th>Mark For Deletion</th>
 				</tr>
+				{{#contact}}{{#M}}
 				<tr>
 					<td>
-						<input type="text" />
+						{{#fieldname}}
+						<input type="text" value="{{S}}"/>
+						{{/fieldname}}
 					</td>
 					<td>
-						<input type="text" />
+						{{#fieldvalue}}
+						<input type="text" value="{{S}}"/>
+						{{/fieldvalue}}
 					</td>
 					<td>
 						<select>
@@ -117,6 +130,7 @@
 						<input type="checkbox"/>
 					</td>
 				</tr>
+				{{/M}}{{/contact}}
 				<tr>
 					<td colspan="4">
 						<input type="submit" value="Add Row" />
@@ -157,7 +171,7 @@
 			</table>
 		</div>
 		<div id="buttonHolder">
-			<input type="submit" value="Submit" />
+			<input id="adminSubmit" type="submit" value="Submit" />
 		</div>
 	</form>
 </script>
