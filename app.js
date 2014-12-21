@@ -66,8 +66,104 @@ function retrievePageContent(callback) {
 /*
 	Sends update request to DynamoDB to update attributes for a certain page
 */
-function performPageUpdate(pagename, input) {
+function performPageUpdate(input) {
+	var aboutInfo = [];
+	for (var i = 0; i < input.about.length; i++){
+	  aboutInfo[i] = {M: {'body': {S: input.about[i].body}}};
+	}
+	var aboutParams = {
+	  Key: {
+	    pagename: {S: 'about'}
+	  },
+	  TableName: 'bethepeople',
+	  UpdateExpression: 'SET content = :val1',
+	  ExpressionAttributeValues: {
+	    ':val1': {L: aboutInfo}
+	  }
+	};
 
+	ddb.updateItem(aboutParams, function(err, data) {
+	  if (err) {
+	    console.log(err);
+	  } else {
+	    console.log(data);
+	  }
+	});
+
+	//This is for the contact page
+
+	var contactInfo = [];
+	for (var i = 0; i < input.contact.length; i++){
+	  contactInfo[i] = {M: {'fieldname': {S: input.contact[i].fieldname}, 'fieldvalue': {S: input.contact[i].fieldvalue}}};
+	}
+	var contactParams = {
+	  Key: {
+	    pagename: {S: 'contact'}
+	  },
+	  TableName: 'bethepeople',
+	  UpdateExpression: 'SET content = :val1',
+	  ExpressionAttributeValues: {
+	    ':val1': {L: contactInfo}
+	  }
+	};
+
+	ddb.updateItem(contactParams, function(err, data) {
+	  if (err) {
+	    console.log(err);
+	  } else {
+	    console.log(data);
+	  }
+	});
+
+	//This is for the chapters page
+
+	var chapterInfo = [];
+	for (var i = 0; i < input.chapters.length; i++){
+	  chapterInfo[i] = {M: {'school': {S: input.chapters[i].school}, 'year': {S: input.chapters[i].year}}};
+	}
+	var chapterParams = {
+	  Key: {
+	    pagename: {S: 'chapters'}
+	  },
+	  TableName: 'bethepeople',
+	  UpdateExpression: 'SET content = :val1',
+	  ExpressionAttributeValues: {
+	    ':val1': {L: chapterInfo}
+	  }
+	};
+
+	ddb.updateItem(chapterParams, function(err, data) {
+	  if (err) {
+	    console.log(err);
+	  } else {
+	    console.log(data);
+	  }
+	});
+
+	//This is for the background page
+
+	var backgroundInfo = [];
+	for (var i = 0; i < input.background.length; i++){
+	  backgroundInfo[i] = {M: {'filename': {S: input.background[i].filename}}};
+	}
+	var backgroundParams = {
+	  Key: {
+	    pagename: {S: 'backgrounds'}
+	  },
+	  TableName: 'bethepeople',
+	  UpdateExpression: 'SET content = :val1',
+	  ExpressionAttributeValues: {
+	    ':val1': {L: backgroundInfo}
+	  }
+	};
+
+	ddb.updateItem(backgroundParams, function(err, data) {
+	  if (err) {
+	    console.log(err);
+	  } else {
+	    console.log(data);
+	  }
+	});
 }
 
 /*
@@ -97,11 +193,10 @@ function authFb(queryObj, callback) {
 						callback({status: 'success'});
 					// ~~ IT IS POSSIBLE THAT WE COMBINE ALL OF THESE FLOWS INTO ONE ~~
 					} else if (action === 'update') {
-						// invoke update flow
-					} else if (action === 'add') {
-						// invoke add content flow
-					} else if (action === 'remove') {
-						// invoke remove content flow
+						if(queryObj.hasOwnProperty('updata')){
+							var parsed = JSON.parse(queryObj.updata);
+							performPageUpdate(parsed);
+						}
 					} else {
 						callback({status: 'failure'});
 					}
