@@ -7,104 +7,48 @@
 	top: 110px;
 	left: 10%;
 	background-color: rgba(79,79,79,0.93);
-	border: 2px solid #AAA;
-	font-family: Helvetica, Arial, sans-serif;
+	border: 1px solid black;
 	border-radius: 20px;
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
-	#admin button {
-		width: 20%;
-		float: left;
-		border: none;
+
+	#admin span {
+		display: inline-block;
+		width: 15%;
+		border: 0;
 		margin-top: 5px;
-		background-color: #3E3E3E;
-		color: white;
-		border-left: 2px solid #D5D5D5;
-		font-size: 14pt;
+		font-size: 16px;
+		background: none;
 	}
-	
-	#admin #exit {
-		border-left: none;
-	}
-	
-	#admin button:hover {
-		background-color: #212121;
+
+	#admin span:hover {
 		text-shadow: 2px 0px 20px #EBEBEB;
-		color: #F9F9F9;
+		cursor: pointer;
 	}
 	
 	#admin #buttons {
+		text-align: center;
 		width: 100%;
-		height: 10%;
-		background-color: #3E3E3E;
 		vertical-align: middle;
 	}
 
 	#admin h3 {
 		text-align: center;
+		margin: 0px;
+		padding: 5px;
 	}
 	
-	/*
-	
-	#admin #exit {
-		background-color: #F05154;
-	}
-	
-	#admin #exit:hover {
-		background-color: #F03033;
-	}
-	
-	#admin #about {
-		background-color: #9F77F4;
-	}
-	
-	#admin #about:hover {
-		background-color: #8755F3;
-	}
-	
-	#admin #chapters {
-		background-color: #2EED79;
-	}
-	
-	#admin #chapters:hover {
-		background-color: #19E068;	
-	}
-	
-	#admin #contact {
-		background-color: #EDF55D;
-	}
-	
-	#admin #contact:hover {
-		background-color: #E1EC31;
-	}
-	
-	#admin #background {
-		background-color: #F5B278
-	}
-	
-	#admin #background:hover {
-		background-color: #F59E52;
-	}
-	
-	*/
 	#admin table {
 		width: 90%;
+		margin-top: 5px;
 		margin-left: auto;
 		margin-right: auto;
 	}
 
-	#admin table tr {
-		width: 30%;
-	}
-
 	#admin table td {
 		text-align: center;
-	}
-
-	#admin table input {
-		width: 100%;
-		max-width: 300px;
+		padding: 5px;
 	}
 
 	#admin #buttonHolder{
@@ -112,21 +56,44 @@
 	}
 
 	#admin table textarea {
-		width: 80%;
-		height: 150px;
+		width: 100%;
+		height: 100px;
 	}
 
-	#about-form, #chapters-form, #contact-form, #background-form, #buttonHolder{
+	#about-form, #chapters-form, #contact-form, #background-form {
 		height: 80%;
-		display: none;
 		overflow-y: auto;
+	}
+
+	#chapters-form, #contact-form, #background-form {
+		display: none;
 	}
 
 	#buttonHolder {
 		height: 10%;
 	}
 
-	#buttonHolder input {
-		height: 80%;
+	#admin input[type="submit"] {
 		width: 80%;
+	}
+
+	#admin input {
+		border: 1px black solid;
+		width: 100%;
+		height: 46px;
+		line-height: 40px;
+		padding: 3px;
+	}
+
+	#admin a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	#admin a:hover {
+		text-decoration: underline;
+	}
+
+	#admin a:visited {
+		color: inherit;
 	}

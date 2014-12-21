@@ -98,6 +98,7 @@ body, div {
 	width: 70%;
 	top: 133px;
 	left: 15%;
+	opacity: 0;
 }
 
 #content {

@@ -26,6 +26,7 @@ function renderModal($active, content) {
 
 // destroys the admin modal and restores the main website
 function destroyModal() {
+	$('#admin div').fadeOut(500);
 	$('#admin').slideUp(1000, 0.0, function() {
 		$('#main').slideDown(1000);
 		$('#admin').remove();
@@ -51,8 +52,6 @@ function attachButtonBehavior() {
 	$('#admin #background').click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		$('#admin #background').css('background-color', '#212121');
-		$('#admin #chapters, #admin #contact, #admin #about').css('background-color', '#3E3E3E');
 		$('#admin div[id*=-form]:visible').hide();
 		$('#background-form').show();
 		$('#buttonHolder').show();
@@ -70,8 +69,6 @@ function attachButtonBehavior() {
 		// loading admin controls for the contact page
 		e.preventDefault();
 		e.stopPropagation();
-		$('#admin #contact').css('background-color', '#212121');
-		$('#admin #chapters, #admin #about, #admin #background').css('background-color', '#3E3E3E');
 		$('#admin div[id*=-form]:visible').hide();
 		$('#contact-form').show();
 		$('#buttonHolder').show();
@@ -89,8 +86,6 @@ function attachButtonBehavior() {
 		// loading admin controls for the chapters page
 		e.preventDefault();
 		e.stopPropagation();
-		$('#admin #chapters').css('background-color', '#212121');
-		$('#admin #about, #admin #contact, #admin #background').css('background-color', '#3E3E3E');
 		$('#admin div[id*=-form]:visible').hide();
 		$('#chapters-form').show();
 		$('#buttonHolder').show();
@@ -108,8 +103,6 @@ function attachButtonBehavior() {
 		// loading admin controls for the about page
 		e.preventDefault();
 		e.stopPropagation();
-		$('#admin #about').css('background-color', '#212121');
-		$('#admin #chapters, #admin #contact, #admin #background').css('background-color', '#3E3E3E');
 		$('#admin div[id*=-form]:visible').hide();
 		$('#about-form').show();
 		$('#buttonHolder').show();

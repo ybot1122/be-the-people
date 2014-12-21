@@ -5,15 +5,19 @@
 -->
 <script id="template-modal" type="text/html">
 	<div id="buttons">
-		<button id="exit">Exit</button>
-		<button id="about">About</button>
-		<button id="chapters">Chapters</button>
-		<button id="contact">Contact</button>
-		<button id="background">Background</button>
+		<span id="exit">Exit</span>
+		<span id="about">About</span>
+		<span id="chapters">Chapters</span>
+		<span id="contact">Contact</span>
+		<span id="background">Background</span>
 	</div>
 	<div id="about-form">
-		<h3>Editing the About Page</h3>
 		<table>
+			<tr>
+				<td colspan="2">
+					<h3>Editing 'About Be The People'</h3>
+				</td>
+			</tr>
 			<tr>
 				<th>Text</th>
 				<th>Mark for Deletion</th>
@@ -29,15 +33,19 @@
 			</tr>
 			{{/body}}{{/M}}{{/about}}
 			<tr id="submitInput">
-				<td colspan="3">
-					<input type="submit" value="Add Row" id="addRowAbout"/>
+				<td>
+					<a href="#" id="addRowAbout">Click to insert new row</a>
 				</td>
 			</tr>
 		</table>
 	</div>
 	<div id="chapters-form">
-		<h3>Editing the Chapters Page</h3>
 		<table>
+			<tr>
+				<td colspan="3">
+					<h3>Editing 'Chapters of Be The People'</h3>
+				</td>
+			</tr>
 			<tr>
 				<th>School Name</th>
 				<th>Year</th>
@@ -61,15 +69,19 @@
 			</tr>
 			{{/M}}{{/chapters}}
 			<tr id="chapterSubmit">
-				<td colspan="4">
-					<input type="submit" value="Add Row" id="addRowChp"/>
+				<td>
+					<a href="#" id="addRowChp">Click to insert new row</a>
 				</td>
 			</tr>
 		</table>
 	</div>
 	<div id="contact-form">
-		<h3>Editing the Contact Page</h3>
 		<table>
+			<tr>
+				<td colspan="3">
+					<h3>Editing 'Contact Be The People'</h3>
+				</td>
+			</tr>
 			<tr>
 				<th>Field Name</th>
 				<th>Field Value</th>
@@ -93,8 +105,8 @@
 			</tr>
 			{{/M}}{{/contact}}
 			<tr id="contactSubmit">
-				<td colspan="4">
-					<input type="submit" value="Add Row" id="addRowCont"/>
+				<td>
+					<a href="#" id="addRowCont">Click to insert new row</a>
 				</td>
 			</tr>
 		</table>
@@ -118,7 +130,7 @@
 			</tr>
 			<tr>
 				<td colspan="4">
-					<input type="submit" value="Add Row" />
+					<input type="submit" value="Add New Row" />
 				</td>
 			<tr>
 		</table>

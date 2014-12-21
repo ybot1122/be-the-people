@@ -15,7 +15,8 @@ function changeActivePage(pagename, content) {
 		makeEverythingAvailable();
 		$button.fadeOut(300);
 		$('#main-frame').animate({
-			height: '0%'
+			height: '0%',
+			opacity: '0'
 		}, 1000, shrinkColumns);
 	} else {
 		//make the active column 95%, while making the others 0% width and remove their margin for sizing issues
@@ -67,7 +68,8 @@ function expandColumns($button, pagename, content) {
 		$('#main-frame').show();
 		$('.infocolumn').not($button);
 		$('#main-frame').animate({
-			height: '75%'
+			height: '75%',
+			opacity: '1'
 		}, 1000);
 	});
 }
