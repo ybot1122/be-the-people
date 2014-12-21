@@ -54,8 +54,9 @@ function retrievePageContent(callback) {
 		  });
 	  	var result = {
 	  		about: res[0].content.L,
-	  		chapters: res[1].content.L,
-	  		contact: res[2].content.L
+	  		bgs: res[1].content.L,
+	  		chapters: res[2].content.L,
+	  		contact: res[3].content.L
 	  	}
 	    callback({status: 'success', data: result});
 		}
