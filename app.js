@@ -92,7 +92,13 @@ function performPageUpdate(input, callback) {
 	  }
 	  };
 
-	  ddb.updateItem(params, function(){});
+	  ddb.updateItem(params, function(err, data){
+	  	if (err) {
+	  		console.log(err);
+	  	} else {
+	  		console.log(data);
+	  	}
+	  });
 	}
 	callback({status: 'success'});
 }
