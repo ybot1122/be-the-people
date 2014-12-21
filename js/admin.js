@@ -162,6 +162,8 @@ function attachButtonBehavior() {
 		td = $(document.createElement("td"));
 		input = $(document.createElement("input"));
 		input.attr('data-type', 'year');
+		input.attr('class', 'item');
+		input.attr('type', 'text');
 
 		td.append(input);
 		tr.append(td);

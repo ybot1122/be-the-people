@@ -18,7 +18,8 @@
 		width: 15%;
 		border: 0;
 		margin-top: 5px;
-		font-size: 16px;
+		font-size: 30px;
+		font-weight: bold;
 		background: none;
 	}
 
@@ -41,7 +42,7 @@
 	
 	#admin table {
 		width: 90%;
-		margin-top: 5px;
+		margin-top: 15px;
 		margin-left: auto;
 		margin-right: auto;
 	}
