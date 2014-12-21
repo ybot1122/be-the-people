@@ -1,3 +1,7 @@
+body {
+	font-family: Arial, sans-serif;
+}
+
 body, div {
 	padding: 0px;
 	margin: 0px;
@@ -73,7 +77,6 @@ body, div {
 }
 
 #auth {
-	font-family: Arial, sans-serif;
 	color: #B5B5B5;
 	padding: 10px;
 	background-color: rgba(0, 0, 0, .5);
@@ -95,4 +98,12 @@ body, div {
 	width: 70%;
 	top: 133px;
 	left: 15%;
+}
+
+#content {
+	padding: 10px;
+}
+
+#content h3 {
+	text-align: center;
 }
