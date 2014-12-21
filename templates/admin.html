@@ -4,25 +4,12 @@
 	HTML Template for the entire admin modal
 -->
 <script id="template-modal" type="text/html">
-	<h2 id="adminIntro">Admin Panel</h2>
 	<div id="buttons">
 		<button id="exit">Exit</button>
 		<button id="about">About</button>
 		<button id="chapters">Chapters</button>
 		<button id="contact">Contact</button>
 		<button id="background">Background</button>
-	</div>
-	<div id="whiteBars">
-		<div id="exitBar"></div>
-		<div id="aboutBar"></div>
-		<div id="chaptersBar"></div>
-		<div id="contactBar"></div>
-		<div id="backgroundBar"></div>
-	</div>
-	<div id="adminContent">
-		<div>
-			<h1>Click on a tab to edit its content</h1>
-		</div>
 	</div>
 	<div id="about-form">
 		<h3>Editing the About Page</h3>
@@ -41,6 +28,41 @@
 				</td>
 			</tr>
 			{{/body}}{{/M}}{{/about}}
+			<tr id="contentRow">
+				<td>
+					<textarea class="item" data-type="body">{{S}}</textarea>
+				</td>
+				<td>
+					<input class="del" type="checkbox" />
+				</td>
+			</tr>
+			<tr id="contentRow">
+				<td>
+					<textarea class="item" data-type="body">{{S}}</textarea>
+				</td>
+				<td>
+					<input class="del" type="checkbox" />
+				</td>
+			</tr>
+			<tr id="contentRow">
+				<td>
+					<textarea class="item" data-type="body">{{S}}</textarea>
+				</td>
+				<td>
+					<input class="del" type="checkbox" />
+				</td>
+			</tr>
+			<tr id="contentRow">
+				<td>
+					<textarea class="item" data-type="body">{{S}}</textarea>
+				</td>
+				<td>
+					<input class="del" type="checkbox" />
+				</td>
+			</tr>
+
+
+
 			<tr id="submitInput">
 				<td colspan="3">
 					<input type="submit" value="Add Row"/>
@@ -137,6 +159,6 @@
 		</table>
 	</div>
 	<div id="buttonHolder">
-		<input id="adminSubmit" type="submit" value="Submit" />
+		<input id="adminSubmit" type="submit" value="Submit all changes" />
 	</div>
 </script>
