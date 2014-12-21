@@ -7,7 +7,7 @@
 	detects which content panel is open and either closes it if currently active
 	or opens a different panel and loads content to it
 */
-function changeActivePage(pagename) {
+function changeActivePage(pagename, content) {
 	var $button = $('#' + pagename);
 	//If the home button is clicked, slide the content div down then calls a shrinkcolumns function
 	if($button.is('#home')){
@@ -27,15 +27,15 @@ function changeActivePage(pagename) {
 			width:'0%',
 			marginLeft:'0',
 			opacity: '0'
-		}, 600, expandColumns($button, pagename));
+		}, 600, expandColumns($button, pagename, content));
 	}
 	// TODO: make request to server, get the data, and render the template
 }
 
 //Shows the home button, content div, and slides the content up
-function expandColumns($button, pagename) {
-	data = {};
-	loadTemplate($('#content'), "#template-" + pagename, "general.html", data, function() {
+function expandColumns($button, pagename, content) {
+	console.log(content);
+	loadTemplate($('#content'), "#template-" + pagename, "general.html", content, function() {
 		$('#home').show();
 		$('#main-frame').show();
 		$('.infocolumn').not($button);
@@ -61,7 +61,7 @@ function shrinkColumns(){
 */
 function loadContent(callback) {
 	var request = $.ajax({
-		url: '/?page',
+		url: '/?page=go',
 		type: 'GET',
 		datatype: 'JSON'
 	});
@@ -72,7 +72,11 @@ function loadContent(callback) {
 			callback({error: 'bad request'});
 		} else {
 			// request succeeded
-			callback({data: res.data});
+			callback({
+				about: res.data.about,
+				chapters: res.data.chapters,
+				contact: res.data.contact
+			});
 		}
 	});
 
@@ -83,17 +87,18 @@ function loadContent(callback) {
 }
 
 function initializeCols(response) {
+console.log(response);	
 	$('#home').click(function(e) {
 		changeActivePage('home');
 	});
 	$('#about').click(function(e) {
-		changeActivePage('about');
+		changeActivePage('about', {data: response.about});
 	});
 	$('#chapters').click(function(e) {
-		changeActivePage('chapters');
+		changeActivePage('chapters', {data: response.chapters});
 	});
 	$('#contact').click(function(e) {
-		changeActivePage('contact');
+		changeActivePage('contact', {data: response.contact});
 	});
 	$('#home, #about, #chapters, #contact').slideDown(1000);
 }

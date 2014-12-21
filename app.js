@@ -31,8 +31,36 @@ var fbPageId = '797627276956025';
 /*
 	Sends request to DynamoDB for all the content of a certain page
 */
-function retrievePageContent(pagename) {
+function retrievePageContent(callback) {
+	var params = {
+	  RequestItems: {
+	    bethepeople: {
+	      Keys: [
+	        {pagename: {S: 'about'}},
+	        {pagename: {S: 'chapters'}},
+	      	{pagename: {S: 'contact'}}
+	      ]
+	    }
+	  }
+	};
 
+	ddb.scan({TableName: 'bethepeople'}, function(err, data) {
+		if (err) {
+			console.log(err);
+		} else {
+		  var res = data.Items;
+		  res.sort(function(a, b) {
+		    return a.pagename.S > b.pagename.S;
+		  });
+	  	var result = {
+	  		about: res[0].content.L,
+	  		chapters: res[1].content.L,
+	  		contact: res[2].content.L
+	  	}
+	    console.log(result);
+	    callback({status: 'success', data: result});
+		}
+	});
 }
 
 /*
@@ -103,8 +131,10 @@ var server = http.createServer(function(req, res) {
 		});
 	} else if (queryObj.hasOwnProperty('page')) {
 		// handle request for page content
-		res.writeHead(200, {'Content-Type': 'application/json'});
-		res.end();
+		retrievePageContent(function(result) {
+			res.writeHead(200, {'Content-Type': 'application/json'});
+			res.end(JSON.stringify(result));
+		});
 	} else if (queryObj.hasOwnProperty('bgs')) {
 		// handle request for background filenames
 		res.writeHead(200, {'Content-Type': 'application/json'});

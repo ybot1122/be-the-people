@@ -6,9 +6,10 @@
 <script id="template-about" type="text/html">
 	<h3>About Be The People</h3>
 	<div class="paragraphs">
-		{{#data}}
-			<p>{{body}}</p>
-		{{/data}}
+		{{#data}}{{#M}}{{#body}}
+			<p>{{S}}</p>
+		{{/body}}{{/M}}{{/data}}
+
 		{{#error}}
 			<p>{{error}}</p>
 		{{/error}}
@@ -21,8 +22,11 @@
 		<div class="topic"><p>Here are the current chapters:</p></div>
 		<ol>
 		{{#data}}
-			<li>{{school}}: started at {{year}}</li>
+		{{#M}}
+			<li>{{#school}}{{S}}{{/school}}: started at {{#year}}{{N}}{{/year}}</li>
+		{{/M}}
 		{{/data}}
+
 		{{#error}}
 			<li>{{error}}</li>
 		{{/error}}
@@ -33,12 +37,15 @@
 <script id="template-contact" type="text/html">
 	<h3>Contact Be The People</h3>
 	<table>
-	{{#data}}
+		{{#data}}
+		{{#M}}
 		<tr>
-			<td>{{field}}</td>
-			<td>{{value}}
-		</td>
-	{{/data}}
+			<td>{{#fieldname}}{{S}}{{/fieldname}}</td>
+			<td>{{#fieldvalue}}{{S}}{{/fieldvalue}}</td>
+		</tr>
+		{{/M}}
+		{{/data}}
+
 	{{#error}}
 		<tr>
 			<td>{{error}}</td>
