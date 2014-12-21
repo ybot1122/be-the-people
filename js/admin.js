@@ -144,8 +144,44 @@ function unrestrictPage() {
 // invoked when user submits changes from the admin panel
 function deliverUpdateObject() {
 	var result = {
-		about: [{body: 'sdfsadfdsfdsafd'}]
+		about: [],
+		chapters: [],
+		contact: []
 	};
+	// extract about
+	$('#about-form tr').each(function(ind, element) {
+		if (!$(element).find('.del').is(':checked')) {
+			var paraText = $(element).find('textarea').val();
+			if (paraText) {
+				result.about.push({body: paraText});
+			}
+		}
+	});
+	// extract chapters
+	$('#chapters-form tr').each(function(ind, element) {
+		if (!$(element).find('.del').is(':checked')) {
+			var resItem = {};
+			$(element).find('.item').each(function(itemInd, item) {
+				resItem[$(item).data('type')] = $(item).val();
+			});
+			if (resItem.hasOwnProperty('school') && resItem.hasOwnProperty('year')) {
+				result.chapters.push(resItem);
+			}
+		}
+	});
+	// extract contact
+	$('#contact-form tr').each(function(ind, element) {
+		if (!$(element).find('.del').is(':checked')) {
+			var resItem = {};
+			$(element).find('.item').each(function(itemInd, item) {
+				resItem[$(item).data('type')] = $(item).val();
+			});
+			if (resItem.hasOwnProperty('fieldname') && resItem.hasOwnProperty('fieldvalue')) {
+				result.contact.push(resItem);
+			}
+		}
+	});
+	console.log(result);
 	var resultString = JSON.stringify(result);
 	authenticateFb('update&upData=' + resultString, function(response) {
 		console.log(response);
