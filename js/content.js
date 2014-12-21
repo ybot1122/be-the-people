@@ -68,7 +68,7 @@ function expandColumns($button, pagename, content) {
 		$('#main-frame').show();
 		$('.infocolumn').not($button);
 		$('#main-frame').animate({
-			height: '75%',
+			height: '60%',
 			opacity: '1'
 		}, 1000);
 	});

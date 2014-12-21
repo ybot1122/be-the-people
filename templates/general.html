@@ -4,7 +4,6 @@
 -->
 
 <script id="template-about" type="text/html">
-	<h3>About Be The People</h3>
 	<div class="paragraphs">
 		{{#data}}{{#M}}{{#body}}
 			<p>{{S}}</p>
@@ -17,26 +16,26 @@
 </script>
 
 <script id="template-chapters" type="text/html">
-	<h3>Be The People Chapters</h3>
-	<div class="paragraphs">
-		<div class="topic"><p>Here are the current chapters:</p></div>
-		<ol>
+	<table id="content-chapters">
 		{{#data}}
 		{{#M}}
-			<li>{{#school}}{{S}}{{/school}}: started at {{#year}}{{S}}{{/year}}</li>
+			<tr>
+				<td>{{#school}}{{S}}{{/school}}</td>
+				<td>founded {{#year}}{{S}}{{/year}}</td>
+			</tr>
 		{{/M}}
 		{{/data}}
 
 		{{#error}}
-			<li>{{error}}</li>
+			<tr>
+				<td>{{error}}</td>
+			</tr>
 		{{/error}}
-		</ol>
-	</div>
+	</table>
 </script>
 
 <script id="template-contact" type="text/html">
-	<h3>Contact Be The People</h3>
-	<table>
+	<table id="content-contact">
 		{{#data}}
 		{{#M}}
 		<tr>
