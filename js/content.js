@@ -8,7 +8,6 @@
 	or opens a different panel and loads content to it
 */
 function changeActivePage(pagename, content) {
-	console.log(content);
 	var $button = $('#' + pagename);
 	var selectedID = pagename;
 	//If the home (X) button is clicked, slide the content div down then calls a shrinkcolumns function
@@ -115,7 +114,6 @@ function loadContent(callback) {
 }
 
 function initializeCols(response) {
-	console.log(response);
 	$('#home').click(function(e) {
 		changeActivePage('home');
 	});
@@ -136,7 +134,6 @@ function initializeCols(response) {
 			$('#menu').fadeTo(500, 0.0, function() {
 				$('#menu').hide();
 			});
-			console.log(response);
 			renderModal($active, response);
 		}
 	});
