@@ -4,85 +4,70 @@
 */
 
 /*
-	detects which content panel is open and either closes it if currently active
-	or opens a different panel and loads content to it
+	CONTENT RENDERING:
+
+	1) load raw json data from the server
+	2) load corresponding templates and create dom elements
+		a) create a dom element for the title
+		b) create a dom element for the content 
+		(both should be rendered by mustache already)
+	3) consistently use the structure to render content/titles
+				and vice versa
 */
-function changeActivePage(pagename, content) {
-	var $button = $('#' + pagename);
-	var selectedID = pagename;
-	//If the home (X) button is clicked, slide the content div down then calls a shrinkcolumns function
-	if($button.is('#home')){
-		makeEverythingAvailable();
-		$button.fadeOut(300);
-		$('#main-frame').animate({
-			height: '0%',
-			opacity: '0'
-		}, 1000, shrinkColumns);
-	} else {
-		//make the active column 95%, while making the others 0% width and remove their margin for sizing issues
-		//Calls expandColumn callback function to show the content div once they are expanded.
 
-		// if something is already selected, that isnt this new item
-		if (!selectedAlready(selectedID)) {
-			//console.log("did i reach here");
-			$('#' + pagename).attr('name', 'selected');
-			$button.animate({
-				width:'95%',
-				opacity: '.8',
-				marginLeft: '2.5%'
-			}, 600);
-			// hide all the other columns
-			$('.infocolumn').not($button).animate({
-				width:'0%',
-				marginLeft:'0',
-				opacity: '0'
-			}, 600, expandColumns($button, pagename, content));
+function initContent() {
+	var contentStruct = {};
+	var $exitButton = $('<div></div>', {id: 'home'});
+	$exitButton.click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		shrinkColumns();
+	});
+	loadContent(function(pages) {
+		for (var page in pages) {
+			var item = {
+				title: page,
+				content: pages[page]
+			};
+			contentStruct[page] = item;
+			var $currPanel = $('<div></div>', {class: 'infocolumn', id: page});
+			(function($element) {
+				$element.click(function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					expandColumns($element);
+					$element.append($exitButton);
+				});
+			})($currPanel);
+			$currPanel.html(item.title);
+			$('#main').append($currPanel);
 		}
-	}
-	// TODO: make request to server, get the data, and render the template
-}
-
-function selectedAlready(selectedID) {
-	var divs = $('#main').find('.infocolumn');
-	for (var i = 0; i < divs.length; i++) {
-		if (divs[i].attributes[3])
-			console.log(divs[i].attributes[3].value);
-		if (divs[i].attributes[3] && divs[i].id !== selectedID) {
-			//console.log(selectedID + " " + divs[i].id);
-			return true;
-		}
-	}
-	return false;
-}
-
-function makeEverythingAvailable() {
-	$('#about').removeAttr('name');
-	$('#chapters').removeAttr('name');
-	$('#contact').removeAttr('name');
-}
-
-//Shows the home button, content div, and slides the content up
-function expandColumns($button, pagename, content) {
-	loadTemplate($('#content'), "#template-" + pagename, "general.html", content, function() {
-		$('#home').show();
-		$('#main-frame').show();
-		$('.infocolumn').not($button);
-		$('#main-frame').animate({
-			height: '60%',
-			opacity: '1'
-		}, 1000);
 	});
 }
 
-//hides the content div and shrinks the columns to the original size
+// expand the active panel, shrink others, show home button
+function expandColumns($activePanel) {
+	$activePanel.animate({
+		width: '95%',
+		opacity: '.8',
+		marginLeft: '2.5%'
+	}, 600);
+	$('.infocolumn').not($activePanel).animate({
+		width:'0%',
+		marginLeft:'0',
+		opacity: '0'
+	}, 600);
+}
+
+// shrink active panel, restore others, hide home button
 function shrinkColumns(){
-	$('#main-frame').hide();
 	$('.infocolumn').animate({
 		width: '30%',
 		marginLeft:'2.5%',
 		opacity: '.6',
 		marginLeft:'2.5%'
 	}, 600);
+	$('#home').detach();
 }
 
 /*
@@ -101,57 +86,20 @@ function loadContent(callback) {
 			callback({error: 'bad request'});
 		} else {
 			// request succeeded
-			callback({
-				about: res.data.about,
-				chapters: res.data.chapters,
-				contact: res.data.contact
-			});
 			loadBgs(res.data.bgs);
+			delete res.data.bgs;
+			var responseObj = {};
+			for (var page in res.data) {
+				if (page !== 'bgs') {
+					responseObj[page] = res.data[page];
+				}
+			}
+			callback(responseObj);
 		}
 	});
 
 	// request failed to even make it to server
 	request.fail(function(data, msg) {
 		callback({error: 'database currently down'});
-	});
-}
-
-function initializeCols(response) {
-	console.log(response);
-	$('#home').unbind('click').click(function(e) {
-		changeActivePage('home');
-	});
-	$('#about').unbind('click').click(function(e) {
-		changeActivePage('about', {data: response.about});
-	});
-	$('#chapters').unbind('click').click(function(e) {
-		changeActivePage('chapters', {data: response.chapters});
-	});
-	$('#contact').unbind('click').click(function(e) {
-		changeActivePage('contact', {data: response.contact});
-	});
-	$('#auth').unbind('click').click(function(e) {
-		// Only activate if the admin panel is not already present
-		if ($('#admin').length == 0) {
-			$active = $('span[data-active=\"true\"]');
-			$active.click();
-			$('#menu').fadeTo(500, 0.0, function() {
-				$('#menu').hide();
-			});
-			renderModal($active, response);
-		}
-	});
-	$('#home, #about, #chapters, #contact').slideDown(1000);
-}
-
-/*
-	This function is used across multiple parts of the program. It is a wrapper function
-	for rendering our mustache.js templates.
-*/
-function loadTemplate($destination, selector, filename, data, callback) {
-	$destination.load('templates/' + filename + ' ' + selector,
-	function(response, status, xhr) {
-		$destination.html(Mustache.render($destination.text(), data));
-		callback();
 	});
 }
