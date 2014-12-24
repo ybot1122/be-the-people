@@ -17,29 +17,32 @@
 
 function initContent() {
 	var contentStruct = {};
+	// initialize and define the home button dom element
 	var $exitButton = $('<div></div>', {id: 'home'});
 	$exitButton.click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
 		shrinkColumns();
 	});
+	// make ajax request for page content
 	loadContent(function(pages) {
 		for (var page in pages) {
-			var item = {
-				title: page,
-				content: pages[page]
-			};
-			contentStruct[page] = item;
+			// define the item info
+			contentStruct[page] = {};
+			contentStruct[page].title = page;
+			contentStruct[page].content = pages[page];
+			// initialize and define click behavior for panel dom element
 			var $currPanel = $('<div></div>', {class: 'infocolumn', id: page});
-			(function($element) {
+			(function($element, pagename, content) {
 				$element.click(function(e) {
 					e.preventDefault();
 					e.stopPropagation();
-					expandColumns($element);
+					expandColumns($element, contentStruct[page].content);
 					$element.append($exitButton);
+					generateRenderedHtml(pagename, content);
 				});
-			})($currPanel);
-			$currPanel.html(item.title);
+			})($currPanel, page, contentStruct[page].content);
+			$currPanel.html(contentStruct[page].title);
 			$('#main').append($currPanel);
 		}
 	});
@@ -61,13 +64,14 @@ function expandColumns($activePanel) {
 
 // shrink active panel, restore others, hide home button
 function shrinkColumns(){
+	$('#home').detach();
+	$('#activeContent').detach();
 	$('.infocolumn').animate({
 		width: '30%',
 		marginLeft:'2.5%',
 		opacity: '.6',
 		marginLeft:'2.5%'
 	}, 600);
-	$('#home').detach();
 }
 
 /*
@@ -101,5 +105,19 @@ function loadContent(callback) {
 	// request failed to even make it to server
 	request.fail(function(data, msg) {
 		callback({error: 'database currently down'});
+	});
+}
+
+/*
+	loads a template from the templates/ directory and renders it
+	with the supplied data
+	appends the rendered dom element to the panel
+*/
+function generateRenderedHtml(pagename, content) {
+	console.log(content);
+	$element = $('<div></div>', {id: 'activeContent'});
+	$element.load('templates/general.html #template-' + pagename, function() {
+		$element.html(Mustache.render($element.text(), {data: content}));
+		$('#' + pagename).append($element);
 	});
 }

@@ -70,7 +70,6 @@ body, div {
 
 .infocolumn:hover {
 	opacity: .8 !important;
-	cursor: pointer;
 }
 
 #home {
@@ -78,6 +77,7 @@ body, div {
 	height: 30px;
 	width: 30px;
 	background-color: blue;
+	cursor: pointer;
 }
 
 #auth {
