@@ -17,46 +17,38 @@ function initContent() {
 	var contentStruct = {};
 	// initialize and define the home button dom element
 	var $exitButton = $('<div></div>', {id: 'home'});
-	// make ajax request for page content
+	$exitButton.click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		shrinkColumns();
+		enablePanelClicking($exitButton, contentStruct);
+	});
+	// make request for page content
 	loadContent(function(pages) {
+		// populate struct with information for each page
 		for (var page in pages) {
-			// define the item info
 			contentStruct[page] = {};
 			contentStruct[page].title = page;
 			contentStruct[page].content = pages[page];
-			// initialize and define click behavior for panel dom element
-			var $currPanel = $('<div></div>', {class: 'infocolumn', id: page});
-			(function($element, pagename, content) {
-				$element.one('click', function(e) {
-					e.preventDefault();
-					e.stopPropagation();
-					makePanelActive($element, $exitButton, content);
-				});
-			})($currPanel, page, contentStruct[page].content);
-			$currPanel.html(contentStruct[page].title);
+			$currPanel = $('<div></div>', {class: 'infocolumn', id: page});
+			$currPanel.html(page);
 			$('#main').append($currPanel);
 		}
-		// attach behavior to the exit button
-		$exitButton.click(function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-			$element = $exitButton.parent();
-			// reassign the expand on click behavior
-			$element.one('click', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				makePanelActive($element, $exitButton, contentStruct[$element.attr('id')].content);
-			});
-			shrinkColumns();
-		});
+		// define click behavior across all panels
+		enablePanelClicking($exitButton, contentStruct);		
 	});
 }
 
-// shared function for everytime an inactive panel is clicked on
-function makePanelActive($targetPanel, $exitButton, content) {
-	expandColumns($targetPanel, content);
-	$targetPanel.append($exitButton);
-	generateRenderedHtml($targetPanel.attr('id'), content);
+function enablePanelClicking($exitButton, contentStruct) {
+	$('.infocolumn').on('click', function(e) {
+		$('.infocolumn').off('click');
+		e.preventDefault();
+		e.stopPropagation();
+		var selectedPage = $(this).attr('id');
+		expandColumns($(this));
+		$(this).append($exitButton);
+		generateRenderedHtml(selectedPage, contentStruct[selectedPage].content);
+	});
 }
 
 // expand the active panel, shrink others, show home button
