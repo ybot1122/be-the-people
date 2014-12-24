@@ -4,26 +4,19 @@
 */
 
 /*
-	CONTENT RENDERING:
+	This function was fun to write. 
+	We make a request to the server for raw page content and store the
+	content into a structure. For each page we encounter, we also build out
+	a .infocontent panel and attach a one-time click listener to it.
 
-	1) load raw json data from the server
-	2) load corresponding templates and create dom elements
-		a) create a dom element for the title
-		b) create a dom element for the content 
-		(both should be rendered by mustache already)
-	3) consistently use the structure to render content/titles
-				and vice versa
+	After all the .infocontent panels have been built and parsed, we define
+	behavior for the exit button which resets the panels to their original
+	sizes and restores a one-time click listener.
 */
-
 function initContent() {
 	var contentStruct = {};
 	// initialize and define the home button dom element
 	var $exitButton = $('<div></div>', {id: 'home'});
-	$exitButton.click(function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		shrinkColumns();
-	});
 	// make ajax request for page content
 	loadContent(function(pages) {
 		for (var page in pages) {
@@ -34,18 +27,36 @@ function initContent() {
 			// initialize and define click behavior for panel dom element
 			var $currPanel = $('<div></div>', {class: 'infocolumn', id: page});
 			(function($element, pagename, content) {
-				$element.click(function(e) {
+				$element.one('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();
-					expandColumns($element, contentStruct[page].content);
-					$element.append($exitButton);
-					generateRenderedHtml(pagename, content);
+					makePanelActive($element, $exitButton, content);
 				});
 			})($currPanel, page, contentStruct[page].content);
 			$currPanel.html(contentStruct[page].title);
 			$('#main').append($currPanel);
 		}
+		// attach behavior to the exit button
+		$exitButton.click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			$element = $exitButton.parent();
+			// reassign the expand on click behavior
+			$element.one('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				makePanelActive($element, $exitButton, contentStruct[$element.attr('id')].content);
+			});
+			shrinkColumns();
+		});
 	});
+}
+
+// shared function for everytime an inactive panel is clicked on
+function makePanelActive($targetPanel, $exitButton, content) {
+	expandColumns($targetPanel, content);
+	$targetPanel.append($exitButton);
+	generateRenderedHtml($targetPanel.attr('id'), content);
 }
 
 // expand the active panel, shrink others, show home button
@@ -114,7 +125,6 @@ function loadContent(callback) {
 	appends the rendered dom element to the panel
 */
 function generateRenderedHtml(pagename, content) {
-	console.log(content);
 	$element = $('<div></div>', {id: 'activeContent'});
 	$element.load('templates/general.html #template-' + pagename, function() {
 		$element.html(Mustache.render($element.text(), {data: content}));
