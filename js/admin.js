@@ -4,6 +4,14 @@
 	to admin related elements
 */
 
+function initAdminPanel(content) {
+	$('#auth').one('click', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		renderModal(content);
+	});
+}
+
 // hides main website and launches admin modal
 function renderModal(content) {
 	authenticateFb('verify', function(response) {

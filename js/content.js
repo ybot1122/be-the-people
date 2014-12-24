@@ -34,11 +34,12 @@ function initContent() {
 		// make request for page content
 		loadContent(function(pages) {
 			// enable the admin panel
-			$('#auth').click(function(e) {
-				renderModal(pages);
-			});
+			initAdminPanel(pages);
 			// populate struct with information for each page
 			for (var page in pages) {
+				if (page === 'bgs') {
+					continue;
+				}
 				var template = $temp.find('#template-'+page).text();
 				contentStruct[page] = {};
 				contentStruct[page].title = page;
@@ -111,9 +112,7 @@ function loadContent(callback) {
 			delete res.data.bgs;
 			var responseObj = {};
 			for (var page in res.data) {
-				if (page !== 'bgs') {
-					responseObj[page] = res.data[page];
-				}
+				responseObj[page] = res.data[page];
 			}
 			callback(responseObj);
 		}
