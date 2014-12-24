@@ -14,6 +14,7 @@
 	sizes and restores a one-time click listener.
 */
 function initContent() {
+	$('.infocolumn').remove();
 	var contentStruct = {};
 	// initialize and define the home button dom element
 	var $exitButton = $('<div></div>', {id: 'home'});
@@ -23,19 +24,24 @@ function initContent() {
 		shrinkColumns();
 		enablePanelClicking($exitButton, contentStruct);
 	});
-	// make request for page content
-	loadContent(function(pages) {
-		// populate struct with information for each page
-		for (var page in pages) {
-			contentStruct[page] = {};
-			contentStruct[page].title = page;
-			contentStruct[page].content = pages[page];
-			$currPanel = $('<div></div>', {class: 'infocolumn', id: page});
-			$currPanel.html(page);
-			$('#main').append($currPanel);
-		}
-		// define click behavior across all panels
-		enablePanelClicking($exitButton, contentStruct);		
+	// load page templates
+	$temp = $('<div></div>');
+	$temp.load('templates/general.html', function() {
+		// make request for page content
+		loadContent(function(pages) {
+			// populate struct with information for each page
+			for (var page in pages) {
+				var template = $temp.find('#template-'+page).text();
+				contentStruct[page] = {};
+				contentStruct[page].title = page;
+				contentStruct[page].content = generateRenderedHtml(page, pages[page], template);
+				$currPanel = $('<div></div>', {class: 'infocolumn', id: page});
+				$currPanel.html(page);
+				$('#main').append($currPanel);
+			}
+			// define click behavior across all panels
+			enablePanelClicking($exitButton, contentStruct);		
+		});
 	});
 }
 
@@ -47,7 +53,7 @@ function enablePanelClicking($exitButton, contentStruct) {
 		var selectedPage = $(this).attr('id');
 		expandColumns($(this));
 		$(this).append($exitButton);
-		generateRenderedHtml(selectedPage, contentStruct[selectedPage].content);
+		$(this).append(contentStruct[selectedPage].content);
 	});
 }
 
@@ -111,15 +117,8 @@ function loadContent(callback) {
 	});
 }
 
-/*
-	loads a template from the templates/ directory and renders it
-	with the supplied data
-	appends the rendered dom element to the panel
-*/
-function generateRenderedHtml(pagename, content) {
+function generateRenderedHtml(pagename, content, template) {
 	$element = $('<div></div>', {id: 'activeContent'});
-	$element.load('templates/general.html #template-' + pagename, function() {
-		$element.html(Mustache.render($element.text(), {data: content}));
-		$('#' + pagename).append($element);
-	});
+	$element.html(Mustache.render(template, {data: content}));
+	return $element;
 }
