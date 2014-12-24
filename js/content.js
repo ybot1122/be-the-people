@@ -5,13 +5,17 @@
 
 /*
 	This function was fun to write. 
-	We make a request to the server for raw page content and store the
-	content into a structure. For each page we encounter, we also build out
-	a .infocontent panel and attach a one-time click listener to it.
 
-	After all the .infocontent panels have been built and parsed, we define
-	behavior for the exit button which resets the panels to their original
-	sizes and restores a one-time click listener.
+	the contentStruct object stores a mapping of pagename to
+		a) title: a string which represents the title of the panel
+		b) content: a dom element that contains the rendered html
+
+	1) load templates into a dummy dom element
+	2) load the json data for page content
+	3) render the html from the templates and content and store it as
+			a dom element in the contentStruct object
+	4) initialize an event listener on all infocolumn divs that can pull
+			content from the structure as necessary
 */
 function initContent() {
 	$('.infocolumn').remove();
@@ -29,6 +33,10 @@ function initContent() {
 	$temp.load('templates/general.html', function() {
 		// make request for page content
 		loadContent(function(pages) {
+			// enable the admin panel
+			$('#auth').click(function(e) {
+				renderModal(pages);
+			});
 			// populate struct with information for each page
 			for (var page in pages) {
 				var template = $temp.find('#template-'+page).text();

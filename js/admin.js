@@ -5,7 +5,7 @@
 */
 
 // hides main website and launches admin modal
-function renderModal($active, content) {
+function renderModal(content) {
 	authenticateFb('verify', function(response) {
 		if (!response || response === null || response.status !== 'success') {
 			// authentication failed, exit out of admin modal
@@ -30,7 +30,7 @@ function destroyModal() {
 	$('#admin').slideUp(1000, 0.0, function() {
 		$('#main').slideDown(1000);
 		$('#admin').remove();
-		loadContent(initializeCols);
+		initContent();
 	});
 	$('#menu').fadeTo(500, 1.0);
 }
@@ -272,5 +272,13 @@ function deliverUpdateObject() {
 	authenticateFb('update&upData=' + resultString, function(response) {
 		console.log(response);
 		destroyModal();
+	});
+}
+
+function loadTemplate($destination, selector, filename, data, callback) {
+	$destination.load('templates/' + filename + ' ' + selector,
+	function(response, status, xhr) {
+		$destination.html(Mustache.render($destination.text(), data));
+		callback();
 	});
 }
