@@ -17,8 +17,8 @@ function renderModal(content) {
 		$('#admin').hide();
 		loadTemplate($('#admin'), '#template-modal', 'admin.html', content, function() {
 			attachButtonBehavior();
-				$('#main').slideUp(1000, function() {
-				$('#admin').slideDown(1000);
+			$('#main').slideUp(600, function() {
+					$('#admin').slideDown(600);
 			});
 		});
 	});
@@ -26,13 +26,11 @@ function renderModal(content) {
 
 // destroys the admin modal and restores the main website
 function destroyModal() {
-	$('#admin div').fadeOut(500);
-	$('#admin').slideUp(1000, 0.0, function() {
-		$('#main').slideDown(1000);
+	$('#admin').slideUp(600, 0.0, function() {
+		$('#main').slideDown(600);
 		$('#admin').remove();
 		initContent();
 	});
-	$('#menu').fadeTo(500, 1.0);
 }
 
 // TODO: tell the admin-modal buttons what to do
