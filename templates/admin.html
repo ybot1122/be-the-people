@@ -27,9 +27,9 @@
 				</td>
 			</tr>
 			{{/body}}{{/M}}{{/about}}
-			<tr id="submitInput">
+			<tr>
 				<td>
-					<a href="#" id="addRowAbout">Click to insert new row</a>
+					<a href="#" id ="addRow" data-fields="body">Click to insert new row</a>
 				</td>
 			</tr>
 		</table>
@@ -58,9 +58,9 @@
 				</td>
 			</tr>
 			{{/M}}{{/chapters}}
-			<tr id="chapterSubmit">
+			<tr>
 				<td>
-					<a href="#" id="addRowChp">Click to insert new row</a>
+					<a href="#" id ="addRow" data-fields="school year">Click to insert new row</a>
 				</td>
 			</tr>
 		</table>
@@ -89,35 +89,37 @@
 				</td>
 			</tr>
 			{{/M}}{{/contact}}
-			<tr id="contactSubmit">
+			<tr>
 				<td>
-					<a href="#" id="addRowCont">Click to insert new row</a>
+					<a href="#" id ="addRow" data-fields="fieldname fieldvalue">Click to insert new row</a>
 				</td>
 			</tr>
 		</table>
 	</div>
 	<div id="background-form">
-		<h3>Editing the Background Page</h3>
 		<table>
 			<tr>
 				<th>Preview</th>
 				<th>Extension</th>
 				<th>Mark for Deletion</th>
 			</tr>
+			{{#bgs}}{{#M}}
 			<tr>
-				<td></td>
 				<td>
-					<input type="text" />
+					{{#filename}}
+					<img src="graphics/{{S}}" />
+					{{/filename}}
 				</td>
 				<td>
 					<input type="checkbox"/>
 				</td>
 			</tr>
+			{{/M}}{{/bgs}}
 			<tr>
-				<td colspan="4">
-					<input type="submit" value="Add New Row" />
+				<td>
+					temp upload button
 				</td>
-			<tr>
+			</tr>
 		</table>
 	</div>
 	<div id="buttonHolder">

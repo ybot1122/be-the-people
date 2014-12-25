@@ -95,7 +95,7 @@ function performPageUpdate(input, callback) {
 	  	if (err) {
 	  		console.log(err);
 	  	} else {
-	  		console.log(data);
+	  		//console.log(data);
 	  	}
 	  });
 	}

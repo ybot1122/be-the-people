@@ -109,7 +109,6 @@ function loadContent(callback) {
 		} else {
 			// request succeeded
 			loadBgs(res.data.bgs);
-			delete res.data.bgs;
 			var responseObj = {};
 			for (var page in res.data) {
 				responseObj[page] = res.data[page];

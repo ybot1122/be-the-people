@@ -8,7 +8,6 @@ function loadBgs(data) {
 	for (item in data) {
 		bgs.push('graphics/' + data[item].M.filename.S);
 	}
-	console.log(bgs);
 	if (bgs.length < 1) {
 		noBackground();
 	} else {
