@@ -4,11 +4,13 @@
 	to admin related elements
 */
 
-function initAdminPanel(content) {
+function initAdminPanel(content, timer) {
 	$('#auth').one('click', function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		renderModal(content);
+		renderModal(content, timer);
+		clearInterval(timer);
+		$('#live, #next').fadeOut(600);
 	});
 }
 
@@ -34,7 +36,7 @@ function renderModal(content) {
 
 // destroys the admin modal and restores the main website
 function destroyModal() {
-	$('#admin').slideUp(600, 0.0, function() {
+	$('#admin').slideUp(600, function() {
 		$('#main').slideDown(600);
 		$('#admin').remove();
 		initContent();
@@ -60,16 +62,24 @@ function adminNavButtonBehavior(ind, element) {
 		e.preventDefault();
 		e.stopPropagation();
 		var fields = $(this).data('fields').split(" ");
-		var row = $('<tr></tr>');
+		var $row = $('<tr></tr>');
+		var	$removeLink = $('<a></a>', {href: '#'});
+		$removeLink.one('click', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).parents('tr').remove();
+		})
+		$removeLink.html('Remove Row');
 		for (var i in fields) {
 			if (fields[i] === 'body') {
-				row.append($('<td></td>').html('<textarea data-type="body"></textarea>'));
+				$row.append($('<td></td>').html('<textarea data-type="body"></textarea>'));
 			} else {
-				row.append($('<td></td>').html('<input class="item" data-type="' + fields[i] + '" type="text" />'));
+				$row.append($('<td></td>').html('<input class="item" data-type="' + fields[i] + '" type="text" />'));
 			}
 		}
-		row.append($('<td></td>').html('<input class="del" type="checkbox" />'));
-		$('#' + formName + '-form').find('#addRow').parents('tr').before(row);
+		$row.append($('<td></td>').append($removeLink));
+
+		$('#' + formName + '-form').find('#addRow').parents('tr').before($row);
 	});
 }
 
@@ -79,7 +89,7 @@ function attachButtonBehavior() {
 		destroyModal();
 	});
 
-	$('#buttons').find('span').each(adminNavButtonBehavior);
+	$('#buttons').find('span').not('#exit').each(adminNavButtonBehavior);
 
 	$('#adminSubmit').one('click', function(e) {
 		e.preventDefault();

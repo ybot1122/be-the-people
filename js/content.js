@@ -33,11 +33,11 @@ function initContent() {
 	$temp.load('templates/general.html', function() {
 		// make request for page content
 		loadContent(function(pages) {
-			// enable the admin panel
-			initAdminPanel(pages);
 			// populate struct with information for each page
 			for (var page in pages) {
 				if (page === 'bgs') {
+					var timer = loadBgs(pages[page]);
+					initAdminPanel(pages, timer);
 					continue;
 				}
 				var template = $temp.find('#template-'+page).text();
@@ -108,7 +108,6 @@ function loadContent(callback) {
 			callback({error: 'bad request'});
 		} else {
 			// request succeeded
-			loadBgs(res.data.bgs);
 			var responseObj = {};
 			for (var page in res.data) {
 				responseObj[page] = res.data[page];
