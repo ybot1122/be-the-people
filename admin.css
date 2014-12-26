@@ -61,12 +61,12 @@
 		height: 100px;
 	}
 
-	#about-form, #chapters-form, #contact-form, #background-form {
+	#about-form, #chapters-form, #contact-form, #backgrounds-form {
 		height: 80%;
 		overflow-y: auto;
 	}
 
-	#chapters-form, #contact-form, #background-form {
+	#chapters-form, #contact-form, #backgrounds-form {
 		display: none;
 	}
 

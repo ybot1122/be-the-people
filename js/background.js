@@ -32,7 +32,6 @@ function rotateGraphic(images) {
 
 	function loop() {
 		counter = (counter + 1) % images.length;
-		console.log(counter);
 		var $currVis;
 		var $currHide;
 		if ($('#live').is(':visible')) {
