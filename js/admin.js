@@ -26,6 +26,9 @@ function renderModal(content) {
 		$('#container').prepend($('<div id=\"admin\"></div>'));
 		$('#admin').hide();
 		loadTemplate($('#admin'), '#template-modal', 'admin.html', content, function() {
+			for (var page in content) {
+				$('#buttons').append($('<span></span>', {id: page}).html(page));
+			}
 			attachButtonBehavior();
 			$('#main').slideUp(600, function() {
 					$('#admin').slideDown(600);
