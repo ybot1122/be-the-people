@@ -4,76 +4,67 @@
 */
 
 /*
-	This function was fun to write. 
-
-	the contentStruct object stores a mapping of pagename to
-		a) title: a string which represents the title of the panel
-		b) content: a dom element that contains the rendered html
-
-	1) load templates into a dummy dom element
-	2) load the json data for page content
-	3) render the html from the templates and content and store it as
-			a dom element in the contentStruct object
-	4) initialize an event listener on all infocolumn divs that can pull
-			content from the structure as necessary
+	Returns a dom element which represents the content parsed into
+	appropriate html
 */
-function initContent() {
-	$('.infocolumn').remove();
-	var contentStruct = {};
+function parseIntoDom(page) {
+	$container = $('<div></div>', {id: 'activeFrame'});
+	for (var item in page) {
+		$innerRow = $('<div></div>');
+		for (var field in page[item]['M']) {
+			$innerRow.append(page[item]['M'][field]['S']);
+		}
+		$container.append($innerRow);
+	}
+	return $container;
+}
+
+/*
+	Generates the panels and appends them to the webpage. 
+	Also applies event listners for clicking.
+*/
+function initContent(data) {
 	// initialize and define the home button dom element
 	var $exitButton = $('<div></div>', {id: 'home'});
 	$exitButton.click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
+		$(this).detach();
+		$('#activeFrame').remove();
 		shrinkColumns();
-		enablePanelClicking($exitButton, contentStruct);
+		enablePanelClicking($exitButton, data);
 	});
-	// load page templates
-	$temp = $('<div></div>');
-	$temp.load('templates/general.html', function() {
-		// make request for page content
-		loadContent(function(pages) {
-			// populate struct with information for each page
-			for (var page in pages) {
-				if (page === 'bgs') {
-					var timer = loadBgs(pages[page]);
-					initAdminPanel(pages, timer);
-					continue;
-				}
-				var template = $temp.find('#template-'+page).text();
-				contentStruct[page] = {};
-				contentStruct[page].title = page;
-				contentStruct[page].content = generateRenderedHtml(page, pages[page], template);
-				$currPanel = $('<div></div>', {class: 'infocolumn', id: page});
-				$currPanel.html(page);
-				$('#main').append($currPanel);
-			}
-			// define click behavior across all panels
-			enablePanelClicking($exitButton, contentStruct);		
-		});
-	});
+	// iterate through and parse each page
+	for (var page in data) {
+		var $panel = $('<div></div>', {class: 'infocolumn', id: page});
+		$panel.html(data[page].title);
+		$('#main').append($panel);
+	}
+	enablePanelClicking($exitButton, data);
 }
 
-function enablePanelClicking($exitButton, contentStruct) {
-	$('.infocolumn').on('click', function(e) {
-		$('.infocolumn').off('click');
+/*
+	Applies click behavior to panels
+*/
+function enablePanelClicking($exitButton, content) {
+	$('.infocolumn').one('click', function(e) {
 		e.preventDefault();
 		e.stopPropagation();
 		var selectedPage = $(this).attr('id');
 		expandColumns($(this));
 		$(this).append($exitButton);
-		$(this).append(contentStruct[selectedPage].content);
+		$(this).append(content[selectedPage].content);
 	});
 }
 
 // expand the active panel, shrink others, show home button
 function expandColumns($activePanel) {
-	$activePanel.animate({
+	$activePanel.stop().animate({
 		width: '95%',
 		opacity: '.8',
 		marginLeft: '2.5%'
 	}, 600);
-	$('.infocolumn').not($activePanel).animate({
+	$('.infocolumn').not($activePanel).stop().animate({
 		width:'0%',
 		marginLeft:'0',
 		opacity: '0'
@@ -81,10 +72,8 @@ function expandColumns($activePanel) {
 }
 
 // shrink active panel, restore others, hide home button
-function shrinkColumns(){
-	$('#home').detach();
-	$('#activeContent').detach();
-	$('.infocolumn').animate({
+function shrinkColumns() {
+	$('.infocolumn').stop().animate({
 		width: '30%',
 		marginLeft:'2.5%',
 		opacity: '.6',
@@ -120,10 +109,4 @@ function loadContent(callback) {
 	request.fail(function(data, msg) {
 		callback({error: 'database currently down'});
 	});
-}
-
-function generateRenderedHtml(pagename, content, template) {
-	$element = $('<div></div>', {id: 'activeContent'});
-	$element.html(Mustache.render(template, {data: content}));
-	return $element;
 }

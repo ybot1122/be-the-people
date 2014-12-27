@@ -4,14 +4,31 @@
 	to admin related elements
 */
 
-function initAdminPanel(content, timer) {
+function initAdminPanel(content) {
 	$('#auth').one('click', function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		renderModal(content, timer);
-		clearInterval(timer);
+		renderModal(content);
 		$('#live, #next').fadeOut(600);
 	});
+}
+
+/*
+	Build the overall admin panel frame and divs for each form
+	as well as the buttons
+*/
+function buildFrame(content) {
+	var $frame = $('<div></div>', {id: 'admin'});
+	var $buttons = $('<div></div>', {id: 'buttons'});
+	$frame.append($buttons);
+	$buttons.append($('<span id="exit">exit</span>'));
+	for (var page in content) {
+		$buttons.append($('<span id="' + page + '">' + page + '</span>', {id: page}));
+		$frame.append($('<div></div>', {id: page + '-form', class: 'adminForm'}));
+	}
+	$frame.append($('<div></div>', {id: 'buttonHolder'}));
+	$frame.hide();
+	return $frame;
 }
 
 // hides main website and launches admin modal
@@ -23,26 +40,33 @@ function renderModal(content) {
 			destroyModal();
 			return;
 		}
-		$('#container').prepend($('<div id=\"admin\"></div>'));
-		$('#admin').hide();
-		loadTemplate($('#admin'), '#template-modal', 'admin.html', content, function() {
-			for (var page in content) {
-				$('#buttons').append($('<span></span>', {id: page}).html(page));
-			}
-			attachButtonBehavior();
-			$('#main').slideUp(600, function() {
-					$('#admin').slideDown(600);
-			});
+		var $frame = buildFrame(content);
+		$('#container').prepend($frame);
+		attachButtonBehavior();
+		$('#main').slideUp(600, function() {
+				$frame.slideDown(600);
 		});
 	});
 }
 
 // destroys the admin modal and restores the main website
-function destroyModal() {
+function destroyModal(content) {
 	$('#admin').slideUp(600, function() {
 		$('#main').slideDown(600);
 		$('#admin').remove();
-		initContent();
+	});
+}
+
+// TODO: tell the admin-modal buttons what to do
+function attachButtonBehavior(content) {
+	$('#exit').click(function(e) {
+		destroyModal(content);
+	});
+	$('#buttons').find('span').not('#exit').each(adminNavButtonBehavior);
+	$('#adminSubmit').one('click', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		deliverUpdateObject();
 	});
 }
 
@@ -83,21 +107,6 @@ function adminNavButtonBehavior(ind, element) {
 		$row.append($('<td></td>').append($removeLink));
 
 		$('#' + formName + '-form').find('#addRow').parents('tr').before($row);
-	});
-}
-
-// TODO: tell the admin-modal buttons what to do
-function attachButtonBehavior() {
-	$('#exit').click(function(e) {
-		destroyModal();
-	});
-
-	$('#buttons').find('span').not('#exit').each(adminNavButtonBehavior);
-
-	$('#adminSubmit').one('click', function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		deliverUpdateObject();
 	});
 }
 

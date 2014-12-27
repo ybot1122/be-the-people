@@ -3,6 +3,7 @@
 		<title>Be The People</title>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		<script src="lib/mustache.js"></script>
+		<script src="js/global.js"></script>
 		<script src="js/content.js"></script>
 		<script src="js/background.js"></script>
 		<script src="js/admin.js"></script>
@@ -29,9 +30,11 @@
 		</div>
 
 		<script>
-			$(document).ready(function() {
-				initContent();
-			});
+			(function() {
+				$(document).ready(function() {
+					initApp();
+				});
+			})();
 		</script>
 	</body>
 </html>
