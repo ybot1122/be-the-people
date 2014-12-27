@@ -35,7 +35,7 @@ function initContent() {
 		loadContent(function(pages) {
 			// populate struct with information for each page
 			for (var page in pages) {
-				if (page === 'bgs') {
+				if (page === 'backgrounds') {
 					var timer = loadBgs(pages[page]);
 					initAdminPanel(pages, timer);
 					continue;
