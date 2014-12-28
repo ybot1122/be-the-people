@@ -10,6 +10,12 @@ function initApp() {
       data[page].title = page;
       data[page].raw = response[page];
       data[page].content = parseIntoDom(response[page]);
+      // TODO: REQUIRES THAT THE CONTENT IS NOT EMPTY
+      data[page].fields = [];
+      for (var field in response[page][0].M) {
+        data[page].fields.push(field);
+      }
+      data[page].fields.sort();
     }
     initContent(data);
     initAdminPanel(data, function() {

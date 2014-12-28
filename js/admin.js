@@ -18,27 +18,6 @@ function initAdminPanel(content, resetApp) {
 	});
 }
 
-/*
-	Build the overall admin panel frame and divs for each form
-	as well as the buttons
-*/
-function buildFrame(content) {
-	var $frame = $('<div></div>', {id: 'admin'});
-	var $buttons = $('<div></div>', {id: 'buttons'});
-	$frame.append($buttons);
-	$buttons.append($('<span id="exit">exit</span>'));
-	for (var page in content) {
-		var $form = $('<div></div>', {id: page + '-form', class: 'adminForm'});
-		$form.html(page);
-		$buttons.append($('<span id="' + page + '">' + page + '</span>', {id: page}));
-		$frame.append($form);
-	}
-	$submitButton = $('<input id="adminSubmit" type="submit" value="Submit all changes" />');
-	$frame.append($('<div></div>', {id: 'buttonHolder'}).append($submitButton));
-	$frame.hide();
-	return $frame;
-}
-
 // hides main website and launches admin modal
 function renderModal(content, resetApp) {
 	authenticateFb('verify', function(response) {
@@ -55,6 +34,45 @@ function renderModal(content, resetApp) {
 				$frame.slideDown(600);
 		});
 	});
+}
+
+/*
+	Build the overall admin panel frame and divs for each form
+	as well as the buttons
+*/
+function buildFrame(content) {
+	var $frame = $('<div></div>', {id: 'admin'});
+	var $buttons = $('<div></div>', {id: 'buttons'});
+	$frame.append($buttons);
+	$buttons.append($('<span id="exit">exit</span>'));
+	for (var page in content) {
+		var $form = $('<div></div>', {id: page + '-form', class: 'adminForm'});
+		$form.append(buildFormTable(content[page]));
+		$buttons.append($('<span id="' + page + '">' + page + '</span>', {id: page}));
+		$frame.append($form);
+	}
+	$submitButton = $('<input id="adminSubmit" type="submit" value="Submit all changes" />');
+	$frame.append($('<div></div>', {id: 'buttonHolder'}).append($submitButton));
+	$frame.hide();
+	return $frame;
+}
+
+/*
+	Constructs the table that contains the form elements. Returns the
+	JQuery object. 
+	data should be a JSON object with preexisting elements
+	fields should be an array of strings, specifying which fields exist
+*/
+function buildFormTable(data) {
+	$table = $('<table></table>');
+	$firstRow = $('<tr></tr>');
+	for (var i in data.fields) {
+		$th = $('<th></th>');
+		$th.html(data.fields[i]);
+		$firstRow.append($th);
+	}
+	$table.append($firstRow);
+	return $table;
 }
 
 // destroys the admin modal and restores the main website

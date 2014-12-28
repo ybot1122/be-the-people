@@ -32,18 +32,6 @@ var fbPageId = '797627276956025';
 	Sends request to DynamoDB for all the content of a certain page
 */
 function retrievePageContent(callback) {
-	var params = {
-	  RequestItems: {
-	    bethepeople: {
-	      Keys: [
-	        {pagename: {S: 'about'}},
-	        {pagename: {S: 'chapters'}},
-	      	{pagename: {S: 'contact'}}
-	      ]
-	    }
-	  }
-	};
-
 	ddb.scan({TableName: 'bethepeople'}, function(err, data) {
 		if (err) {
 			console.log(err);
