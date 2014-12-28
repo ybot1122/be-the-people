@@ -12,6 +12,9 @@ function initApp() {
       data[page].content = parseIntoDom(response[page]);
     }
     initContent(data);
-    initAdminPanel(data, null);
+    initAdminPanel(data, function() {
+      $('.infocolumn').remove();
+      initApp();
+    });
   });
 }

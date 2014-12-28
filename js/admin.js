@@ -4,11 +4,16 @@
 	to admin related elements
 */
 
-function initAdminPanel(content) {
+/*
+	Initializes the auth button to pressed and begin admin flow.
+	reset is a callback function to be invoked after the admin
+	panel has been exited.
+*/
+function initAdminPanel(content, resetApp) {
 	$('#auth').one('click', function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		renderModal(content);
+		renderModal(content, resetApp);
 		$('#live, #next').fadeOut(600);
 	});
 }
@@ -23,26 +28,29 @@ function buildFrame(content) {
 	$frame.append($buttons);
 	$buttons.append($('<span id="exit">exit</span>'));
 	for (var page in content) {
+		var $form = $('<div></div>', {id: page + '-form', class: 'adminForm'});
+		$form.html(page);
 		$buttons.append($('<span id="' + page + '">' + page + '</span>', {id: page}));
-		$frame.append($('<div></div>', {id: page + '-form', class: 'adminForm'}));
+		$frame.append($form);
 	}
-	$frame.append($('<div></div>', {id: 'buttonHolder'}));
+	$submitButton = $('<input id="adminSubmit" type="submit" value="Submit all changes" />');
+	$frame.append($('<div></div>', {id: 'buttonHolder'}).append($submitButton));
 	$frame.hide();
 	return $frame;
 }
 
 // hides main website and launches admin modal
-function renderModal(content) {
+function renderModal(content, resetApp) {
 	authenticateFb('verify', function(response) {
 		if (!response || response === null || response.status !== 'success') {
 			// authentication failed, exit out of admin modal
 			alert('you must be authenticated on facebook');
-			destroyModal();
+			destroyModal(resetApp);
 			return;
 		}
 		var $frame = buildFrame(content);
 		$('#container').prepend($frame);
-		attachButtonBehavior();
+		attachButtonBehavior(content, resetApp);
 		$('#main').slideUp(600, function() {
 				$frame.slideDown(600);
 		});
@@ -50,23 +58,24 @@ function renderModal(content) {
 }
 
 // destroys the admin modal and restores the main website
-function destroyModal(content) {
+function destroyModal(resetApp) {
 	$('#admin').slideUp(600, function() {
 		$('#main').slideDown(600);
 		$('#admin').remove();
+		resetApp();
 	});
 }
 
 // TODO: tell the admin-modal buttons what to do
-function attachButtonBehavior(content) {
+function attachButtonBehavior(content, resetApp) {
 	$('#exit').click(function(e) {
-		destroyModal(content);
+		destroyModal(resetApp);
 	});
 	$('#buttons').find('span').not('#exit').each(adminNavButtonBehavior);
 	$('#adminSubmit').one('click', function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		deliverUpdateObject();
+		deliverUpdateObject(resetApp);
 	});
 }
 
@@ -132,7 +141,7 @@ function deliverUpdateObject() {
 	delete result.backgrounds;
 	var resultString = JSON.stringify(result);
 	authenticateFb('update&upData=' + resultString, function(response) {
-		destroyModal();
+		destroyModal(resetApp);
 	});
 }
 
