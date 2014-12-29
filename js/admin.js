@@ -185,6 +185,9 @@ function deliverUpdateObject(resetApp) {
 	delete result.backgrounds;
 	var resultString = JSON.stringify(result);
 	authenticateFb('update&upData=' + resultString, function(response) {
+		if (response.error) {
+			alert('Facebook Auth failed, no changes have been made');
+		}
 		destroyModal(resetApp);
 	});
 }
