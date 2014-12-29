@@ -24,7 +24,7 @@ function renderModal(content, resetApp) {
 		if (!response || response === null || response.status !== 'success') {
 			// authentication failed, exit out of admin modal
 			alert('you must be authenticated on facebook');
-			destroyModal(resetApp);
+			initAdminPanel(content, resetApp);
 			return;
 		}
 		var $frame = buildFrame(content);

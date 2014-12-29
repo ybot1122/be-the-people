@@ -31,8 +31,7 @@ window.fbAsyncInit = function() {
 function authenticateFb(action, callback) {
 	FB.login(function(response) {
 		if (!response || response.error || !response.authResponse) {
-			console.log('login error');
-			$('#menu').fadeTo(500, 1.0);
+			callback({error: 'you must be an admin of the facebook page'});
 		} else {
 			var req = '/?admin=' + response.authResponse.accessToken
 					+ '&id=' + response.authResponse.userID + '&action=' + action;
