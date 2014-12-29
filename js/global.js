@@ -8,14 +8,12 @@ function initApp() {
     for (var page in response) {
       data[page] = {};
       data[page].title = page;
-      data[page].raw = response[page];
-      data[page].content = parseIntoDom(response[page]);
-      // TODO: REQUIRES THAT THE CONTENT IS NOT EMPTY
+      data[page].raw = response[page].content;
       data[page].fields = [];
-      for (var field in response[page][0].M) {
-        data[page].fields.push(field);
+      for (var i = 0; i < response[page].spec.length; i++) {
+        data[page].fields.push(response[page].spec[i].S);
       }
-      data[page].fields.sort();
+      data[page].content = parseIntoDom(data[page].raw, data[page].fields);
     }
     initContent(data);
     initAdminPanel(data, function() {

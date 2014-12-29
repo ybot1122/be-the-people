@@ -41,10 +41,19 @@ function retrievePageContent(callback) {
 		    return a.pagename.S > b.pagename.S;
 		  });
 	  	var result = {
-	  		about: res[0].content.L,
+	  		about: {
+	  			content: res[0].content.L,
+	  			spec: res[0].spec.L
+	  		},
 	  		//bgs: res[1].content.L,
-	  		chapters: res[2].content.L,
-	  		contact: res[3].content.L
+	  		chapters: {
+	  			content: res[2].content.L,
+	  			spec: res[2].spec.L
+	  		},
+	  		contact: {
+	  			content: res[3].content.L,
+	  			spec: res[3].spec.L
+	  		}
 	  	}
 	    callback({status: 'success', data: result});
 		}

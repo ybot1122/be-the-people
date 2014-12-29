@@ -64,12 +64,12 @@ function buildFrame(content) {
 	fields should be an array of strings, specifying which fields exist
 */
 function buildFormTable(data) {
-	var keys = Object.keys(data.raw[0].M).sort();
+	var keys = data.fields;
 	var $table = $('<table></table>');
 	var $firstRow = $('<tr></tr>');
-	for (var i in data.fields) {
+	for (var i in keys) {
 		var $th = $('<th></th>');
-		$th.html(data.fields[i]);
+		$th.html(keys[i]);
 		$firstRow.append($th);
 	}
 	$firstRow.append($('<th>Mark for Deletion</th>'));

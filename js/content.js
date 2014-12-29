@@ -7,12 +7,12 @@
 	Returns a dom element which represents the content parsed into
 	appropriate html
 */
-function parseIntoDom(page) {
+function parseIntoDom(page, fields) {
 	$container = $('<div></div>', {id: 'activeFrame'});
 	for (var item in page) {
 		$innerRow = $('<div></div>');
-		for (var field in page[item]['M']) {
-			$innerRow.append(page[item]['M'][field]['S']);
+		for (var i = 0; i < fields.length; i++) {
+			$innerRow.append(page[item]['M'][fields[i]]['S']);
 		}
 		$container.append($innerRow);
 	}
