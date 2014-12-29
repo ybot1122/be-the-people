@@ -71,7 +71,24 @@ function buildFormTable(data) {
 		$th.html(data.fields[i]);
 		$firstRow.append($th);
 	}
+	$firstRow.append($('<th>Mark for Deletion</th>'));
 	$table.append($firstRow);
+	// populate table with content
+	for (var item in data.raw) {
+		var currData = data.raw[item].M;
+		var keys = Object.keys(currData).sort();
+		$row = $('<tr></tr>');
+		for (var i in keys) {
+			$col = $('<td></td>');
+			$input = $('<input class="item" data-type="' 
+				+ keys[i] + '" type="text" />');
+			$input.attr('value', currData[keys[i]].S);
+			$col.html($input);
+			$row.append($col);
+		}
+		$row.append($('<td><input class="del" type="checkbox" /></td>'));
+		$table.append($row);
+	}
 	return $table;
 }
 
