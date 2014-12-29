@@ -52,7 +52,7 @@ function enablePanelClicking($exitButton, content) {
 		e.stopPropagation();
 		var selectedPage = $(this).attr('id');
 		expandColumns($(this));
-		$(this).append($exitButton);
+		$(this).prepend($exitButton);
 		$(this).append(content[selectedPage].content);
 	});
 }

@@ -57,14 +57,14 @@ body, div {
 }
 
 .infocolumn {
-	float: left;
+	display: inline-block;
+	position: relative;
 	height: 75%;
 	margin-top: 30px;
 	margin-left: 2.5%;
 	width: 30%;
 	background-color: red;
 	opacity: .6;
-
 	text-align: center;
 	font-size: 50px;
 }
@@ -74,7 +74,7 @@ body, div {
 }
 
 #home {
-	float: right;
+	position: fixed;
 	height: 30px;
 	width: 30px;
 	background-color: blue;
