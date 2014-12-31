@@ -22,6 +22,7 @@ function initContent() {
 	var contentStruct = {};
 	// initialize and define the home button dom element
 	var $exitButton = $('<div></div>', {id: 'home'});
+	$exitButton.html('CLOSE');
 	$exitButton.click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -45,7 +46,7 @@ function initContent() {
 				contentStruct[page].title = page;
 				contentStruct[page].content = generateRenderedHtml(page, pages[page], template);
 				$currPanel = $('<div></div>', {class: 'infocolumn', id: page});
-				$currPanel.html(page);
+				$currPanel.html($('<h2></h2>').html(page));
 				$('#main').append($currPanel);
 			}
 			// define click behavior across all panels
@@ -61,7 +62,7 @@ function enablePanelClicking($exitButton, contentStruct) {
 		e.stopPropagation();
 		var selectedPage = $(this).attr('id');
 		expandColumns($(this));
-		$(this).append($exitButton);
+		$(this).prepend($exitButton);
 		$(this).append(contentStruct[selectedPage].content);
 	});
 }
@@ -70,7 +71,7 @@ function enablePanelClicking($exitButton, contentStruct) {
 function expandColumns($activePanel) {
 	$activePanel.animate({
 		width: '95%',
-		opacity: '.8',
+		opacity: '1.0',
 		marginLeft: '2.5%'
 	}, 600);
 	$('.infocolumn').not($activePanel).animate({
@@ -87,7 +88,7 @@ function shrinkColumns(){
 	$('.infocolumn').animate({
 		width: '30%',
 		marginLeft:'2.5%',
-		opacity: '.6',
+		opacity: '.8',
 		marginLeft:'2.5%'
 	}, 600);
 }
