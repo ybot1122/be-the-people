@@ -1,5 +1,7 @@
+@font-face { font-family: Walt; src: url('font.ttf'); } 
+
 body, html {
-	font-family: Arial, sans-serif;
+	font-family: Walt, Arial, sans-serif;
 	background-color: black;
 }
 
@@ -136,28 +138,37 @@ body, div {
 
 /* Content Specific Stylings */
 
-#contact {}
-
-#about {}
-
-#chapters {}
-
-#main-frame p {
-	font-size: 25px;
+#activeContent {
+	width: 70%;
+	margin: auto;
+	text-align: left;
 }
 
-#main-frame table {
-	font-size: 40px;
+#activeContent table {
+	width: 100%;
+	font-size: 30px;
 }
 
-#main-frame table td {
+#activeContent td {
 	padding: 10px;
+	margin: 0px;
 }
 
-#main-frame table td:nth-child(odd) {
+#content-chapters td {
+	width: 50%;	
+}
+
+#activeContent td:nth-child(odd) {
 	text-align: right;
+	border-right: 1px black solid;
 }
 
-#main-frame table tr:hover {
-	background: silver;
+#activeContent tr:hover {
+	font-weight: bold;
+	text-shadow: 1px 1px 0px silver;
 }
+
+.paragraphs p::first-letter {
+	font-size: 120%;
+	font-weight: bold;
+};
