@@ -75,7 +75,7 @@ function adminNavButtonBehavior(ind, element) {
 		$removeLink.html('Remove Row');
 		for (var i in fields) {
 			if (fields[i] === 'body') {
-				$row.append($('<td></td>').html('<textarea data-type="body"></textarea>'));
+				$row.append($('<td></td>').html('<textarea class="item" data-type="body"></textarea>'));
 			} else {
 				$row.append($('<td></td>').html('<input class="item" data-type="' + fields[i] + '" type="text" />'));
 			}
