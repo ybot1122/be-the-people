@@ -48,6 +48,6 @@ function rotateGraphic(images) {
 	}
 
 	loop();
-	timer = setInterval(loop, 2000);
+	timer = setInterval(loop, 7000);
 	return timer;
 }
