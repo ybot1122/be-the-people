@@ -73,15 +73,18 @@
 		height: 10%;
 	}
 
-	#admin input[type="submit"] {
+	#admin input:not(.bg-upload):not(#adminSubmit) {
+		width: 100%;
+		height: 46px;
+	}
+
+	#adminSubmit {
 		width: 80%;
+		height: 100%;
 	}
 
 	#admin input {
 		border: 1px black solid;
-		width: 100%;
-		height: 46px;
-		line-height: 40px;
 		padding: 3px;
 	}
 

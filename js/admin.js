@@ -30,6 +30,7 @@ function renderModal(content) {
 				$('#buttons').append($('<span></span>', {id: page}).html(page));
 			}
 			attachButtonBehavior();
+			uploadImage();
 			$('#main').slideUp(600, function() {
 					$('#admin').slideDown(600);
 			});
@@ -120,11 +121,43 @@ function deliverUpdateObject() {
 			}
 		});
 	});
-	delete result.backgrounds;
+	console.log(result);
 	var resultString = JSON.stringify(result);
 	authenticateFb('update&upData=' + resultString, function(response) {
 		destroyModal();
 	});
+}
+
+function uploadImage() {
+	$('#ubutt').one('click', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+    var fd = new FormData();
+    fd.append('image', $('#ufile')[0].files[0]);      
+
+    $.ajax({
+      url: 'http://localhost:1818/TMP_upload.php',
+      data: fd,
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: function(data) {
+      	uploadImage();
+      	if (data['name']) {
+      		var image = '<img src="graphics/"' + data['name'] + '" height="200px" />';
+      		var hidden = '<input type="hidden" class="item" data-type="filename" value="'
+      			+ data['name'] + '" />';
+      		var rowHtml = '<tr><td>' + image + hidden + 
+      			'</td><td>PRESS SUBMIT TO SAVE CHANGES</td></tr>'
+	        $('#ufile').parents('tr').before($(rowHtml));
+	      } else {
+	      	var $err = $('<p>Error, upload failed</p>');
+	      	$err.fadeIn(500).delay(2000).fadeOut(500);
+	      	$('#ufile').before($err);
+	      }
+       }
+    });
+	})
 }
 
 function loadTemplate($destination, selector, filename, data, callback) {

@@ -103,16 +103,18 @@
 				<td>
 					{{#filename}}
 					<img src="graphics/{{S}}" height="200px" />
+					<input type="hidden" class="item" data-type="filename" value="{{S}}" />
 					{{/filename}}
 				</td>
 				<td>
-					<input type="checkbox"/>
+					<input class="del" type="checkbox"/>
 				</td>
 			</tr>
 			{{/M}}{{/backgrounds}}
 			<tr>
-				<td>
-					temp upload button
+				<td colspan="2">
+					<input id="ufile" class="bg-upload" type="file" />
+					<input id="ubutt" class="bg-upload" type="submit" value="Upload Image" />
 				</td>
 			</tr>
 		</table>
